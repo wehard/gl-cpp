@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/26 20:22:06 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/27 19:30:30 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 #include <glm/glm.hpp>
 #include <iostream>
 #include "shader.h"
+#include "entity.h"
 
-using namespace std;
 
 int main(void)
 {
 	if (!glfwInit())
-		cout << "GLFW failed to initialize!" << endl;
+		std::cout << "GLFW failed to initialize!" << std::endl;
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
@@ -35,17 +35,19 @@ int main(void)
 	glfwMakeContextCurrent(window);
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
-		std::cout << "GLEW failed to initialize!" << endl;
+		std::cout << "GLEW failed to initialize!" << std::endl;
 
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
-	shader basic = shader("basic.vert", "basic.frag");
+	shader basic = shader("shaders/basic.vert", "shaders/basic.frag");
+	entity e = entity();
 
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS)
 	{
 		glClearColor(0.1, 0.1, 0.1, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		basic.use();
+		e.draw();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

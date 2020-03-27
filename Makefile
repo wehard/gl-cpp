@@ -1,7 +1,8 @@
 NAME = pong
 
 SRC = shader.cpp\
-	main.cpp
+	main.cpp\
+	entity.cpp
 
 SRCDIR = src
 
