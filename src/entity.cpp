@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/28 10:13:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/28 10:59:08 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,25 @@
 entity::entity(void)
 {
 	vertices = {
-		-0.5f,	-0.5f,	0.0f,	1.0f, 0.0f, 0.0f,
-		-0.5f,	0.5f,	0.0f,	0.0f, 1.0f, 0.0f,
-		0.5f,	0.5f,	0.0f,	0.0f, 0.0f, 1.0f,
-		0.5f,	-0.5f,	0.0f,	1.0f, 0.0f, 1.0f,
+		-0.5f,	-0.5f,	0.0f,
+		-0.5f,	0.5f,	0.0f,
+		0.5f,	0.5f,	0.0f,
+		0.5f,	-0.5f,	0.0f,
 		};
+
+	colors = {
+		1.0f, 0.0f, 0.0f, 1.0f,
+		0.0f, 1.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 1.0f, 1.0f,
+		1.0f, 0.0f, 1.0f, 1.0f,
+	};
+
+	uvs = {
+		0.0f, 0.0f,
+		0.0f, 1.0f,
+		1.0f, 1.0f,
+		1.0f, 0.0f,
+	};
 
 	indices = {0, 1, 2, 2, 3, 0,};
 
@@ -36,21 +50,32 @@ entity::~entity()
 
 void entity::gen_buffers()
 {
-	glGenBuffers(1, &vbo_id);
-	glGenBuffers(1, &ebo_id);
 	glGenVertexArrays(1, &vao_id);
 	glBindVertexArray(vao_id);
 
+	glGenBuffers(1, &vbo_id);
+	glGenBuffers(1, &cb_id);
+	glGenBuffers(1, &uvb_id);
+	glGenBuffers(1, &ebo_id);
+
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_id);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, cb_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * colors.size(), &colors[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, uvb_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * uvs.size(), &uvs[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(2);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * indices.size(), &indices[0], GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3* sizeof(float)));
-	glEnableVertexAttribArray(1);
 
 	// should we undbind all buffers here and rebind when drawing?
 }
