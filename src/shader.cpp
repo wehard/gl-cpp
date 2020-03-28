@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 17:48:23 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/26 20:41:28 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/28 10:08:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void shader::load_attributes()
 		GLenum type;
 		GLchar name[30];
 		glGetActiveAttrib(p_id, i, 30, &len, &size, &type, &name[0]);
-		attributes.insert(std::pair<string, GLuint>(name, (GLuint)i));
+		attributes.insert(std::pair<string, GLuint>(name, (GLuint)glGetAttribLocation(p_id, name)));
 	}
 	printf("Active attributes: %d\n", count);
 
