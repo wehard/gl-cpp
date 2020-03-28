@@ -6,13 +6,17 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/28 10:59:08 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/28 11:37:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#define GLM_ENABLE_EXPERIMENTAL
 
 #include "entity.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 
 entity::entity(void)
 {
@@ -83,6 +87,9 @@ void entity::gen_buffers()
 void entity::draw()
 {
 	glBindVertexArray(vao_id);
+
+
+
 	// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

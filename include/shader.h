@@ -1,6 +1,7 @@
 #include <GL/glew.h>
 #include <iostream>
 #include <map>
+#include <glm/glm.hpp>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ public:
 	shader(string vert_path, string frag_path);
 	~shader();
 	void use();
-
+	void set_float(string name, float f);
+	void set_vec2(string name, glm::vec2 v);
+	void set_mat4(string name, glm::mat4x4 m);
 };
-

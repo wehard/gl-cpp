@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 17:48:23 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/28 10:08:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/28 11:24:27 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ shader::~shader()
 void shader::use()
 {
 	glUseProgram(p_id);
+}
+
+void shader::set_float(string name, float f)
+{
+	glUniform1f(uniforms[name], f);
+}
+void shader::set_vec2(string name, glm::vec2 v)
+{
+	glUniform2f(uniforms[name], v[0], v[1]);
+}
+void shader::set_mat4(string name, glm::mat4x4 m)
+{
+	glUniformMatrix4fv(uniforms[name], 1, GL_FALSE, (GLfloat*)&m[0]);
 }
 
 void shader::load_uniforms()

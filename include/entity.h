@@ -6,12 +6,13 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/28 10:58:08 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/28 11:22:50 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <GL/glew.h>
 #include <vector>
+#include <glm/glm.hpp>
 
 class entity
 {
@@ -28,6 +29,7 @@ private:
 	void gen_buffers();
 
 public:
+	glm::vec3 position;
 	entity(void);
 	~entity();
 	void draw();

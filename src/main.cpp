@@ -6,9 +6,11 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/28 10:15:16 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/28 11:38:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#define GLM_ENABLE_EXPERIMENTAL
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -16,7 +18,8 @@
 #include <iostream>
 #include "shader.h"
 #include "entity.h"
-
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 
 int main(void)
 {
@@ -48,6 +51,11 @@ int main(void)
 		glClearColor(0.15, 0.15, 0.15, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		basic.use();
+		e.position.x = 0.3f;
+		e.position.y = 0.0f;
+		e.position.z = 0.0f;
+		glm::mat4x4 m = glm::translate(e.position);
+		basic.set_mat4("model_matrix", m);
 		e.draw();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
