@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 13:16:46 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 18:39:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-entity::entity(void)
+entity::entity(shader *s)
 {
+	this->s = s;
 	this->scale = glm::vec3(1.0, 1.0, 1.0);
 	this->rotation = 0.0;
 	vertices = {
@@ -79,9 +80,11 @@ void entity::gen_buffers()
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * indices.size(), &indices[0], GL_STATIC_DRAW);
-
-
 	// should we undbind all buffers here and rebind when drawing?
+}
+
+void entity::update(float delta_time)
+{
 }
 
 void entity::draw()

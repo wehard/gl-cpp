@@ -4,7 +4,8 @@ SRC = shader.cpp\
 	main.cpp\
 	entity.cpp\
 	camera.cpp\
-	renderer.cpp
+	renderer.cpp\
+	engine.cpp
 
 SRCDIR = src
 
@@ -20,7 +21,7 @@ LDFLAGS = -lglfw3 -lGL -lGLEW -lm -ldl -lXrandr -lXi -lX11 -lXxf86vm -lpthread
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) $(LDFLAGS)
+	$(CC) -g $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) $(LDFLAGS)
 
 clean:
 	@echo "removing objects"

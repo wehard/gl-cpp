@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 09:46:35 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 13:46:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 18:13:36 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-camera::camera(/* args */)
+camera::camera(float fovy, float aspect)
 {
 	this->position = glm::vec3(0.0, 0.0, 0.0);
+	this->projection_matrix = glm::perspective(fovy, aspect, 0.1f, 150.0f);
 }
-
+camera::camera() {}
 camera::~camera() {}
 
 glm::mat4x4 camera::get_view_matrix()
@@ -28,4 +29,9 @@ glm::mat4x4 camera::get_view_matrix()
   		   glm::vec3(0.0f, 0.0f, 0.0f),
   		   glm::vec3(0.0f, 1.0f, 0.0f));
 	return (view);
+}
+
+glm::mat4x4 camera::get_projection_matrix()
+{
+	return (projection_matrix);
 }

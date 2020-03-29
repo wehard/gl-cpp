@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 12:58:23 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 18:29:23 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <GL/glew.h>
 #include <vector>
 #include <glm/glm.hpp>
+#include "shader.h"
 
 class entity
 {
@@ -30,10 +31,12 @@ private:
 	void gen_buffers();
 
 public:
+	shader *s;
 	glm::vec3 position;
 	glm::vec3 scale;
 	float rotation;
-	entity(void);
+	entity(shader *s);
 	~entity();
 	void draw();
+	void update(float delta_time);
 };
