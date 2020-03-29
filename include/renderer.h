@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.cpp                                         :+:      :+:    :+:   */
+/*   renderer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/29 09:46:35 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 13:46:19 by wkorande         ###   ########.fr       */
+/*   Created: 2020/03/29 11:51:21 by wkorande          #+#    #+#             */
+/*   Updated: 2020/03/29 12:34:15 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
+#include <vector>
+#include "entity.h"
+#include "shader.h"
 #include "camera.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 
-camera::camera(/* args */)
+class renderer
 {
-	this->position = glm::vec3(0.0, 0.0, 0.0);
-}
+private:
+	std::vector<entity*> entities;
+	shader *s;
+	camera *cam;
+public:
+	renderer(camera *cam, shader *s);
+	renderer();
+	~renderer();
+	void draw();
+	void add_entity(entity *e);
+	void set_shader(shader *s);
+};
 
-camera::~camera() {}
 
-glm::mat4x4 camera::get_view_matrix()
-{
-	glm::mat4 view;
-	view = glm::lookAt(position,
-  		   glm::vec3(0.0f, 0.0f, 0.0f),
-  		   glm::vec3(0.0f, 1.0f, 0.0f));
-	return (view);
-}

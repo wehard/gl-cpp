@@ -6,10 +6,11 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 09:47:00 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 11:15:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 12:32:51 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include <glm/glm.hpp>
 
 class camera

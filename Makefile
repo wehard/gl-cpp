@@ -3,7 +3,8 @@ NAME = pong
 SRC = shader.cpp\
 	main.cpp\
 	entity.cpp\
-	camera.cpp
+	camera.cpp\
+	renderer.cpp
 
 SRCDIR = src
 

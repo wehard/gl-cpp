@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 11:42:44 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 13:47:19 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "entity.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "renderer.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -45,7 +46,7 @@ int main(void)
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
 	GLFWwindow *window;
-	window = glfwCreateWindow(1280, 720, "pong", nullptr, nullptr);
+	window = glfwCreateWindow(1280, 720, "cpp pong", nullptr, nullptr);
 
 	glfwMakeContextCurrent(window);
 	glewExperimental = true;
@@ -57,22 +58,44 @@ int main(void)
 
 	camera cam = camera();
 	shader basic = shader("shaders/basic.vert", "shaders/basic.frag");
-	entity e = entity();
-	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	renderer r = renderer(&cam, &basic);
+
+	cam.position = glm::vec3(0.0, 0.0, 72.0);
+
+	entity left = entity();
+	left.position = glm::vec3(-64.0, 0.0, 0.0);
+	left.scale = glm::vec3(72.0f, 1.0f, 1.0f);
+	left.rotation = 90.0;
+
+	entity right = entity();
+	right.position = glm::vec3(64.0, 0.0, 0.0);
+	right.scale = glm::vec3(72.0f, 1.0f, 1.0f);
+	right.rotation = 90.0;
+
+	entity top = entity();
+	top.position = glm::vec3(0.0, 36.0, 0.0);
+	top.scale = glm::vec3(128.0f, 1.0f, 1.0f);
+
+	entity bottom = entity();
+	bottom.position = glm::vec3(0.0, -36.0, 0.0);
+	bottom.scale = glm::vec3(128.0f, 1.0f, 1.0f);
+
+	entity center = entity();
+	center.position = glm::vec3(0.0, 0.0, 0.0);
+	center.scale = glm::vec3(60.0f, 1.0f, 1.0f);
+	center.rotation = 90.0;
+
+	r.add_entity(&left);
+	r.add_entity(&right);
+	r.add_entity(&top);
+	r.add_entity(&bottom);
+	r.add_entity(&center);
 
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS)
 	{
 		glClearColor(0.15, 0.15, 0.15, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		basic.use();
-		e.position = glm::vec3(5.0, 5.0, 0.0);
-		cam.position = glm::vec3(0.0, 0.0, 0.0);
-		glm::mat4x4 m = glm::translate(glm::mat4(1.0f), e.position);
-		basic.set_mat4("model_matrix", m);
-		basic.set_mat4("view_matrix",  cam.get_view_matrix());
-		basic.set_mat4("proj_matrix", glm::ortho(0.0, 10.0, 0.0, 10.0));
-		e.draw();
+		r.draw();
 		glfwSwapBuffers(window);
 
 		glfwPollEvents();

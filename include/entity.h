@@ -6,11 +6,11 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 11:16:20 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 12:58:23 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#pragma once
 #include <GL/glew.h>
 #include <vector>
 #include <glm/glm.hpp>
@@ -31,6 +31,8 @@ private:
 
 public:
 	glm::vec3 position;
+	glm::vec3 scale;
+	float rotation;
 	entity(void);
 	~entity();
 	void draw();
