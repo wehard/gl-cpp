@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   entity.h                                           :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 11:16:20 by wkorande         ###   ########.fr       */
+/*   Created: 2020/03/29 09:47:00 by wkorande          #+#    #+#             */
+/*   Updated: 2020/03/29 11:15:45 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <GL/glew.h>
-#include <vector>
 #include <glm/glm.hpp>
 
-class entity
+class camera
 {
 private:
-	GLuint vao_id;
-	GLuint vbo_id;
-	GLuint ebo_id;
-	GLuint cb_id;
-	GLuint uvb_id;
-	std::vector<GLuint> indices;
-	std::vector<GLfloat> vertices;
-	std::vector<GLfloat> colors;
-	std::vector<GLfloat> uvs;
-	void gen_buffers();
-
+	glm::vec3 rotation;
+	float	fov;
 public:
 	glm::vec3 position;
-	entity(void);
-	~entity();
-	void draw();
+	camera(/* args */);
+	~camera();
+	glm::mat4x4 get_view_matrix();
 };
+

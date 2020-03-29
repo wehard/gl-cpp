@@ -2,7 +2,8 @@ NAME = pong
 
 SRC = shader.cpp\
 	main.cpp\
-	entity.cpp
+	entity.cpp\
+	camera.cpp
 
 SRCDIR = src
 
@@ -12,7 +13,7 @@ SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 
 CC = g++
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 LDFLAGS = -lglfw3 -lGL -lGLEW -lm -ldl -lXrandr -lXi -lX11 -lXxf86vm -lpthread
 
 all: $(NAME)

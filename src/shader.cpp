@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 17:48:23 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/28 11:24:27 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 10:59:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ void shader::set_vec2(string name, glm::vec2 v)
 }
 void shader::set_mat4(string name, glm::mat4x4 m)
 {
-	glUniformMatrix4fv(uniforms[name], 1, GL_FALSE, (GLfloat*)&m[0]);
+	GLuint location = glGetUniformLocation(p_id, name.c_str());
+	// std::cout << name << " loc: " << location << std::endl;
+	glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat*)&m[0]);
 }
 
 void shader::load_uniforms()

@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   entity.h                                           :+:      :+:    :+:   */
+/*   camera.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 11:16:20 by wkorande         ###   ########.fr       */
+/*   Created: 2020/03/29 09:46:35 by wkorande          #+#    #+#             */
+/*   Updated: 2020/03/29 09:55:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <GL/glew.h>
-#include <vector>
+#include "camera.h"
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-class entity
+camera::camera(/* args */)
 {
-private:
-	GLuint vao_id;
-	GLuint vbo_id;
-	GLuint ebo_id;
-	GLuint cb_id;
-	GLuint uvb_id;
-	std::vector<GLuint> indices;
-	std::vector<GLfloat> vertices;
-	std::vector<GLfloat> colors;
-	std::vector<GLfloat> uvs;
-	void gen_buffers();
+	this->position = glm::vec3(0.0, 0.0, 0.0);
+}
 
-public:
-	glm::vec3 position;
-	entity(void);
-	~entity();
-	void draw();
-};
+camera::~camera() {}
+
+glm::mat4x4 camera::get_view_matrix()
+{
+	glm::mat4 view;
+	view = glm::lookAt(position,
+  		   glm::vec3(0.0f, 0.0f, -1.0f),
+  		   glm::vec3(0.0f, 1.0f, 0.0f));
+	return (view);
+}
