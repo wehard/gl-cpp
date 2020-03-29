@@ -6,11 +6,12 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 18:41:07 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 19:07:45 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
+#include "player.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -29,6 +30,11 @@ int main(void)
 {
 	engine e = engine("engine");
 	shader basic = shader("shaders/basic.vert", "shaders/basic.frag");
+
+	player p = player();
+	p.position = glm::vec3(-50, 0.0, 0.0);
+	p.scale = glm::vec3(1.0f, 10.0f, 1.0f);
+	p.s = &basic;
 
 	entity left = entity(&basic);
 	left.position = glm::vec3(-64.0, 0.0, 0.0);
@@ -51,6 +57,7 @@ int main(void)
 	center.scale = glm::vec3(60.0f, 1.0f, 1.0f);
 	center.rotation = 90.0;
 
+	e.add_entity(&p);
 	e.add_entity(&left);
 	e.add_entity(&right);
 	e.add_entity(&top);

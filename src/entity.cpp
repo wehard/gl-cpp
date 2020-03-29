@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 18:39:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 19:16:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,9 @@ entity::entity(shader *s)
 
 }
 
-entity::~entity()
-{
+entity::entity() {}
 
-}
+entity::~entity() {}
 
 void entity::gen_buffers()
 {
@@ -83,9 +82,7 @@ void entity::gen_buffers()
 	// should we undbind all buffers here and rebind when drawing?
 }
 
-void entity::update(float delta_time)
-{
-}
+void entity::update(float delta_time) { }
 
 void entity::draw()
 {

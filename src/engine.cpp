@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 18:37:54 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 19:56:10 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,15 @@ void engine::init()
 	r = renderer(&c);
 }
 
+bool engine::is_key_down(int keycode)
+{
+	return (glfwGetKey(window, GLFW_KEY_ESCAPE));
+}
+
 void engine::run()
 {
 	last_time = glfwGetTime();
-	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS)
+	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		double current_time = glfwGetTime();
 		double delta_time = current_time - last_time;

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 18:29:23 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 19:57:10 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "shader.h"
+#include "engine.h"
 
 class entity
 {
@@ -29,14 +30,15 @@ private:
 	std::vector<GLfloat> colors;
 	std::vector<GLfloat> uvs;
 	void gen_buffers();
-
 public:
 	shader *s;
 	glm::vec3 position;
 	glm::vec3 scale;
 	float rotation;
+	engine *e;
 	entity(shader *s);
+	entity();
 	~entity();
 	void draw();
-	void update(float delta_time);
+	virtual void update(float delta_time);
 };

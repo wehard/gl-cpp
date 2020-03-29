@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:54:41 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 18:34:33 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/29 19:56:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ public:
 	void init();
 	void run();
 	void add_entity(entity *e);
+	bool is_key_down(int keycode);
 };
 
 
