@@ -9,7 +9,8 @@ SRC = shader.cpp\
 	wgl_input.cpp\
 	player.cpp\
 	ball.cpp\
-	opponent.cpp
+	opponent.cpp\
+	obj_loader.cpp
 
 SRCDIR = src
 
