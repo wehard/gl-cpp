@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 12:05:36 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 18:01:50 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 #include "renderer.h"
+#include "wgl_input.h"
 
 wgl::wgl(std::string title)
 {
@@ -45,8 +46,10 @@ void wgl::init()
 		std::cout << "GLEW failed to initialize!" << std::endl;
 
 	c = camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
-	c.position = glm::vec3(0.0, 0.0, 72.0);
+	c.position = glm::vec3(0.0, -30.0, 72.0);
 	r = renderer(&c);
+	wgl_input::setup_key_inputs(window);
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
 }
 
 void wgl::run()
@@ -54,6 +57,7 @@ void wgl::run()
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
+		glfwPollEvents();
 		double current_time = glfwGetTime();
 		double delta_time = current_time - last_time;
 		glClearColor(0.15, 0.15, 0.15, 1.0);
@@ -66,7 +70,6 @@ void wgl::run()
 		}
 
 		glfwSwapBuffers(window);
-		glfwPollEvents();
 		last_time = current_time;
 	}
 }

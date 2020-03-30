@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.h                                           :+:      :+:    :+:   */
+/*   ball.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/29 18:54:02 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 16:53:56 by wkorande         ###   ########.fr       */
+/*   Created: 2020/03/30 17:12:11 by wkorande          #+#    #+#             */
+/*   Updated: 2020/03/30 17:20:45 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entity.h"
-#include "wgl_input.h"
+#include <glm/vec3.hpp>
 
-class player : public entity
+class ball : public entity
 {
 private:
-	wgl_input input;
 	float speed;
+	glm::vec3 direction;
 public:
-	player(shader *s);
-	player();
-	~player();
+	ball(shader *s);
+	~ball();
 	void update(float delta_time) override;
 };
-
-

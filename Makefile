@@ -6,7 +6,9 @@ SRC = shader.cpp\
 	camera.cpp\
 	renderer.cpp\
 	wgl.cpp\
-	player.cpp
+	wgl_input.cpp\
+	player.cpp\
+	ball.cpp
 
 SRCDIR = src
 
@@ -14,9 +16,9 @@ INCLUDE = include
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 
-CC = g++
+CC = clang
 
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -std=c++17 -lstdc++ #-Wall -Wextra -Werror
 LDFLAGS = -lglfw3 -lGL -lGLEW -lm -ldl -lXrandr -lXi -lX11 -lXxf86vm -lpthread
 
 all: $(NAME)

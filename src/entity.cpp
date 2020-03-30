@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 19:16:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 17:19:52 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ entity::entity(shader *s)
 
 }
 
-entity::entity() {}
+entity::entity() : s(0) {}
 
 entity::~entity() {}
 
