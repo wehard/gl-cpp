@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 18:01:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 18:22:29 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void wgl::run()
 		glfwPollEvents();
 		double current_time = glfwGetTime();
 		double delta_time = current_time - last_time;
-		glClearColor(0.15, 0.15, 0.15, 1.0);
+		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		for (auto e : entities)
