@@ -6,10 +6,11 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 13:05:54 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 16:40:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 18:46:53 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include <GLFW/glfw3.h>
 #include <map>
 #include <vector>

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 17:19:52 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 18:42:12 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-entity::entity(shader *s)
+entity::entity(shader *s) : rotation(0.0)
 {
 	this->s = s;
 	this->scale = glm::vec3(1.0, 1.0, 1.0);
@@ -48,7 +48,7 @@ entity::entity(shader *s)
 
 }
 
-entity::entity() : s(0) {}
+entity::entity() : s(0), rotation(0.0) {}
 
 entity::~entity() {}
 

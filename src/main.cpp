@@ -6,13 +6,14 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 17:21:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 18:49:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wgl.h"
 #include "player.h"
 #include "ball.h"
+#include "opponent.h"
 
 
 int main(void)
@@ -26,6 +27,10 @@ int main(void)
 
 	ball b = ball(&basic);
 	b.position = glm::vec3(-50.0, 0.0, 0.0);
+
+	opponent o = opponent(&basic, &b);
+	o.position = glm::vec3(60, 0.0, 0.0);
+	o.scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
 	entity left = entity(&basic);
 	left.position = glm::vec3(-64.0, 0.0, 0.0);
@@ -53,8 +58,9 @@ int main(void)
 	engine.add_entity(&top);
 	engine.add_entity(&bottom);
 	engine.add_entity(&center);
-	engine.add_entity(&p);
+	engine.add_entity(&o);
 	engine.add_entity(&b);
+	engine.add_entity(&p);
 
 	engine.run();
 	return (0);

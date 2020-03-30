@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 18:22:29 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 18:39:16 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void wgl::init()
 		std::cout << "GLEW failed to initialize!" << std::endl;
 
 	c = camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
-	c.position = glm::vec3(0.0, -30.0, 72.0);
+	c.position = glm::vec3(0.0, -30.0, 95.0);
 	r = renderer(&c);
 	wgl_input::setup_key_inputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
@@ -68,6 +68,9 @@ void wgl::run()
 			e->update(delta_time);
 			r.render(e);
 		}
+
+		c.position.y = -entities[0]->position.y;
+		c.position.x = entities[1]->position.x / 4.0;
 
 		glfwSwapBuffers(window);
 		last_time = current_time;

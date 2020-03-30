@@ -4,5 +4,5 @@ out vec4 color;
 
 void main()
 {
-	color = f_col * 1.0 - (gl_FragCoord.y / 720);
+	color = f_col;// * 1.0 - (gl_FragCoord.y / 720);
 }
