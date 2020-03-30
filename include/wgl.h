@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:54:41 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 09:57:38 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 12:05:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ private:
 	renderer r;
 	camera c;
 	double last_time;
+	GLFWkeyfun key_callback;
 public:
 	wgl(std::string title);
+	wgl();
 	~wgl();
 	void init();
 	void run();
 	void add_entity(entity *e);
-	bool is_key_down(int keycode);
 };
 
 

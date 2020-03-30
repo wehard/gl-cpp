@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 18:54:02 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 19:14:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 12:06:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ class player : public entity
 {
 private:
 public:
-	player(/* args */);
+	player();
 	~player();
 	void update(float delta_time) override;
 };

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 09:58:59 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 12:05:36 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ wgl::wgl(std::string title)
 	init();
 }
 
-wgl::~wgl()
-{
-}
+wgl::wgl() { }
+
+wgl::~wgl() { }
 
 void wgl::init()
 {
@@ -47,11 +47,6 @@ void wgl::init()
 	c = camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
 	c.position = glm::vec3(0.0, 0.0, 72.0);
 	r = renderer(&c);
-}
-
-bool wgl::is_key_down(int keycode)
-{
-	return (glfwGetKey(window, GLFW_KEY_ESCAPE));
 }
 
 void wgl::run()

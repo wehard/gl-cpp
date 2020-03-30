@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 09:58:14 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 12:05:46 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,7 @@
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
-       std::cout << "up" << std::endl;
-	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
-       std::cout << "down" << std::endl;
-	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
-       std::cout << "right" << std::endl;
-	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
-       std::cout << "left" << std::endl;
+
 	// && glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS
 }
 
