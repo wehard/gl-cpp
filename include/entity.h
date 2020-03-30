@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 19:57:10 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 09:42:14 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "shader.h"
-#include "engine.h"
 
 class entity
 {
@@ -35,7 +34,6 @@ public:
 	glm::vec3 position;
 	glm::vec3 scale;
 	float rotation;
-	engine *e;
 	entity(shader *s);
 	entity();
 	~entity();

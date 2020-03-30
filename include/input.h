@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   renderer.h                                         :+:      :+:    :+:   */
+/*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/29 11:51:21 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 09:41:12 by wkorande         ###   ########.fr       */
+/*   Created: 2020/03/30 09:53:08 by wkorande          #+#    #+#             */
+/*   Updated: 2020/03/30 09:53:47 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-#include <vector>
-#include "entity.h"
-#include "shader.h"
-#include "camera.h"
-
-class renderer
+class input
 {
 private:
-	camera *cam;
+	/* data */
 public:
-	renderer(camera *cam);
-	renderer();
-	~renderer();
-	void render(entity *e);
+	input(/* args */);
+	~input();
 };
 
 
