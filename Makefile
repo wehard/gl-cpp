@@ -5,7 +5,7 @@ SRC = shader.cpp\
 	entity.cpp\
 	camera.cpp\
 	renderer.cpp\
-	engine.cpp\
+	wgl.cpp\
 	player.cpp
 
 SRCDIR = src

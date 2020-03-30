@@ -6,11 +6,11 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 19:07:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 09:58:14 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "wgl.h"
 #include "player.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -28,7 +28,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 int main(void)
 {
-	engine e = engine("engine");
+	wgl e = wgl("wgl");
 	shader basic = shader("shaders/basic.vert", "shaders/basic.frag");
 
 	player p = player();

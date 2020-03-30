@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.cpp                                         :+:      :+:    :+:   */
+/*   wgl.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 19:56:10 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/30 09:58:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "wgl.h"
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 #include "renderer.h"
 
-engine::engine(std::string title)
+wgl::wgl(std::string title)
 {
 	this->title = title;
 	init();
 }
 
-engine::~engine()
+wgl::~wgl()
 {
 }
 
-void engine::init()
+void wgl::init()
 {
 	if (!glfwInit())
 		std::cout << "GLFW failed to initialize!" << std::endl;
@@ -49,12 +49,12 @@ void engine::init()
 	r = renderer(&c);
 }
 
-bool engine::is_key_down(int keycode)
+bool wgl::is_key_down(int keycode)
 {
 	return (glfwGetKey(window, GLFW_KEY_ESCAPE));
 }
 
-void engine::run()
+void wgl::run()
 {
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
@@ -76,7 +76,7 @@ void engine::run()
 	}
 }
 
-void engine::add_entity(entity *e)
+void wgl::add_entity(entity *e)
 {
 	entities.insert(entities.begin(), e);
 }
