@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 17:48:23 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 10:59:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 17:52:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ GLuint shader::compile_shader(string src, GLenum shader_type)
 	{
 		std::vector<char> error_message(log_len + 1);
 		glGetShaderInfoLog(shader_id, log_len, NULL, &error_message[0]);
-		printf("%s\n", &error_message[0]);
+		printf("%s: %s\n", shader_type == GL_FRAGMENT_SHADER ? "frag" : "vert", &error_message[0]);
 	}
 	return (shader_id);
 }

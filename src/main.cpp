@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 15:38:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 17:12:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int main(void)
 	load_obj("resources/logo.obj", &l);
 	mesh cube;
 	load_obj("resources/cube.obj", &cube);
+
+	mesh quad;
+	load_obj("resources/quad.obj", &quad);
+
 
 	entity logo = entity(&basic, &l);
 	logo.position = glm::vec3(0.0, 0.0, -50.0);

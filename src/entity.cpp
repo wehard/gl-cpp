@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 15:14:26 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 17:39:54 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void entity::gen_buffers()
 	glGenBuffers(1, &vbo_id);
 	glGenBuffers(1, &cb_id);
 	glGenBuffers(1, &uvb_id);
+	glGenBuffers(1, &nb_id);
 	glGenBuffers(1, &ebo_id);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_id);
@@ -57,6 +58,11 @@ void entity::gen_buffers()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * m->uvs.size(), &m->uvs[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
+
+	glBindBuffer(GL_ARRAY_BUFFER, nb_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * m->normals.size(), &m->normals[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(3);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * m->indices.size(), &m->indices[0], GL_STATIC_DRAW);

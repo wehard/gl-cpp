@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 15:14:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 17:04:01 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ private:
 	GLuint vbo_id;
 	GLuint ebo_id;
 	GLuint cb_id;
+	GLuint nb_id;
 	GLuint uvb_id;
 	mesh *m;
 	void gen_buffers();

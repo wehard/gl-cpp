@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 19:25:13 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 14:23:44 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 17:34:35 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool load_obj(const char *path, mesh *m)
 {
 	// std::vector<glm::vec3> out_verts;
 	// std::vector<glm::vec2> out_uvs;
-	// std::vector<glm::vec3> out_normals;
+	std::vector<glm::vec3> temp_normals;
 	// std::vector<int> out_indices;
 
 	FILE *f = fopen(path, "r");
@@ -44,6 +44,10 @@ bool load_obj(const char *path, mesh *m)
 			m->vertices.push_back(vertex.y);
 			m->vertices.push_back(vertex.z);
 
+			m->normals.push_back(1.0);
+			m->normals.push_back(1.0);
+			m->normals.push_back(1.0);
+
 			m->colors.push_back(1.0);
 			m->colors.push_back(1.0);
 			m->colors.push_back(1.0);
@@ -60,24 +64,39 @@ bool load_obj(const char *path, mesh *m)
 		{
 			glm::vec3 normal;
 			fscanf(f, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
+			temp_normals.push_back(normal);
 			// m->normals.push_back(normal.x);
 			// m->normals.push_back(normal.y);
 			// m->normals.push_back(normal.z);
 		}
 		else if (strcmp(buf, "f") == 0)
 		{
-			char s1[10];
-			char s2[10];
-			char s3[10];
-			int vert_index[3];
-			fscanf(f, "%s %s %s\n", s1, s2, s3);
-			vert_index[0] = atoi(s1);
-			vert_index[1] = atoi(s2);
-			vert_index[2] = atoi(s3);
-			// printf("read triangle: %d %d %d\n", vert_index[0], vert_index[1], vert_index[2]);
-			m->indices.push_back(vert_index[0] - 1);
-			m->indices.push_back(vert_index[1] - 1);
-			m->indices.push_back(vert_index[2] - 1);
+			int v_i[3];
+			int t_i[3];
+			int n_i[3];
+			fscanf(f, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &v_i[0], &t_i[0], &n_i[0], &v_i[1], &t_i[1], &n_i[1], &v_i[2], &t_i[2], &n_i[2]);
+			for (int i = 0; i < 3; i++)
+			{
+				v_i[i] -= 1;
+				t_i[i] -= 1;
+				n_i[i] -= 1;
+			}
+			m->indices.push_back(v_i[0]);
+			m->indices.push_back(v_i[1]);
+			m->indices.push_back(v_i[2]);
+
+			m->normals[(v_i[0] * 3)] = 		temp_normals[n_i[0]].x;
+			m->normals[(v_i[0] * 3) + 1] =	temp_normals[n_i[0]].y;
+			m->normals[(v_i[0] * 3) + 2] =	temp_normals[n_i[0]].z;
+
+			m->normals[(v_i[1] * 3)] = 		temp_normals[n_i[1]].x;
+			m->normals[(v_i[1] * 3) + 1] =	temp_normals[n_i[1]].y;
+			m->normals[(v_i[1] * 3) + 2] =	temp_normals[n_i[1]].z;
+
+			m->normals[(v_i[2] * 3)] = 		temp_normals[n_i[2]].x;
+			m->normals[(v_i[2] * 3) + 1] =	temp_normals[n_i[2]].y;
+			m->normals[(v_i[2] * 3) + 2] =	temp_normals[n_i[2]].z;
+
 		}
 	}
 	return (true);
