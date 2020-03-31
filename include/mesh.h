@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.h                                           :+:      :+:    :+:   */
+/*   mesh.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/29 09:47:00 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 09:43:13 by wkorande         ###   ########.fr       */
+/*   Created: 2020/03/31 10:53:38 by wkorande          #+#    #+#             */
+/*   Updated: 2020/03/31 11:14:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include <glm/vec3.hpp>
-#include <glm/mat4x4.hpp>
+#include <GL/gl.h>
+#include <vector>
 
-class camera
+class mesh
 {
 private:
-	glm::vec3 rotation;
-	float	fov;
-	glm::mat4x4 projection_matrix;
 public:
-	glm::vec3 position;
-	camera(float fovy, float aspect);
-	camera();
-	~camera();
-	glm::mat4x4 get_view_matrix();
-	glm::mat4x4 get_projection_matrix();
+	std::vector<GLuint> indices;
+	std::vector<GLfloat> vertices;
+	std::vector<GLfloat> colors;
+	std::vector<GLfloat> uvs;
+	mesh(/* args */);
+	~mesh();
+	static mesh *quad();
 };
 

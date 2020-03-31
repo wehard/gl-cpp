@@ -6,12 +6,12 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 09:46:35 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/29 18:13:36 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 09:44:40 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
-#include <glm/glm.hpp>
+
 #include <glm/gtc/matrix_transform.hpp>
 
 camera::camera(float fovy, float aspect)

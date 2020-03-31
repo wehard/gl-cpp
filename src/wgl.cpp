@@ -6,17 +6,19 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 18:39:16 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 12:19:08 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wgl.h"
-#include <GL/glew.h>
+#include "camera.h"
+#include "renderer.h"
+#include "wgl_input.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
-#include "renderer.h"
-#include "wgl_input.h"
+
 
 wgl::wgl(std::string title)
 {
@@ -44,12 +46,12 @@ void wgl::init()
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 		std::cout << "GLEW failed to initialize!" << std::endl;
-
-	c = camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
-	c.position = glm::vec3(0.0, -30.0, 95.0);
-	r = renderer(&c);
+	c = new camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
+	c->position = glm::vec3(0.0, -30.0, 95.0);
+	r = new renderer(c);
 	wgl_input::setup_key_inputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 void wgl::run()
@@ -66,11 +68,11 @@ void wgl::run()
 		for (auto e : entities)
 		{
 			e->update(delta_time);
-			r.render(e);
+			r->render(e);
 		}
 
-		c.position.y = -entities[0]->position.y;
-		c.position.x = entities[1]->position.x / 4.0;
+		c->position.y = -entities[0]->position.y;
+		c->position.x = entities[1]->position.x / 4.0;
 
 		glfwSwapBuffers(window);
 		last_time = current_time;

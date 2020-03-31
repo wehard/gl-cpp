@@ -6,15 +6,19 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 18:26:41 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 11:16:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+
 #include <GL/glew.h>
 #include <vector>
 #include <glm/glm.hpp>
-#include "shader.h"
+// #include "shader.h"
+
+class shader;
+class mesh;
 
 class entity
 {
@@ -24,10 +28,7 @@ private:
 	GLuint ebo_id;
 	GLuint cb_id;
 	GLuint uvb_id;
-	std::vector<GLuint> indices;
-	std::vector<GLfloat> vertices;
-	std::vector<GLfloat> colors;
-	std::vector<GLfloat> uvs;
+	mesh *m;
 	void gen_buffers();
 public:
 	shader *s;

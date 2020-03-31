@@ -10,7 +10,8 @@ SRC = shader.cpp\
 	player.cpp\
 	ball.cpp\
 	opponent.cpp\
-	obj_loader.cpp
+	obj_loader.cpp\
+	mesh.cpp
 
 SRCDIR = src
 
@@ -30,6 +31,9 @@ $(NAME):
 
 debug:
 	$(CC) -g $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) $(LDFLAGS)
+
+check: fclean
+	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) $(LDFLAGS) CXX=~/Dev/temp/build/bin/include-what-you-use
 
 clean:
 	@echo "removing objects"
