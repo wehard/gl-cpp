@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:11 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 17:20:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 15:17:36 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ private:
 	float speed;
 	glm::vec3 direction;
 public:
-	ball(shader *s);
+	ball(shader *s, mesh *m);
 	~ball();
 	void update(float delta_time) override;
 };

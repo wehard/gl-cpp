@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   opponent.cpp                                       :+:      :+:    :+:   */
+/*   wall.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/30 18:41:11 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 15:18:18 by wkorande         ###   ########.fr       */
+/*   Created: 2020/03/31 13:10:30 by wkorande          #+#    #+#             */
+/*   Updated: 2020/03/31 15:18:58 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "opponent.h"
-#include <GLFW/glfw3.h>
+#include "entity.h"
 
-opponent::opponent(shader *s, mesh *m, entity *ball) : entity(s, m), ball(ball), speed(100.0)
+class wall : public entity
 {
-}
-
-opponent::opponent() {}
-
-opponent::~opponent()
-{
-}
-
-void opponent::update(float delta_time)
-{
-	position.y = ball->position.y;
-}
+private:
+	/* data */
+public:
+	wall(shader *s, mesh *m);
+	~wall();
+};

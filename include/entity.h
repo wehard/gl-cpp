@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 11:16:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 15:14:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ public:
 	glm::vec3 position;
 	glm::vec3 scale;
 	float rotation;
-	entity(shader *s);
+	entity(shader *s, mesh *m);
+	entity(mesh *m);
 	entity();
 	~entity();
 	void draw();

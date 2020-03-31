@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 12:19:08 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 14:56:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void wgl::init()
 	r = new renderer(c);
 	wgl_input::setup_key_inputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
-	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_FACE, GL_LINE);
 }
 
 void wgl::run()

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 19:25:13 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 11:57:54 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 14:23:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 bool load_obj(const char *path, mesh *m)
 {
-	std::vector<glm::vec3> out_verts;
-	std::vector<glm::vec2> out_uvs;
-	std::vector<glm::vec3> out_normals;
-	std::vector<int> out_indices;
+	// std::vector<glm::vec3> out_verts;
+	// std::vector<glm::vec2> out_uvs;
+	// std::vector<glm::vec3> out_normals;
+	// std::vector<int> out_indices;
 
 	FILE *f = fopen(path, "r");
 	if (!f)
@@ -40,7 +40,6 @@ bool load_obj(const char *path, mesh *m)
 		{
 			glm::vec3 vertex;
 			fscanf(f, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
-			out_verts.push_back(vertex);
 			m->vertices.push_back(vertex.x);
 			m->vertices.push_back(vertex.y);
 			m->vertices.push_back(vertex.z);
@@ -54,7 +53,6 @@ bool load_obj(const char *path, mesh *m)
 		{
 			glm::vec2 uv;
 			fscanf(f, "%f %f\n", &uv.x, &uv.y);
-			out_uvs.push_back(uv);
 			m->uvs.push_back(uv.x);
 			m->uvs.push_back(uv.y);
 		}
@@ -62,7 +60,6 @@ bool load_obj(const char *path, mesh *m)
 		{
 			glm::vec3 normal;
 			fscanf(f, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
-			out_normals.push_back(normal);
 			// m->normals.push_back(normal.x);
 			// m->normals.push_back(normal.y);
 			// m->normals.push_back(normal.z);
@@ -77,9 +74,7 @@ bool load_obj(const char *path, mesh *m)
 			vert_index[0] = atoi(s1);
 			vert_index[1] = atoi(s2);
 			vert_index[2] = atoi(s3);
-			out_indices.push_back(vert_index[0] - 1);
-			out_indices.push_back(vert_index[1] - 1);
-			out_indices.push_back(vert_index[2] - 1);
+			// printf("read triangle: %d %d %d\n", vert_index[0], vert_index[1], vert_index[2]);
 			m->indices.push_back(vert_index[0] - 1);
 			m->indices.push_back(vert_index[1] - 1);
 			m->indices.push_back(vert_index[2] - 1);

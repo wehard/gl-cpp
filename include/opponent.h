@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 18:54:02 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 18:48:28 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 15:18:24 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ private:
 	entity *ball;
 	float speed;
 public:
-	opponent(shader *s, entity *ball);
+	opponent(shader *s, mesh *m, entity *ball);
 	opponent();
 	~opponent();
 	void update(float delta_time) override;

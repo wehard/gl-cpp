@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 09:46:35 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 09:44:40 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 15:25:38 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 camera::camera(float fovy, float aspect)
 {
 	this->position = glm::vec3(0.0, 0.0, 0.0);
-	this->projection_matrix = glm::perspective(fovy, aspect, 0.1f, 150.0f);
+	this->projection_matrix = glm::perspective(fovy, aspect, 0.1f, 1000.0f);
 }
 camera::camera() {}
 camera::~camera() {}

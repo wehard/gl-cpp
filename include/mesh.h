@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 10:53:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 11:14:00 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 15:07:06 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ public:
 	std::vector<GLfloat> vertices;
 	std::vector<GLfloat> colors;
 	std::vector<GLfloat> uvs;
-	mesh(/* args */);
+	std::vector<GLfloat> normals;
+	mesh();
 	~mesh();
 	static mesh *quad();
 };

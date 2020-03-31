@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 12:18:32 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/03/31 15:14:26 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 #include "obj_loader.h"
 #include "mesh.h"
 
-entity::entity(shader *s) : rotation(0.0)
+entity::entity(shader *s, mesh *m) : s(s), m(m), rotation(0.0)
 {
-	this->s = s;
 	this->scale = glm::vec3(1.0, 1.0, 1.0);
-	this->m = new mesh(); //mesh::quad();
-	load_obj("resources/quad.obj", this->m);
 	gen_buffers();
+}
+
+entity::entity(mesh *m)
+{
+	this->m = m;
 }
 
 entity::entity() : s(0), rotation(0.0) {}
@@ -67,5 +69,5 @@ void entity::draw()
 {
 	glBindVertexArray(vao_id);
 	// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, m->indices.size(), GL_UNSIGNED_INT, 0);
 }
