@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 14:42:15 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 17:40:05 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include <glm/glm.hpp>
 // #include "shader.h"
 #include <vector>
+#include "collider.h"
 
 class shader;
 class mesh;
-class collider;
 
 class entity
 {

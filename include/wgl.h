@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:54:41 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 14:30:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 17:08:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 class entity;
 class camera;
 class renderer;
+class wgl_input;
 
 class wgl
 {
@@ -37,6 +38,8 @@ private:
 	double last_time;
 	GLFWkeyfun key_callback;
 	std::vector<entity*> entities;
+	bool wireframe_mode;
+	wgl_input *input;
 public:
 	wgl(std::string title);
 	wgl();

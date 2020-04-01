@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 15:31:59 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 17:39:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main(void)
 	mesh *l = load_obj("resources/logo.obj");
 	mesh *cube = load_obj("resources/cube.obj");
 	mesh *quad = load_obj("resources/quad.obj");
+	mesh *icosphere = load_obj("resources/icosphere.obj");
 
 	mesh::print(quad);
 
@@ -38,9 +39,9 @@ int main(void)
 	p.position = glm::vec3(-60, 0.0, 0.0);
 	p.scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
-	ball b = ball(&basic, cube);
+	ball b = ball(&basic, icosphere);
 	b.position = glm::vec3(-50.0, 0.0, 0.0);
-	b.scale = glm::vec3(2.0f, 2.0f, 2.0f);
+	b.scale = glm::vec3(10.0f, 10.0f, 10.0f);
 
 	opponent o = opponent(&basic, cube, &b);
 	o.position = glm::vec3(60, 0.0, 0.0);
@@ -65,6 +66,7 @@ int main(void)
 	wall center = wall(&basic, cube);
 	center.position = glm::vec3(0.0, 0.0, -2.0);
 	center.scale = glm::vec3(1.0f, 72.0f, 1.0f);
+	center.c->disable();
 
 	engine.add_entity(&left);
 	engine.add_entity(&right);

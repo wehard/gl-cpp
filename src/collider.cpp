@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:45:34 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 16:55:11 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 17:34:26 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,28 @@
 #include "mesh.h"
 #include "entity.h"
 
-collider::collider(mesh *m)
+collider::collider(mesh *m) : m_is_enabled(true)
 {
 	this->b = mesh::calculate_bounds(m);
 }
 
 collider::~collider()
 {
+}
+
+void collider::enable()
+{
+	m_is_enabled = true;
+}
+
+void collider::disable()
+{
+	m_is_enabled = false;
+}
+
+bool collider::is_enabled()
+{
+	return (m_is_enabled);
 }
 
 bounds transform_bounds(bounds b, glm::vec3 p, glm::vec3 s)
@@ -36,7 +51,7 @@ bounds transform_bounds(bounds b, glm::vec3 p, glm::vec3 s)
 
 bool collider::check_collision(entity *e1, entity *e2, hit_info *h)
 {
-	if (!e1 || !e2 || !e1->c || !e2->c)
+	if (!e1 || !e2 || !e1->c || !e2->c || !e1->c->is_enabled() || !e2->c->is_enabled())
 		return (false);
 	bounds b1 = transform_bounds(e1->c->b, e1->position, e1->scale);
 	bounds b2 = transform_bounds(e2->c->b, e2->position, e2->scale);
@@ -67,5 +82,6 @@ bool collider::check_collision(entity *e1, entity *e2, hit_info *h)
 			h->normal = face_normals[i];
 		}
 	}
+	h->e = e2;
 	return (true);
 }

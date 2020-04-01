@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 14:35:44 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 17:09:50 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@
 #include <iostream>
 
 
-wgl::wgl(std::string title)
+wgl::wgl(std::string title) : title(title), wireframe_mode(0)
 {
-	this->title = title;
 	init();
 }
 
@@ -51,19 +50,28 @@ void wgl::init()
 	r = new renderer(c);
 	wgl_input::setup_key_inputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
-	glPolygonMode(GL_FRONT_FACE, GL_LINE);
+	// glPolygonMode(GL_FRONT_FACE, GL_LINE);
 	glEnable(GL_DEPTH_TEST);
 }
 
 void wgl::run()
 {
+	input = new wgl_input(vector<int>({GLFW_KEY_W}));
+
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
+		if (input->is_key_down(GLFW_KEY_W))
+			wireframe_mode = !wireframe_mode;
 		double current_time = glfwGetTime();
 		double delta_time = current_time - last_time;
 		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		if (wireframe_mode)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		else
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		for (auto e : entities)
 		{
