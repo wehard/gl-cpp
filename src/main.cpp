@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 17:39:02 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 22:34:26 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int main(void)
 	p.scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
 	ball b = ball(&basic, icosphere);
-	b.position = glm::vec3(-50.0, 0.0, 0.0);
-	b.scale = glm::vec3(10.0f, 10.0f, 10.0f);
+	b.position = glm::vec3(-40.0, 0.0, 0.0);
+	b.scale = glm::vec3(2.0f, 2.0f, 2.0f);
 
 	opponent o = opponent(&basic, cube, &b);
 	o.position = glm::vec3(60, 0.0, 0.0);

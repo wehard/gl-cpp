@@ -6,13 +6,14 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:45:34 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 17:34:26 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 20:30:37 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "collider.h"
 #include "mesh.h"
 #include "entity.h"
+#include <stdio.h>
 
 collider::collider(mesh *m) : m_is_enabled(true)
 {

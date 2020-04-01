@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:46 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 17:22:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 22:46:50 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,21 @@ void ball::update(float delta_time)
 		if (other->id != this->id && collider::check_collision(this, other, &h))
 		{
 			player* p  = dynamic_cast<player*>(h.e);
-			if (p)
-				printf("hit player\n");
-			opponent* o  = dynamic_cast<opponent*>(h.e);
-			if (o)
-				printf("hit opponent\n");
-			direction = glm::reflect(direction, h.normal);
+			opponent *o  = dynamic_cast<opponent*>(h.e);
+			if (p || o)
+			{
+				printf("hit paddle\n");
+				float i = (h.e->position.y - position.y) / scale.y;
+				float angle = -glm::radians(i * 75.0);
+				direction.x = h.normal.x * glm::cos(angle) - h.normal.y * glm::sin(angle);
+				direction.y = h.normal.x * glm::sin(angle) + h.normal.y * glm::cos(angle);
+				direction = glm::normalize(direction);
+				position -= direction;
+				printf("angle %f dir: %f %f %f\n", angle, direction.x, direction.y, direction.z);
+				return ;
+			}
+			else if (!p && !o)
+				direction = glm::reflect(direction, h.normal);
 			position += h.normal;
 			return ;
 		}
