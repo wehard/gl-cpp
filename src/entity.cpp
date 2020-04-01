@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 11:15:32 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 14:47:36 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,22 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "obj_loader.h"
 #include "mesh.h"
+#include "collider.h"
+
+std::vector<entity*> entity::entities;
 
 entity::entity(shader *s, mesh *m) : s(s), m(m), rotation(0.0)
 {
 	this->scale = glm::vec3(1.0, 1.0, 1.0);
+	this->c = new collider(m);
 	gen_buffers();
+	entity::entities.push_back(this);
 }
 
 entity::entity(mesh *m)
 {
 	this->m = m;
+
 }
 
 entity::entity() : s(0), rotation(0.0) {}

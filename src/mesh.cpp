@@ -6,12 +6,15 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 11:01:04 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 10:38:23 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 13:13:35 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mesh.h"
+#include "bounds.h"
 #include <stdio.h>
+#include <math.h>
+#include <glm/vec3.hpp>
 
 mesh::mesh(/* args */)
 {
@@ -65,4 +68,32 @@ void mesh::print(mesh *m)
 			);
 	}
 
+}
+
+bounds mesh::calculate_bounds(mesh *m)
+{
+	bounds b = {
+		b.x_min = INFINITY, b.x_max = -INFINITY,
+		b.y_min = INFINITY, b.y_max = -INFINITY,
+		b.z_min = INFINITY, b.z_max = -INFINITY
+		};
+	if (!m)
+		return (b);
+	for (size_t i = 0; i < m->vertices.size(); i += 3)
+	{
+		glm::vec3 cur = glm::vec3(m->vertices[i], m->vertices[i + 1], m->vertices[i + 2]);
+		if (cur.x < b.x_min)
+			b.x_min = cur.x;
+		if (cur.y < b.y_min)
+			b.y_min = cur.y;
+		if (cur.z < b.z_min)
+			b.z_min = cur.z;
+		if (cur.x > b.x_max)
+			b.x_max = cur.x;
+		if (cur.y > b.y_max)
+			b.y_max = cur.y;
+		if (cur.z > b.z_max)
+			b.z_max = cur.z;
+	}
+	return (b);
 }

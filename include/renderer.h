@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 11:51:21 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 09:41:12 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 12:40:27 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class renderer
 {
 private:
 	camera *cam;
+	glm::vec3 light_pos;
 public:
 	renderer(camera *cam);
 	renderer();

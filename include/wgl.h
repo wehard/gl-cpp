@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:54:41 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 09:40:40 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 14:30:43 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ class wgl
 private:
 	GLFWwindow	*window;
 	std::string	title;
-	std::vector<entity*> entities;
 	renderer *r;
 	camera *c;
 	double last_time;
 	GLFWkeyfun key_callback;
+	std::vector<entity*> entities;
 public:
 	wgl(std::string title);
 	wgl();

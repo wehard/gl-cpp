@@ -12,7 +12,8 @@ SRC = shader.cpp\
 	opponent.cpp\
 	obj_loader.cpp\
 	mesh.cpp\
-	wall.cpp
+	wall.cpp\
+	collider.cpp
 
 SRCDIR = src
 

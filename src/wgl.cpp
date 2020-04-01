@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 12:33:02 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 14:35:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ void wgl::run()
 void wgl::add_entity(entity *e)
 {
 	entities.insert(entities.begin(), e);
+	e->id = entities.size();
 }

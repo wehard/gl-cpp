@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 11:52:19 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 11:55:25 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 12:42:58 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 #include "shader.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-renderer::renderer(camera *cam)
+renderer::renderer(camera *cam) : cam(cam), light_pos(glm::vec3(0.0,0.0,50.0))
 {
-	this->cam = cam;
 }
 
 renderer::renderer()
@@ -30,7 +29,7 @@ renderer::~renderer()
 void renderer::render(entity *e)
 {
 	e->s->use();
-	e->s->set_vec3("light_pos", cam->position);
+	e->s->set_vec3("light_pos", light_pos);
 	e->s->set_vec3("light_color", glm::vec3(1.0, 1.0, 0.8));
 	e->s->set_mat4("view_matrix", cam->get_view_matrix());
 	e->s->set_mat4("proj_matrix", cam->get_projection_matrix());
