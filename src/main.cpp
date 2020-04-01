@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 11:49:24 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 15:31:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int main(void)
 	bottom.scale = glm::vec3(128.0f, 1.0f, 10.0f);
 
 	wall center = wall(&basic, cube);
-	center.position = glm::vec3(0.0, 0.0, 0.0);
-	center.scale = glm::vec3(1.0f, 72.0f, 10.0f);
+	center.position = glm::vec3(0.0, 0.0, -2.0);
+	center.scale = glm::vec3(1.0f, 72.0f, 1.0f);
 
 	engine.add_entity(&left);
 	engine.add_entity(&right);
