@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 17:39:54 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 11:15:32 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ void entity::update(float delta_time) { }
 void entity::draw()
 {
 	glBindVertexArray(vao_id);
-	// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
 	glDrawElements(GL_TRIANGLES, m->indices.size(), GL_UNSIGNED_INT, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 18:57:26 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 15:35:32 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 12:22:52 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ player::~player()
 void player::update(float delta_time)
 {
 	if (input->is_key_down(GLFW_KEY_UP))
-	{
-		if (position.y < 30)
 			position.y += speed * delta_time;
-	}
 	if (input->is_key_down(GLFW_KEY_DOWN))
-	{
-		if (position.y > -30)
 			position.y -= speed * delta_time;
-	}
+
+	float play_area_height = 72.0;
+	if (position.y + scale.y / 2 > play_area_height / 2)
+		position.y = (play_area_height / 2) - scale.y / 2;
+	if (position.y - scale.y / 2 < -play_area_height / 2)
+		position.y = (-play_area_height / 2) + scale.y / 2;
 }

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 17:48:23 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 17:52:31 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 11:01:54 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ void shader::set_vec2(string name, glm::vec2 v)
 {
 	glUniform2f(uniforms[name], v[0], v[1]);
 }
+
+void shader::set_vec3(string name, glm::vec3 v)
+{
+	glUniform3f(uniforms[name], v[0], v[1], v[2]);
+}
+
 void shader::set_mat4(string name, glm::mat4x4 m)
 {
 	GLuint location = glGetUniformLocation(p_id, name.c_str());

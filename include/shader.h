@@ -28,5 +28,6 @@ public:
 	void use();
 	void set_float(string name, float f);
 	void set_vec2(string name, glm::vec2 v);
+	void set_vec3(string name, glm::vec3 v);
 	void set_mat4(string name, glm::mat4x4 m);
 };

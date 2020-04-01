@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 13:30:30 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 16:42:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 10:37:07 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ wgl_input::wgl_input(std::vector<int> keys_to_monitor) : is_enabled(true), keys(
 	input_instances.push_back(this);
 	for (int key : keys_to_monitor)
 		keys[key] = false;
-	std::cout << "constructor" << std::endl;
+	// std::cout << "constructor" << std::endl;
 }
 
 wgl_input::wgl_input() : is_enabled(true), keys() {

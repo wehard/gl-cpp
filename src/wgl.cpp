@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 14:56:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 12:33:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void wgl::init()
 	wgl_input::setup_key_inputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
 	glPolygonMode(GL_FRONT_FACE, GL_LINE);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void wgl::run()
@@ -59,10 +60,9 @@ void wgl::run()
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
-		glfwPollEvents();
 		double current_time = glfwGetTime();
 		double delta_time = current_time - last_time;
-		glClearColor(0.0, 0.0, 0.0, 1.0);
+		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		for (auto e : entities)
@@ -76,6 +76,7 @@ void wgl::run()
 
 		glfwSwapBuffers(window);
 		last_time = current_time;
+		glfwPollEvents();
 	}
 }
 

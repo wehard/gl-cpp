@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 19:25:13 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 17:34:35 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/01 10:17:40 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 #include <string.h>
 #include <string>
 
-bool load_obj(const char *path, mesh *m)
+mesh *load_obj(const char *path)
 {
+	mesh *m = new mesh();
 	// std::vector<glm::vec3> out_verts;
 	// std::vector<glm::vec2> out_uvs;
 	std::vector<glm::vec3> temp_normals;
@@ -27,7 +28,7 @@ bool load_obj(const char *path, mesh *m)
 	if (!f)
 	{
 		printf("error opening file: %s\n", path);
-		return (false);
+		return (NULL);
 	}
 	char buf[128];
 	while (true)
@@ -99,7 +100,7 @@ bool load_obj(const char *path, mesh *m)
 
 		}
 	}
-	return (true);
+	return (m);
 }
 
 std::vector<float> convert_vec3s(std::vector<glm::vec3> v3s)
