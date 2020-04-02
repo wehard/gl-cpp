@@ -21,15 +21,25 @@ INCLUDE = include
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 
+OBJS = $(SRC:.cpp=.o)
+
 CC = clang
 
 CFLAGS = -std=c++17 -lstdc++ #-Wall -Wextra -Werror
 LDFLAGS = -lglfw3 -lGL -lGLEW -lm -ldl -lXrandr -lXi -lX11 -lXxf86vm -lpthread
 
+vpath %.cpp $(SRCDIR)
+vpath %.h $(INCLUDE)
+
 all: $(NAME)
 
-$(NAME):
-	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) $(LDFLAGS)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE) $(LDFLAGS)
+
+%.o: %.cpp
+	#$(CC) $(CFLAGS) -c $(SRCS) -I $(INCLUDE) $(LDFLAGS)
+	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
+
 
 debug:
 	$(CC) -g $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) $(LDFLAGS)
@@ -39,6 +49,7 @@ check: fclean
 
 clean:
 	@echo "removing objects"
+	rm -rf $(OBJS)
 
 fclean: clean
 	rm -rf $(NAME)
