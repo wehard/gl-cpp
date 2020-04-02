@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:46 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 22:46:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/02 10:47:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,26 @@ void ball::update(float delta_time)
 			opponent *o  = dynamic_cast<opponent*>(h.e);
 			if (p || o)
 			{
+				float i = (position.y - h.e->position.y) / scale.y;
+				float d = glm::dot(h.normal, glm::vec3(0.0, 1.0, 0.0));
+				if (d >= 1 || d <= -1)
+				{
+					h.normal = glm::vec3(d, 0.0, 0.0);
+					i = d;
+					break ;
+				}
 				printf("hit paddle\n");
-				float i = (h.e->position.y - position.y) / scale.y;
-				float angle = -glm::radians(i * 75.0);
+				float angle = glm::radians(i * 75.0);
 				direction.x = h.normal.x * glm::cos(angle) - h.normal.y * glm::sin(angle);
 				direction.y = h.normal.x * glm::sin(angle) + h.normal.y * glm::cos(angle);
 				direction = glm::normalize(direction);
-				position -= direction;
-				printf("angle %f dir: %f %f %f\n", angle, direction.x, direction.y, direction.z);
-				return ;
+				// position += direction;
+				printf("d %f i %f angle %f dir: %f %f %f\n", d, i, angle, direction.x, direction.y, direction.z);
+				break;
 			}
 			else if (!p && !o)
 				direction = glm::reflect(direction, h.normal);
-			position += h.normal;
+			position += (direction * 2.0f);
 			return ;
 		}
 	}
