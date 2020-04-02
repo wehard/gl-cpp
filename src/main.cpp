@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/02 11:51:58 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/02 17:45:25 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ int main(void)
 	wall left = wall(&basic, cube);
 	left.position = glm::vec3(-64.0, 0.0, 0.0);
 	left.scale = glm::vec3(1.0f, 73.0f, 10.0f);
+	left.c->disable();
 
 	wall right = wall(&basic, cube);
 	right.position = glm::vec3(64.0, 0.0, 0.0);
 	right.scale = glm::vec3(1.0f, 73.0f, 10.0f);
+	right.c->disable();
 
 	wall top = wall(&basic, cube);
 	top.position = glm::vec3(0.0, 36.0, 0.0);

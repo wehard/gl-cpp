@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:45:34 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 20:30:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/02 17:25:12 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bounds transform_bounds(bounds b, glm::vec3 p, glm::vec3 s)
 	return (b);
 }
 
-bool collider::check_collision(entity *e1, entity *e2, hit_info *h)
+bool collider::check_collision(entity *e1, entity *e2, hit_info *h, int ignore_mask)
 {
 	if (!e1 || !e2 || !e1->c || !e2->c || !e1->c->is_enabled() || !e2->c->is_enabled())
 		return (false);
@@ -77,10 +77,16 @@ bool collider::check_collision(entity *e1, entity *e2, hit_info *h)
 	{
 		if (distance[i] < 0.0)
 			return (false);
+		if (ignore_mask & (1 << i))
+		{
+			printf("ignoring face %d\n", i);
+			continue ;
+		}
 		if (i == 0 || distance[i] < min_dist)
 		{
 			min_dist = distance[i];
 			h->normal = face_normals[i];
+			h->faces = (1 << i);
 		}
 	}
 	h->e = e2;
