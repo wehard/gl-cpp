@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:46 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/02 17:51:20 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/02 18:51:50 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <iostream>
 #include <math.h>
 
-ball::ball(shader *s, mesh *m) : entity(s, m), speed(80)
+ball::ball(shader *s, mesh *m) : entity(s, m), speed(60)
 {
 	direction = glm::normalize(glm::vec3(1.0, 0.8, 0.0));
 }
