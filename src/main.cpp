@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/02 17:45:25 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/03 10:57:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int main(void)
 	mesh *quad = load_obj("resources/quad.obj");
 	mesh *icosphere = load_obj("resources/icosphere.obj");
 
+	l->set_vertex_colors(glm::vec4(0.3,0.3,0.3,1.0));
 	mesh::print(quad);
 
 	entity logo = entity(&basic, l);
@@ -50,12 +51,12 @@ int main(void)
 	wall left = wall(&basic, cube);
 	left.position = glm::vec3(-64.0, 0.0, 0.0);
 	left.scale = glm::vec3(1.0f, 73.0f, 10.0f);
-	left.c->disable();
+	// left.c->disable();
 
 	wall right = wall(&basic, cube);
 	right.position = glm::vec3(64.0, 0.0, 0.0);
 	right.scale = glm::vec3(1.0f, 73.0f, 10.0f);
-	right.c->disable();
+	// right.c->disable();
 
 	wall top = wall(&basic, cube);
 	top.position = glm::vec3(0.0, 36.0, 0.0);

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:46 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/02 18:51:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/03 12:21:27 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,9 @@ void ball::update(float delta_time)
 	}
 
 	position = position + direction * speed * delta_time;
+}
+
+glm::vec3 ball::get_direction()
+{
+	return (direction);
 }

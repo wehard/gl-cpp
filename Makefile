@@ -34,11 +34,12 @@ vpath %.h $(INCLUDE)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE) $(LDFLAGS)
+	@printf "compiling %s\n" "$(NAME)"
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE) $(LDFLAGS)
 
 %.o: %.cpp
-	#$(CC) $(CFLAGS) -c $(SRCS) -I $(INCLUDE) $(LDFLAGS)
-	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
+	@printf "compiling %s\n" "$<"
+	@$(CC) -I $(INCLUDE) -c $< -o $@
 
 
 debug:
@@ -49,10 +50,11 @@ check: fclean
 
 clean:
 	@echo "removing objects"
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	@echo "removing $(NAME)"
+	@rm -rf $(NAME)
 
 re: fclean all
 

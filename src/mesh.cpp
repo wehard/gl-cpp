@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 11:01:04 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 13:13:35 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/03 10:56:18 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ mesh *mesh::quad()
 
 	m->indices = {0, 1, 2, 2, 3, 0,};
 	return (m);
+}
+
+void mesh::set_vertex_colors(glm::vec4 c)
+{
+	for (size_t i = 0; i < colors.size(); i += 4)
+	{
+		colors[i] = c.r;
+		colors[i+1] = c.g;
+		colors[i+2] = c.b;
+		colors[i+3] = c.a;
+	}
+
 }
 
 size_t mesh::num_verts()
