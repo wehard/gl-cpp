@@ -26,7 +26,7 @@ OBJS = $(SRC:.cpp=.o)
 CC = clang
 
 CFLAGS = -std=c++17 -lstdc++ #-Wall -Wextra -Werror
-LDFLAGS = -lglfw3 -lGL -lGLEW -lm -ldl -lXrandr -lXi -lX11 -lXxf86vm -lpthread
+LDFLAGS = -lglfw -lGL -lGLEW -lm -ldl -lXrandr -lXi -lX11 -lXxf86vm -lpthread
 
 vpath %.cpp $(SRCDIR)
 vpath %.h $(INCLUDE)

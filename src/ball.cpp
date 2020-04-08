@@ -29,13 +29,17 @@ ball::~ball() {}
 
 void ball::update(float delta_time)
 {
+	if (position.x < -70 || position.x > 70)
+	{
+		position = glm::vec3(0,0,0);
+	}
+
 	for (auto &other : entity::entities)
 	{
 		hit_info h;
 		h.normal = glm::vec3(0.0);
 		if (other->id != this->id && collider::check_collision(this, other, &h))
 		{
-
 			player* p  = dynamic_cast<player*>(h.e);
 			opponent *o  = dynamic_cast<opponent*>(h.e);
 			if (p || o)
@@ -66,7 +70,6 @@ void ball::update(float delta_time)
 			return ;
 		}
 	}
-
 	position = position + direction * speed * delta_time;
 }
 

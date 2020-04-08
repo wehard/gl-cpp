@@ -27,15 +27,18 @@ int main(void)
 	mesh *cube = load_obj("resources/cube.obj");
 	mesh *quad = load_obj("resources/quad.obj");
 	mesh *icosphere = load_obj("resources/icosphere.obj");
-
-	l->set_vertex_colors(glm::vec4(0.9,0.3,0.3,1.0));
+	mesh *paddle = load_obj("resources/cube.obj");
+	l->set_vertex_colors(glm::vec4(0.9, 0.3, 0.3, 1.0));
+	cube->set_vertex_colors(glm::vec4(0.2, 0.3, 0.7, 1.0));
+	icosphere->set_vertex_colors(glm::vec4(0.9, 0.6, 0.3, 1.0));
+	paddle->set_vertex_colors(glm::vec4(1.0, 1.0, 1.0, 1.0));
 
 	entity logo = entity(&basic, l);
 	logo.position = glm::vec3(0.0, 0.0, -50.0);
 	logo.scale = glm::vec3(10.0f, 10.0f, 10.0f);
 	logo.s = &basic;
 
-	player p = player(&basic, cube);
+	player p = player(&basic, paddle);
 	p.position = glm::vec3(-60, 0.0, 0.0);
 	p.scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
@@ -43,19 +46,19 @@ int main(void)
 	b.position = glm::vec3(-40.0, 0.0, 0.0);
 	b.scale = glm::vec3(2.0f, 2.0f, 2.0f);
 
-	opponent o = opponent(&basic, cube, &b);
+	opponent o = opponent(&basic, paddle, &b);
 	o.position = glm::vec3(60, 0.0, 0.0);
 	o.scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
 	wall left = wall(&basic, cube);
 	left.position = glm::vec3(-64.0, 0.0, 0.0);
 	left.scale = glm::vec3(1.0f, 73.0f, 10.0f);
-	// left.c->disable();
+	left.c->disable();
 
 	wall right = wall(&basic, cube);
 	right.position = glm::vec3(64.0, 0.0, 0.0);
 	right.scale = glm::vec3(1.0f, 73.0f, 10.0f);
-	// right.c->disable();
+	right.c->disable();
 
 	wall top = wall(&basic, cube);
 	top.position = glm::vec3(0.0, 36.0, 0.0);
