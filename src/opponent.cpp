@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 18:41:11 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/03 13:33:55 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/08 10:37:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void opponent::update(float delta_time)
 		float t = glm::dot(b->get_direction(), glm::normalize(bp_dir));
 		float a = tan(t) * glm::length(bp_dir);
 		target_y = b->position.y + a;
-		printf("targety: %f\n", target_y);
+		// printf("targety: %f\n", target_y);
 	}
 	if (abs(position.y - target_y) > 1)
 	{
