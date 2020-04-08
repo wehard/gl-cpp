@@ -23,4 +23,5 @@ public:
 	~ball();
 	void update(float delta_time) override;
 	glm::vec3 get_direction();
+	void reset_pos_and_dir();
 };

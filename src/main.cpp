@@ -23,17 +23,17 @@ int main(void)
 {
 	wgl engine = wgl("cpp pong");
 	shader basic = shader("shaders/phong.vert", "shaders/phong.frag");
-	mesh *l = load_obj("resources/logo.obj");
+	mesh *pong = load_obj("resources/logo.obj");
 	mesh *cube = load_obj("resources/cube.obj");
-	mesh *quad = load_obj("resources/quad.obj");
+	// mesh *quad = load_obj("resources/quad.obj");
 	mesh *icosphere = load_obj("resources/icosphere.obj");
 	mesh *paddle = load_obj("resources/cube.obj");
-	l->set_vertex_colors(glm::vec4(0.9, 0.3, 0.3, 1.0));
-	cube->set_vertex_colors(glm::vec4(0.2, 0.3, 0.7, 1.0));
-	icosphere->set_vertex_colors(glm::vec4(0.9, 0.6, 0.3, 1.0));
+	pong->set_vertex_colors(glm::vec4(0.9, 0.1, 0.2, 1.0));
+	cube->set_vertex_colors(glm::vec4(0.2, 0.2, 0.2, 1.0));
+	icosphere->set_vertex_colors(glm::vec4(0.9, 0.9, 0.9, 1.0));
 	paddle->set_vertex_colors(glm::vec4(1.0, 1.0, 1.0, 1.0));
 
-	entity logo = entity(&basic, l);
+	entity logo = entity(&basic, pong);
 	logo.position = glm::vec3(0.0, 0.0, -50.0);
 	logo.scale = glm::vec3(10.0f, 10.0f, 10.0f);
 	logo.s = &basic;
@@ -43,7 +43,6 @@ int main(void)
 	p.scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
 	ball b = ball(&basic, icosphere);
-	b.position = glm::vec3(-40.0, 0.0, 0.0);
 	b.scale = glm::vec3(2.0f, 2.0f, 2.0f);
 
 	opponent o = opponent(&basic, paddle, &b);

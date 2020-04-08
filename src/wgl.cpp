@@ -84,7 +84,7 @@ void wgl::run()
 		{
 			float cam_speed = 100.0f;
 			glm::vec3 dir = glm::normalize(cam_target - c->position);
-			c->position = c->position + dir * (cam_speed* (float)delta_time) * glm::length(cam_target - c->position) / 10.0f;
+			c->position = c->position + dir * (cam_speed * (float)delta_time) * glm::length(cam_target - c->position) / 10.0f;
 		}
 
 		glfwSwapBuffers(window);

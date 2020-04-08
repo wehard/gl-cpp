@@ -22,18 +22,24 @@
 
 ball::ball(shader *s, mesh *m) : entity(s, m), speed(60)
 {
-	direction = glm::normalize(glm::vec3(1.0, 0.8, 0.0));
+	reset_pos_and_dir();
 }
 
 ball::~ball() {}
 
+void ball::reset_pos_and_dir()
+{
+	std::cout << "reset" << std::endl;
+	position = glm::vec3(0,0,0);
+	direction.x = 0.5 - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	direction.y = 0.5 - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	direction = glm::normalize(direction * 10.0f);
+}
+
 void ball::update(float delta_time)
 {
 	if (position.x < -70 || position.x > 70)
-	{
-		position = glm::vec3(0,0,0);
-	}
-
+		reset_pos_and_dir();
 	for (auto &other : entity::entities)
 	{
 		hit_info h;
