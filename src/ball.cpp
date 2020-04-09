@@ -53,7 +53,7 @@ void ball::update(float delta_time)
 			opponent *o  = dynamic_cast<opponent*>(h.e);
 			if (p || o)
 			{
-				float i = (position.y - h.e->position.y) / scale.y;
+				float i = (position.y - h.e->position.y) / h.e->scale.y;
 				float d = glm::dot(h.normal, glm::vec3(0.0, 1.0, 0.0));
 				if (d >= 1.0 || d <= -1.0)
 				{
@@ -65,9 +65,9 @@ void ball::update(float delta_time)
 					h.normal = glm::vec3(d, 0.0, 0.0);
 					i = d;
 				}
-				float angle = glm::radians(i * 45.0);
+				float angle = glm::radians(i * 75.0);
 				direction.x = h.normal.x * glm::cos(angle) - h.normal.y * glm::sin(angle);
-				direction.y = h.normal.x * glm::sin(angle) + h.normal.y * glm::cos(angle);
+				direction.y = (h.normal.x * glm::sin(angle) + h.normal.y * glm::cos(angle)) * h.normal.x;
 				direction = glm::normalize(direction);
 				// printf("%s d %f i %f angle %f dir: %f %f %f\n", p != NULL ? "player" : "opp", d, i, angle, direction.x, direction.y, direction.z);
 				// break;

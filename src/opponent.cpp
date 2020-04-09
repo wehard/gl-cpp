@@ -16,7 +16,7 @@
 #include <math.h>
 #include "ball.h"
 
-opponent::opponent(shader *s, mesh *m, ball *b) : entity(s, m), b(b), speed(60.0)
+opponent::opponent(shader *s, mesh *m, ball *b) : entity(s, m), b(b), speed(30.0)
 {
 }
 
@@ -44,12 +44,13 @@ void opponent::update(float delta_time)
 	if (b->get_direction().x < 0)
 		target_y = 0.0;
 
-	glm::vec3 target = glm::vec3(position.x, target_y, position.z);
-
+	glm::vec3 target = p; // glm::vec3(position.x, target_y, position.z);
+	// if (b->get_direction().x < 0)
+	// 	target = glm::vec3(position.x, 0, position.z);
 	if (glm::length(target - position) > 1)
 	{
 		glm::vec3 dir = glm::normalize(target - position);
-		position = position + dir * (speed * delta_time) * glm::length(target - position) / 10.0f;
+		position = position + dir * (speed * std::min(abs(glm::length(target - position) / 10.0f), 1.0f)) * delta_time;
 		// c->position = c->position + dir * (cam_speed * (float)delta_time) * glm::length(cam_target - c->position) / 10.0f;
 	}
 
