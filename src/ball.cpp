@@ -20,7 +20,7 @@
 #include <iostream>
 #include <math.h>
 
-ball::ball(shader *s, mesh *m) : entity(s, m), speed(60)
+ball::ball(shader *s, mesh *m) : entity(s, m), speed(70)
 {
 	reset_pos_and_dir();
 }

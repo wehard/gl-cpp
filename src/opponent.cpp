@@ -16,7 +16,7 @@
 #include <math.h>
 #include "ball.h"
 
-opponent::opponent(shader *s, mesh *m, ball *b) : entity(s, m), b(b), speed(30.0)
+opponent::opponent(shader *s, mesh *m, ball *b) : entity(s, m), b(b), speed(60.0)
 {
 }
 
@@ -35,18 +35,14 @@ void opponent::update(float delta_time)
 	float angle = glm::dot(b->get_direction(), glm::normalize(bp));
 	float opposite = adjacent * tanf(angle);
 	
-	if (b->get_direction().y > 0)
-		target_y = b->position.y - opposite;
-	else
-		target_y = b->position.y + opposite;
 	// printf("adjacent: %.2f opposite: %.2f angle: %.2f\n", adjacent, opposite, glm::degrees(angle));
 	// printf("ball y: %.2f\n", b->get_direction().y);
-	if (b->get_direction().x < 0)
-		target_y = 0.0;
+	
 
 	glm::vec3 target = p; // glm::vec3(position.x, target_y, position.z);
-	// if (b->get_direction().x < 0)
-	// 	target = glm::vec3(position.x, 0, position.z);
+	if (b->get_direction().x < 0)
+		target.y = -b->position.y/3;
+
 	if (glm::length(target - position) > 1)
 	{
 		glm::vec3 dir = glm::normalize(target - position);
