@@ -39,9 +39,8 @@ void opponent::update(float delta_time)
 		target_y = b->position.y - opposite;
 	else
 		target_y = b->position.y + opposite;
-	// printf("target: %.2f\n", target_y);
-	printf("adjacent: %.2f opposite: %.2f angle: %.2f\n", adjacent, opposite, glm::degrees(angle));
-
+	// printf("adjacent: %.2f opposite: %.2f angle: %.2f\n", adjacent, opposite, glm::degrees(angle));
+	// printf("ball y: %.2f\n", b->get_direction().y);
 	if (b->get_direction().x < 0)
 		target_y = 0.0;
 

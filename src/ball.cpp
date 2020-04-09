@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include "player.h"
 #include "opponent.h"
-
+#include <glm/gtc/random.hpp>
 #include <bitset> //
 #include <iostream>
 #include <math.h>
@@ -29,11 +29,14 @@ ball::~ball() {}
 
 void ball::reset_pos_and_dir()
 {
-	std::cout << "reset" << std::endl;
 	position = glm::vec3(0,0,0);
-	direction.x = 0.5 - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-	direction.y = 0.5 - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-	direction = glm::normalize(direction * 10.0f);
+	// direction.x = 0.5 - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	// direction.y = 0.5 - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	direction = glm::sphericalRand(1.0);
+	direction.y *= 0.5;
+	direction.z = 0.0;
+	direction = glm::normalize(direction);
+	printf("ball dir: %.2f, %.2f, %.2f\n", direction.x, direction.y, direction.z);
 }
 
 void ball::update(float delta_time)
@@ -54,7 +57,7 @@ void ball::update(float delta_time)
 				float d = glm::dot(h.normal, glm::vec3(0.0, 1.0, 0.0));
 				if (d >= 1.0 || d <= -1.0)
 				{
-					printf("h.normal %f %f %f\n", h.normal.x, h.normal.y, h.normal.z);
+					// printf("h.normal %f %f %f\n", h.normal.x, h.normal.y, h.normal.z);
 					if (d > 1.0)
 						d = 1.0;
 					if (d < -1.0)
