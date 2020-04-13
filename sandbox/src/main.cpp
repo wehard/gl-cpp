@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/08 09:44:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 15:54:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 int main(void)
 {
 	wgl engine = wgl("cpp pong");
-	shader basic = shader("shaders/phong.vert", "shaders/phong.frag");
+	shader basic = shader("../engine/shaders/phong.vert", "../engine/shaders/phong.frag");
 	mesh *pong = load_obj("resources/logo.obj");
 	mesh *cube = load_obj("resources/cube.obj");
 	// mesh *quad = load_obj("resources/quad.obj");
