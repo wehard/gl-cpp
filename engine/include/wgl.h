@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:54:41 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:24:33 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:54:42 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ public:
 	void run();
 	void addEntity(Entity *e);
 	virtual void onAttach() = 0;
-	virtual void onUpdate() = 0;
+	virtual void onUpdate(float deltaTime) = 0;
 };

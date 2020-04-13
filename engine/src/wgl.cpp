@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:24:35 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:56:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void WEngine::run()
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
-		onUpdate();
 		if (input->isKeyDown(GLFW_KEY_W))
 			wireframe_mode = !wireframe_mode;
 		double current_time = glfwGetTime();
 		double delta_time = current_time - last_time;
+		onUpdate(delta_time);
 		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
