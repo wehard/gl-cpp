@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 18:02:57 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:04:20 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "shader.h"
 #include "obj_loader.h"
 #include "mesh.h"
+#include "framebuffer.h"
 
 class Pong : public WEngine
 {

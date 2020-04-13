@@ -8,7 +8,8 @@ SRC = shader.cpp\
 	wgl_input.cpp\
 	obj_loader.cpp\
 	mesh.cpp\
-	collider.cpp
+	collider.cpp\
+	framebuffer.cpp
 
 SRCDIR = src
 

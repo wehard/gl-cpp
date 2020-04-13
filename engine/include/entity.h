@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:25:41 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 18:25:08 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-// #include "shader.h"
 #include <vector>
 #include "collider.h"
 

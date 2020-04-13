@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:56:13 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:08:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "camera.h"
 #include "renderer.h"
 #include "wgl_input.h"
+#include "framebuffer.h"
+#include "mesh.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -56,8 +58,12 @@ void WEngine::init()
 
 void WEngine::run()
 {
-	input = new WengineInput(vector<int>({GLFW_KEY_W}));
+	// Shader *texshader = new Shader("../engine/shaders/texture.vert", "../engine/shaders/texture.frag");
+	// Framebuffer *frameBuffer = new Framebuffer();
+	// Entity *frame = new Entity(texshader, Mesh::makeQuad());
+
 	onAttach();
+	input = new WengineInput(vector<int>({GLFW_KEY_W}));
 
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
@@ -66,7 +72,21 @@ void WEngine::run()
 			wireframe_mode = !wireframe_mode;
 		double current_time = glfwGetTime();
 		double delta_time = current_time - last_time;
+
 		onUpdate(delta_time);
+		glm::vec3 cam_target = glm::vec3(entities[1]->position.x / 4.0, -entities[0]->position.y, 95.0);
+		if (glm::length(cam_target - c->position) > 0.1)
+		{
+			float cam_speed = 100.0f;
+			glm::vec3 dir = glm::normalize(cam_target - c->position);
+			c->position = c->position + dir * (cam_speed * (float)delta_time) * glm::length(cam_target - c->position) / 10.0f;
+		}
+		for (auto e : entities)
+			e->update(delta_time);
+
+		// rendering
+		// frameBuffer->Bind();
+
 		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -76,18 +96,13 @@ void WEngine::run()
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		for (auto e : entities)
-		{
-			e->update(delta_time);
 			r->render(e);
-		}
 
-		glm::vec3 cam_target = glm::vec3(entities[1]->position.x / 4.0, -entities[0]->position.y, 95.0);
-		if (glm::length(cam_target - c->position) > 0.1)
-		{
-			float cam_speed = 100.0f;
-			glm::vec3 dir = glm::normalize(cam_target - c->position);
-			c->position = c->position + dir * (cam_speed * (float)delta_time) * glm::length(cam_target - c->position) / 10.0f;
-		}
+		// frameBuffer->Unbind();
+		// glClearColor(0.2, 0.2, 0.2, 1.0);
+		// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		// glBindTexture(GL_TEXTURE_2D, frameBuffer->tex_id);
+		// frame->draw();
 
 		glfwSwapBuffers(window);
 		last_time = current_time;
