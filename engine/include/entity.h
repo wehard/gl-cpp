@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 17:40:05 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:25:41 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 #include <vector>
 #include "collider.h"
 
-class shader;
-class mesh;
+class Shader;
+class Mesh;
 
-class entity
+class Entity
 {
 private:
 	uint vao_id;
@@ -30,20 +30,20 @@ private:
 	uint cb_id;
 	uint nb_id;
 	uint uvb_id;
-	mesh *m;
-	void gen_buffers();
+	Mesh *m;
+	void genBuffers();
 public:
-	static std::vector<entity*> entities;
+	static std::vector<Entity*> entities;
 	size_t id;
-	collider *c;
-	shader *s;
+	Collider *c;
+	Shader *s;
 	glm::vec3 position;
 	glm::vec3 scale;
 	float rotation;
-	entity(shader *s, mesh *m);
-	entity(mesh *m);
-	entity();
-	~entity();
+	Entity(Shader *s, Mesh *m);
+	Entity(Mesh *m);
+	Entity();
+	~Entity();
 	void draw();
 	virtual void update(float delta_time);
 };

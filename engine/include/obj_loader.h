@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 19:24:13 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 10:16:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:19:06 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 
-class mesh;
+class Mesh;
 
-mesh *load_obj(const char *path);
-std::vector<float> convert_vec3s(std::vector<glm::vec3> v3s);
+Mesh *loadObj(const char *path);
+std::vector<float> convertVec3s(std::vector<glm::vec3> v3s);

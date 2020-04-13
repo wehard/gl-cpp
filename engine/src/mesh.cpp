@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 11:01:04 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/03 10:56:18 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:19:06 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 #include <math.h>
 #include <glm/vec3.hpp>
 
-mesh::mesh(/* args */)
+Mesh::Mesh(/* args */)
 {
 }
 
-mesh::~mesh()
+Mesh::~Mesh()
 {
 }
 
-mesh *mesh::quad()
+Mesh *Mesh::makeQuad()
 {
-	mesh *m = new mesh();
+	Mesh *m = new Mesh();
 	m->vertices = {
 		-0.5f,	-0.5f,	0.0f,
 		-0.5f,	0.5f,	0.0f,
@@ -52,7 +52,7 @@ mesh *mesh::quad()
 	return (m);
 }
 
-void mesh::set_vertex_colors(glm::vec4 c)
+void Mesh::setVertexColors(glm::vec4 c)
 {
 	for (size_t i = 0; i < colors.size(); i += 4)
 	{
@@ -64,14 +64,14 @@ void mesh::set_vertex_colors(glm::vec4 c)
 
 }
 
-size_t mesh::num_verts()
+size_t Mesh::getNumVertices()
 {
 	return (vertices.size() / 3);
 }
 
-void mesh::print(mesh *m)
+void Mesh::print(Mesh *m)
 {
-	printf("vertices: %zu\n", m->num_verts());
+	printf("vertices: %zu\n", m->getNumVertices());
 	for (size_t i = 0; i < m->vertices.size(); i += 3)
 	{
 		printf("v %.2f, %.2f, %.2f\tn %.2f, %.2f, %.2f\n",
@@ -82,9 +82,9 @@ void mesh::print(mesh *m)
 
 }
 
-bounds mesh::calculate_bounds(mesh *m)
+Bounds Mesh::calculateBounds(Mesh *m)
 {
-	bounds b = {
+	Bounds b = {
 		b.x_min = INFINITY, b.x_max = -INFINITY,
 		b.y_min = INFINITY, b.y_max = -INFINITY,
 		b.z_min = INFINITY, b.z_max = -INFINITY

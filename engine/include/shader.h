@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class shader
+class Shader
 {
 private:
 	GLuint	p_id;
@@ -17,17 +17,17 @@ private:
 	std::map<string, GLuint> uniforms;
 	std::map<string, GLuint> attributes;
 
-	string load_shader(string path);
-	GLuint compile_shader(string src, GLenum shader_type);
-	GLuint create_program(GLuint vert_id, GLuint frag_id);
-	void load_uniforms();
-	void load_attributes();
+	string loadShader(string path);
+	GLuint compileShader(string src, GLenum shader_type);
+	GLuint createProgram(GLuint vert_id, GLuint frag_id);
+	void loadUniforms();
+	void loadAttributes();
 public:
-	shader(string vert_path, string frag_path);
-	~shader();
+	Shader(string vert_path, string frag_path);
+	~Shader();
 	void use();
-	void set_float(string name, float f);
-	void set_vec2(string name, glm::vec2 v);
-	void set_vec3(string name, glm::vec3 v);
-	void set_mat4(string name, glm::mat4x4 m);
+	void setFloat(string name, float f);
+	void setVec2(string name, glm::vec2 v);
+	void setVec3(string name, glm::vec3 v);
+	void setMat4(string name, glm::mat4x4 m);
 };

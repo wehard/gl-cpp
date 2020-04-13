@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 17:09:50 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:24:35 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 #include <iostream>
 
 
-wgl::wgl(std::string title) : title(title), wireframe_mode(0)
+WEngine::WEngine(std::string title) : title(title), wireframe_mode(0)
 {
 	init();
 }
 
-wgl::wgl() { }
+WEngine::WEngine() { }
 
-wgl::~wgl() { }
+WEngine::~WEngine() { }
 
-void wgl::init()
+void WEngine::init()
 {
 	if (!glfwInit())
 		std::cout << "GLFW failed to initialize!" << std::endl;
@@ -45,23 +45,25 @@ void wgl::init()
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 		std::cout << "GLEW failed to initialize!" << std::endl;
-	c = new camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
+	c = new Camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
 	c->position = glm::vec3(0.0, -30.0, 95.0);
-	r = new renderer(c);
-	wgl_input::setup_key_inputs(window);
+	r = new Renderer(c);
+	WengineInput::setupKeyInputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
 	// glPolygonMode(GL_FRONT_FACE, GL_LINE);
 	glEnable(GL_DEPTH_TEST);
 }
 
-void wgl::run()
+void WEngine::run()
 {
-	input = new wgl_input(vector<int>({GLFW_KEY_W}));
+	input = new WengineInput(vector<int>({GLFW_KEY_W}));
+	onAttach();
 
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
-		if (input->is_key_down(GLFW_KEY_W))
+		onUpdate();
+		if (input->isKeyDown(GLFW_KEY_W))
 			wireframe_mode = !wireframe_mode;
 		double current_time = glfwGetTime();
 		double delta_time = current_time - last_time;
@@ -93,7 +95,7 @@ void wgl::run()
 	}
 }
 
-void wgl::add_entity(entity *e)
+void WEngine::addEntity(Entity *e)
 {
 	entities.insert(entities.begin(), e);
 	e->id = entities.size();

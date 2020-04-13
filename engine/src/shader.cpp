@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 17:48:23 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 11:01:54 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:17:18 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,49 +17,49 @@
 #include <map>
 #include "shader.h"
 
-shader::shader(string vert_path, string frag_path)
+Shader::Shader(string vert_path, string frag_path)
 {
 	this->vert_path = vert_path;
 	this->frag_path = frag_path;
 
-	this->v_id = compile_shader(load_shader(this->vert_path), GL_VERTEX_SHADER);
-	this->f_id = compile_shader(load_shader(this->frag_path), GL_FRAGMENT_SHADER);
-	this->p_id = create_program(this->v_id, this->f_id);
-	load_uniforms();
-	load_attributes();
+	this->v_id = compileShader(loadShader(this->vert_path), GL_VERTEX_SHADER);
+	this->f_id = compileShader(loadShader(this->frag_path), GL_FRAGMENT_SHADER);
+	this->p_id = createProgram(this->v_id, this->f_id);
+	loadUniforms();
+	loadAttributes();
 }
 
-shader::~shader()
+Shader::~Shader()
 {
 }
 
-void shader::use()
+void Shader::use()
 {
 	glUseProgram(p_id);
 }
 
-void shader::set_float(string name, float f)
+void Shader::setFloat(string name, float f)
 {
 	glUniform1f(uniforms[name], f);
 }
-void shader::set_vec2(string name, glm::vec2 v)
+void Shader::setVec2(string name, glm::vec2 v)
 {
 	glUniform2f(uniforms[name], v[0], v[1]);
 }
 
-void shader::set_vec3(string name, glm::vec3 v)
+void Shader::setVec3(string name, glm::vec3 v)
 {
 	glUniform3f(uniforms[name], v[0], v[1], v[2]);
 }
 
-void shader::set_mat4(string name, glm::mat4x4 m)
+void Shader::setMat4(string name, glm::mat4x4 m)
 {
 	GLuint location = glGetUniformLocation(p_id, name.c_str());
 	// std::cout << name << " loc: " << location << std::endl;
 	glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat*)&m[0]);
 }
 
-void shader::load_uniforms()
+void Shader::loadUniforms()
 {
 	GLint count;
 
@@ -84,7 +84,7 @@ void shader::load_uniforms()
 	}
 }
 
-void shader::load_attributes()
+void Shader::loadAttributes()
 {
 	GLint count;
 
@@ -109,7 +109,7 @@ void shader::load_attributes()
 	}
 }
 
-string shader::load_shader(string path)
+string Shader::loadShader(string path)
 {
 	std::string source;
 
@@ -126,7 +126,7 @@ string shader::load_shader(string path)
 	return (source);
 }
 
-GLuint shader::compile_shader(string src, GLenum shader_type)
+GLuint Shader::compileShader(string src, GLenum shader_type)
 {
 	GLuint shader_id;
 
@@ -147,7 +147,7 @@ GLuint shader::compile_shader(string src, GLenum shader_type)
 	return (shader_id);
 }
 
-GLuint shader::create_program(GLuint vert_id, GLuint frag_id)
+GLuint Shader::createProgram(GLuint vert_id, GLuint frag_id)
 {
 	GLuint program_id = glCreateProgram();
 	glAttachShader(program_id, vert_id);

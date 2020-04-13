@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 13:30:30 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 10:37:07 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:21:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <algorithm>
 #include <iostream>
 
-std::vector<wgl_input*> wgl_input::input_instances;
+std::vector<WengineInput*> WengineInput::input_instances;
 
-wgl_input::wgl_input(std::vector<int> keys_to_monitor) : is_enabled(true), keys()
+WengineInput::WengineInput(std::vector<int> keys_to_monitor) : is_enabled(true), keys()
 {
 	input_instances.push_back(this);
 	for (int key : keys_to_monitor)
@@ -24,33 +24,33 @@ wgl_input::wgl_input(std::vector<int> keys_to_monitor) : is_enabled(true), keys(
 	// std::cout << "constructor" << std::endl;
 }
 
-wgl_input::wgl_input() : is_enabled(true), keys() {
+WengineInput::WengineInput() : is_enabled(true), keys() {
 	std::cout << "default" << std::endl;
 	input_instances.push_back(this);
  }
 
 
-wgl_input::~wgl_input()
+WengineInput::~WengineInput()
 {
-	wgl_input::input_instances.erase(std::remove(wgl_input::input_instances.begin(), wgl_input::input_instances.end(), this), wgl_input::input_instances.end());
+	WengineInput::input_instances.erase(std::remove(WengineInput::input_instances.begin(), WengineInput::input_instances.end(), this), WengineInput::input_instances.end());
 }
 
-void wgl_input::setup_key_inputs(GLFWwindow *window)
+void WengineInput::setupKeyInputs(GLFWwindow *window)
 {
-	glfwSetKeyCallback(window, glfw_key_callback);
+	glfwSetKeyCallback(window, glfwKeyCallback);
 }
 
-void wgl_input::glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
+void WengineInput::glfwKeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
 	if (action == GLFW_REPEAT)
 		return ;
-	for (wgl_input* input : input_instances)
+	for (WengineInput* input : input_instances)
 	{
-		input->set_is_key_down(key, action != GLFW_RELEASE);
+		input->setIsKeyDown(key, action != GLFW_RELEASE);
 	}
 }
 
-void wgl_input::set_is_key_down(int key, bool is_down)
+void WengineInput::setIsKeyDown(int key, bool is_down)
 {
 	if (!is_enabled)
 	{
@@ -64,7 +64,7 @@ void wgl_input::set_is_key_down(int key, bool is_down)
 	}
 }
 
-bool wgl_input::is_key_down(int key)
+bool WengineInput::isKeyDown(int key)
 {
 	bool result = false;
 	if (is_enabled)

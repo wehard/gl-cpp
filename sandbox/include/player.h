@@ -6,22 +6,22 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 18:54:02 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 15:16:26 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:31:20 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entity.h"
 
-class wgl_input;
+class WengineInput;
 
-class player : public entity
+class Player : public Entity
 {
 private:
-	wgl_input *input;
+	WengineInput *input;
 	float speed;
 public:
-	player(shader *s, mesh *m);
-	~player();
+	Player(Shader *s, Mesh *m);
+	~Player();
 	void update(float delta_time) override;
 };
 

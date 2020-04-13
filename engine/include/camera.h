@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 09:47:00 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 09:43:13 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:20:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
 
-class camera
+class Camera
 {
 private:
 	glm::vec3 rotation;
@@ -22,10 +22,10 @@ private:
 	glm::mat4x4 projection_matrix;
 public:
 	glm::vec3 position;
-	camera(float fovy, float aspect);
-	camera();
-	~camera();
-	glm::mat4x4 get_view_matrix();
-	glm::mat4x4 get_projection_matrix();
+	Camera(float fovy, float aspect);
+	Camera();
+	~Camera();
+	glm::mat4x4 getViewMatrix();
+	glm::mat4x4 getProjectionMatrix();
 };
 

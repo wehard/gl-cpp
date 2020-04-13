@@ -6,13 +6,13 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:53:02 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 14:36:55 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:19:06 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-struct bounds
+struct Bounds
 {
 	float x_min;
 	float x_max;

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 15:54:02 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:31:43 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,69 +19,86 @@
 #include "obj_loader.h"
 #include "mesh.h"
 
+class Pong : public WEngine
+{
+	public:
+	Pong(string title) : WEngine(title)
+	{
+
+	}
+
+	virtual void onAttach() override
+	{
+	}
+
+	virtual void onUpdate() override
+	{
+	}
+};
+
 int main(void)
 {
-	wgl engine = wgl("cpp pong");
-	shader basic = shader("../engine/shaders/phong.vert", "../engine/shaders/phong.frag");
-	mesh *pong = load_obj("resources/logo.obj");
-	mesh *cube = load_obj("resources/cube.obj");
-	// mesh *quad = load_obj("resources/quad.obj");
-	mesh *icosphere = load_obj("resources/icosphere.obj");
-	mesh *paddle = load_obj("resources/cube.obj");
-	pong->set_vertex_colors(glm::vec4(0.9, 0.1, 0.2, 1.0));
-	cube->set_vertex_colors(glm::vec4(0.2, 0.2, 0.2, 1.0));
-	icosphere->set_vertex_colors(glm::vec4(0.9, 0.9, 0.9, 1.0));
-	paddle->set_vertex_colors(glm::vec4(1.0, 1.0, 1.0, 1.0));
+	Pong pong = Pong("pong");
+	Shader basic = Shader("../engine/shaders/phong.vert", "../engine/shaders/phong.frag");
+	Mesh *pong_mesh = loadObj("resources/logo.obj");
+	Mesh *cube = loadObj("resources/cube.obj");
+	Mesh *icosphere = loadObj("resources/icosphere.obj");
+	Mesh *paddle = loadObj("resources/cube.obj");
 
-	entity logo = entity(&basic, pong);
+	pong_mesh->setVertexColors(glm::vec4(0.9, 0.1, 0.2, 1.0));
+	cube->setVertexColors(glm::vec4(0.2, 0.2, 0.2, 1.0));
+	icosphere->setVertexColors(glm::vec4(0.9, 0.9, 0.9, 1.0));
+	paddle->setVertexColors(glm::vec4(1.0, 1.0, 1.0, 1.0));
+
+	Entity logo = Entity(&basic, pong_mesh);
 	logo.position = glm::vec3(0.0, 0.0, -50.0);
 	logo.scale = glm::vec3(10.0f, 10.0f, 10.0f);
 	logo.s = &basic;
 
-	player p = player(&basic, paddle);
+	Player p = Player(&basic, paddle);
 	p.position = glm::vec3(-60, 0.0, 0.0);
 	p.scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
-	ball b = ball(&basic, icosphere);
+	Ball b = Ball(&basic, icosphere);
 	b.scale = glm::vec3(2.0f, 2.0f, 2.0f);
 
-	opponent o = opponent(&basic, paddle, &b);
+	Opponent o = Opponent(&basic, paddle, &b);
 	o.position = glm::vec3(60, 0.0, 0.0);
 	o.scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
-	wall left = wall(&basic, cube);
+	Wall left = Wall(&basic, cube);
 	left.position = glm::vec3(-64.0, 0.0, 0.0);
 	left.scale = glm::vec3(1.0f, 73.0f, 10.0f);
 	left.c->disable();
 
-	wall right = wall(&basic, cube);
+	Wall right = Wall(&basic, cube);
 	right.position = glm::vec3(64.0, 0.0, 0.0);
 	right.scale = glm::vec3(1.0f, 73.0f, 10.0f);
 	right.c->disable();
 
-	wall top = wall(&basic, cube);
+	Wall top = Wall(&basic, cube);
 	top.position = glm::vec3(0.0, 36.0, 0.0);
 	top.scale = glm::vec3(128.0f, 1.0f, 10.0f);
 
-	wall bottom = wall(&basic, cube);
+	Wall bottom = Wall(&basic, cube);
 	bottom.position = glm::vec3(0.0, -36.0, 0.0);
 	bottom.scale = glm::vec3(128.0f, 1.0f, 10.0f);
 
-	wall center = wall(&basic, cube);
+	Wall center = Wall(&basic, cube);
 	center.position = glm::vec3(0.0, 0.0, -2.0);
 	center.scale = glm::vec3(1.0f, 72.0f, 1.0f);
 	center.c->disable();
 
-	engine.add_entity(&left);
-	engine.add_entity(&right);
-	engine.add_entity(&top);
-	engine.add_entity(&bottom);
-	engine.add_entity(&center);
-	engine.add_entity(&o);
-	engine.add_entity(&logo);
-	engine.add_entity(&b);
-	engine.add_entity(&p);
+	pong.addEntity(&left);
+	pong.addEntity(&right);
+	pong.addEntity(&top);
+	pong.addEntity(&bottom);
+	pong.addEntity(&center);
+	pong.addEntity(&o);
+	pong.addEntity(&logo);
+	pong.addEntity(&b);
+	pong.addEntity(&p);
 
-	engine.run();
+	pong.run();
 	return (0);
 }

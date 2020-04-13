@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:54:41 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 15:50:54 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:24:33 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,30 @@
 #define WIN_WIDTH 1280
 #define WIN_HEIGHT 720
 
-class entity;
-class camera;
-class renderer;
-class wgl_input;
+class Entity;
+class Camera;
+class Renderer;
+class WengineInput;
 
-class wgl
+class WEngine
 {
 private:
-	GLFWwindow	*window;
-	std::string	title;
-	renderer *r;
-	camera *c;
+	GLFWwindow *window;
+	std::string title;
+	Renderer *r;
+	Camera *c;
 	double last_time;
-	std::vector<entity*> entities;
+	std::vector<Entity *> entities;
 	bool wireframe_mode;
-	wgl_input *input;
+	WengineInput *input;
+
 public:
-	wgl(std::string title);
-	wgl();
-	~wgl();
+	WEngine(std::string title);
+	WEngine();
+	~WEngine();
 	void init();
 	void run();
-	void add_entity(entity *e);
+	void addEntity(Entity *e);
+	virtual void onAttach() = 0;
+	virtual void onUpdate() = 0;
 };
-
-

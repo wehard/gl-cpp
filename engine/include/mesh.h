@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 10:53:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/03 12:06:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:19:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <vector>
 #include <glm/vec4.hpp>
 
-struct bounds;
+struct Bounds;
 
-class mesh
+class Mesh
 {
 private:
 public:
@@ -25,12 +25,12 @@ public:
 	std::vector<GLfloat> colors;
 	std::vector<GLfloat> uvs;
 	std::vector<GLfloat> normals;
-	size_t	num_verts();
-	mesh();
-	~mesh();
-	void set_vertex_colors(glm::vec4 c);
-	static mesh *quad();
-	static bounds calculate_bounds(mesh *m);
-	static void print(mesh *m);
+	size_t	getNumVertices();
+	Mesh();
+	~Mesh();
+	void setVertexColors(glm::vec4 c);
+	static Mesh *makeQuad();
+	static Bounds calculateBounds(Mesh *m);
+	static void print(Mesh *m);
 };
 

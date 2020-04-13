@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 18:09:56 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/01 14:47:36 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:25:41 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,27 @@
 #include "mesh.h"
 #include "collider.h"
 
-std::vector<entity*> entity::entities;
+std::vector<Entity*> Entity::entities;
 
-entity::entity(shader *s, mesh *m) : s(s), m(m), rotation(0.0)
+Entity::Entity(Shader *s, Mesh *m) : s(s), m(m), rotation(0.0)
 {
 	this->scale = glm::vec3(1.0, 1.0, 1.0);
-	this->c = new collider(m);
-	gen_buffers();
-	entity::entities.push_back(this);
+	this->c = new Collider(m);
+	genBuffers();
+	Entity::entities.push_back(this);
 }
 
-entity::entity(mesh *m)
+Entity::Entity(Mesh *m)
 {
 	this->m = m;
 
 }
 
-entity::entity() : s(0), rotation(0.0) {}
+Entity::Entity() : s(0), rotation(0.0) {}
 
-entity::~entity() {}
+Entity::~Entity() {}
 
-void entity::gen_buffers()
+void Entity::genBuffers()
 {
 	glGenVertexArrays(1, &vao_id);
 	glBindVertexArray(vao_id);
@@ -75,9 +75,9 @@ void entity::gen_buffers()
 	// should we undbind all buffers here and rebind when drawing?
 }
 
-void entity::update(float delta_time) { }
+void Entity::update(float delta_time) { }
 
-void entity::draw()
+void Entity::draw()
 {
 	glBindVertexArray(vao_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);

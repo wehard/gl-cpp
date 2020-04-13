@@ -6,16 +6,16 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 13:11:09 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/31 15:18:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:31:51 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wall.h"
 
-wall::wall(shader *s, mesh *m) : entity(s, m)
+Wall::Wall(Shader *s, Mesh *m) : Entity(s, m)
 {
 }
 
-wall::~wall()
+Wall::~Wall()
 {
 }

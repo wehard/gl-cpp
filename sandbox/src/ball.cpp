@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:46 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/03 12:21:27 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:31:51 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 #include <iostream>
 #include <math.h>
 
-ball::ball(shader *s, mesh *m) : entity(s, m), speed(70)
+Ball::Ball(Shader *s, Mesh *m) : Entity(s, m), speed(70)
 {
 	reset_pos_and_dir();
 }
 
-ball::~ball() {}
+Ball::~Ball() {}
 
-void ball::reset_pos_and_dir()
+void Ball::reset_pos_and_dir()
 {
 	position = glm::vec3(0,0,0);
 	// direction.x = 0.5 - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -39,18 +39,18 @@ void ball::reset_pos_and_dir()
 	printf("ball dir: %.2f, %.2f, %.2f\n", direction.x, direction.y, direction.z);
 }
 
-void ball::update(float delta_time)
+void Ball::update(float delta_time)
 {
 	if (position.x < -70 || position.x > 70)
 		reset_pos_and_dir();
-	for (auto &other : entity::entities)
+	for (auto &other : Entity::entities)
 	{
-		hit_info h;
+		HitInfo h;
 		h.normal = glm::vec3(0.0);
-		if (other->id != this->id && collider::check_collision(this, other, &h))
+		if (other->id != this->id && Collider::checkCollision(this, other, &h))
 		{
-			player* p  = dynamic_cast<player*>(h.e);
-			opponent *o  = dynamic_cast<opponent*>(h.e);
+			Player* p  = dynamic_cast<Player*>(h.e);
+			Opponent *o  = dynamic_cast<Opponent*>(h.e);
 			if (p || o)
 			{
 				float i = (position.y - h.e->position.y) / h.e->scale.y;
@@ -82,7 +82,7 @@ void ball::update(float delta_time)
 	position = position + direction * speed * delta_time;
 }
 
-glm::vec3 ball::get_direction()
+glm::vec3 Ball::get_direction()
 {
 	return (direction);
 }

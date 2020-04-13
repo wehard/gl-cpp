@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:45:34 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/02 17:25:12 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:26:12 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,31 @@
 #include "entity.h"
 #include <stdio.h>
 
-collider::collider(mesh *m) : m_is_enabled(true)
+Collider::Collider(Mesh *m) : m_is_enabled(true)
 {
-	this->b = mesh::calculate_bounds(m);
+	this->b = Mesh::calculateBounds(m);
 }
 
-collider::~collider()
+Collider::~Collider()
 {
 }
 
-void collider::enable()
+void Collider::enable()
 {
 	m_is_enabled = true;
 }
 
-void collider::disable()
+void Collider::disable()
 {
 	m_is_enabled = false;
 }
 
-bool collider::is_enabled()
+bool Collider::isEnabled()
 {
 	return (m_is_enabled);
 }
 
-bounds transform_bounds(bounds b, glm::vec3 p, glm::vec3 s)
+Bounds transform_bounds(Bounds b, glm::vec3 p, glm::vec3 s)
 {
 	b.x_min = (b.x_min * s.x) + p.x;
 	b.y_min = (b.y_min * s.y) + p.y;
@@ -50,12 +50,12 @@ bounds transform_bounds(bounds b, glm::vec3 p, glm::vec3 s)
 	return (b);
 }
 
-bool collider::check_collision(entity *e1, entity *e2, hit_info *h, int ignore_mask)
+bool Collider::checkCollision(Entity *e1, Entity *e2, HitInfo *h, int ignore_mask)
 {
-	if (!e1 || !e2 || !e1->c || !e2->c || !e1->c->is_enabled() || !e2->c->is_enabled())
+	if (!e1 || !e2 || !e1->c || !e2->c || !e1->c->isEnabled() || !e2->c->isEnabled())
 		return (false);
-	bounds b1 = transform_bounds(e1->c->b, e1->position, e1->scale);
-	bounds b2 = transform_bounds(e2->c->b, e2->position, e2->scale);
+	Bounds b1 = transform_bounds(e1->c->b, e1->position, e1->scale);
+	Bounds b2 = transform_bounds(e2->c->b, e2->position, e2->scale);
 
 	const glm::vec3 face_normals[6] = {
 		glm::vec3(1.0, 0.0, 0.0),

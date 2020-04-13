@@ -1,4 +1,4 @@
-NAME = libwgl.a
+NAME = libwengine.a
 
 SRC = shader.cpp\
 	entity.cpp\
@@ -30,9 +30,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@printf "compiling %s\n" "$(NAME)"
-	# @$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE) $(LDFLAGS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
+	@printf "done\n" "$(NAME)"
 
 
 %.o: %.cpp

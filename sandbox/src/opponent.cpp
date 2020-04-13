@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 18:41:11 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/08 10:37:59 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:32:05 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,28 @@
 #include <math.h>
 #include "ball.h"
 
-opponent::opponent(shader *s, mesh *m, ball *b) : entity(s, m), b(b), speed(60.0)
+Opponent::Opponent(Shader *s, Mesh *m, Ball *b) : Entity(s, m), b(b), speed(60.0)
 {
 }
 
-opponent::opponent() {}
+Opponent::Opponent() {}
 
-opponent::~opponent()
+Opponent::~Opponent()
 {
 }
 
-void opponent::update(float delta_time)
+void Opponent::update(float delta_time)
 {
-	
+
 	glm::vec3 p = glm::vec3(position.x, b->position.y, position.z);
 	glm::vec3 bp = p - b->position;
 	float adjacent = glm::length(bp);
 	float angle = glm::dot(b->get_direction(), glm::normalize(bp));
 	float opposite = adjacent * tanf(angle);
-	
+
 	// printf("adjacent: %.2f opposite: %.2f angle: %.2f\n", adjacent, opposite, glm::degrees(angle));
 	// printf("ball y: %.2f\n", b->get_direction().y);
-	
+
 
 	glm::vec3 target = p; // glm::vec3(position.x, target_y, position.z);
 	if (b->get_direction().x < 0)

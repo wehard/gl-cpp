@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:45:13 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/02 13:48:49 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:26:09 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "bounds.h"
 #include <glm/vec3.hpp>
 
-class mesh;
-class entity;
+class Mesh;
+class Entity;
 
 #define FACE_RIGHT (1 << 0)
 #define FACE_LEFT (1 << 1)
@@ -24,24 +24,24 @@ class entity;
 #define FACE_FRONT (1 << 4)
 #define FACE_BACK (1 << 5)
 
-struct hit_info
+struct HitInfo
 {
-	entity *e;
+	Entity *e;
 	glm::vec3 normal;
 	int faces = 0;
 };
 
-class collider
+class Collider
 {
 private:
-	bounds b;
+	Bounds b;
 	bool m_is_enabled;
 public:
-	collider(mesh *m);
-	~collider();
+	Collider(Mesh *m);
+	~Collider();
 	void enable();
 	void disable();
-	bool is_enabled();
-	static bool check_collision(entity *e1, entity *e2, hit_info *h, int ignore_mask = 0);
+	bool isEnabled();
+	static bool checkCollision(Entity *e1, Entity *e2, HitInfo *h, int ignore_mask = 0);
 };
 

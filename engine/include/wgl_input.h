@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 13:05:54 by wkorande          #+#    #+#             */
-/*   Updated: 2020/03/30 18:46:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:21:32 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 #include <map>
 #include <vector>
 
-class wgl_input
+class WengineInput
 {
 private:
 	std::map<int, bool> keys;
 	bool is_enabled;
 public:
-	static std::vector<wgl_input*> input_instances;
+	static std::vector<WengineInput*> input_instances;
 
-	wgl_input(std::vector<int> keys);
-	wgl_input();
-	~wgl_input();
-	bool get_is_enabled() { return is_enabled; }
-    void set_is_enabled(bool value) { is_enabled = value; }
+	WengineInput(std::vector<int> keys);
+	WengineInput();
+	~WengineInput();
+	bool getIsEnabled() { return is_enabled; }
+    void setIsEnabled(bool value) { is_enabled = value; }
 
-	static void setup_key_inputs(GLFWwindow *window);
-	static void glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
-	void set_is_key_down(int key, bool is_down);
-	bool is_key_down(int key);
+	static void setupKeyInputs(GLFWwindow *window);
+	static void glfwKeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+	void setIsKeyDown(int key, bool is_down);
+	bool isKeyDown(int key);
 };
 

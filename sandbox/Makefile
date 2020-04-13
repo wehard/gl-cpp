@@ -1,6 +1,6 @@
 NAME = pong
 
-WGL = ../engine
+WENGINE = ../engine
 
 SRC = main.cpp\
 	player.cpp\
@@ -11,7 +11,7 @@ SRC = main.cpp\
 SRCDIR = src
 
 INCLUDE = include
-WGLINCLUDE = $(WGL)/include
+WENGINCLUDE = $(WENGINE)/include
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 
@@ -20,24 +20,25 @@ OBJS = $(SRC:.cpp=.o)
 CC = clang
 
 CFLAGS = -std=c++17 -lstdc++ #-Wall -Wextra -Werror
-LDFLAGS = -lwgl -lglfw -lGL -lGLEW -lm -ldl -lXrandr -lXi -lX11 -lXxf86vm -lpthread
+LDFLAGS = -lglfw -lGL -lGLEW -lm -ldl -lXrandr -lXi -lX11 -lXxf86vm -lpthread
 
 vpath %.cpp $(SRCDIR)
-vpath %.h $(INCLUDE) $(WGLINCLUDE)
+vpath %.h $(INCLUDE) $(WENGINCLUDE)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	make -C $(WENGINE)
 	@printf "compiling %s\n" "$(NAME)"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE) -I $(WGLINCLUDE) -L$(WGL) -lwgl $(LDFLAGS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE) -I $(WENGINCLUDE) -L$(WENGINE) -lwengine $(LDFLAGS)
 
 %.o: %.cpp
 	@printf "compiling %s\n" "$<"
-	@$(CC) -I $(INCLUDE) -I $(WGLINCLUDE) -c $< -o $@
+	@$(CC) -I $(INCLUDE) -I $(WENGINCLUDE) -c $< -o $@
 
 
 debug:
-	$(CC) -g $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) -I $(WGLINCLUDE) $(LDFLAGS)
+	$(CC) -g $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) -I $(WENGINCLUDE) $(LDFLAGS)
 
 check: fclean
 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) $(LDFLAGS) CXX=~/Dev/temp/build/bin/include-what-you-use

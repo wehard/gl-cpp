@@ -6,21 +6,21 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:11 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/03 12:21:03 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:31:20 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entity.h"
 #include <glm/vec3.hpp>
 
-class ball : public entity
+class Ball : public Entity
 {
 private:
 	float speed;
 	glm::vec3 direction;
 public:
-	ball(shader *s, mesh *m);
-	~ball();
+	Ball(Shader *s, Mesh *m);
+	~Ball();
 	void update(float delta_time) override;
 	glm::vec3 get_direction();
 	void reset_pos_and_dir();
