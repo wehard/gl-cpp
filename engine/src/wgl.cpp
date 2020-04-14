@@ -94,7 +94,7 @@ void WEngine::run()
 			renderer->drawEntity(e);
 
 		frameBuffer->Unbind();
-
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindTexture(GL_TEXTURE_2D, frameBuffer->tex_id);
