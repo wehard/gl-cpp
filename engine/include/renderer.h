@@ -21,13 +21,13 @@
 class Renderer
 {
 private:
-	Camera *cam;
-	glm::vec3 light_pos;
+	Camera *camera;
+	glm::vec3 lightPos;
 public:
-	Renderer(Camera *cam);
+	Renderer(Camera *camera);
 	Renderer();
 	~Renderer();
-	void render(Entity *e);
+	void drawEntity(Entity *entity);
 	void drawTexturedQuad(TexturedQuad *quad);
 };
 

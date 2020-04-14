@@ -29,20 +29,21 @@ private:
 	uint cb_id;
 	uint nb_id;
 	uint uvb_id;
-	Mesh *m;
+	Mesh *mesh;
 	void genBuffers();
 public:
 	static std::vector<Entity*> entities;
 	size_t id;
-	Collider *c;
-	Shader *s;
+	Collider *collider;
+	Shader *shader;
 	glm::vec3 position;
 	glm::vec3 scale;
 	float rotation;
-	Entity(Shader *s, Mesh *m);
-	Entity(Mesh *m);
+	Entity(Shader *shader, Mesh *mesh);
+	Entity(Mesh *mesh);
 	Entity();
 	~Entity();
 	void draw();
-	virtual void update(float delta_time);
+	glm::mat4 getModelMatrix();
+	virtual void update(float deltaTime);
 };

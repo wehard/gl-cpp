@@ -46,7 +46,7 @@ public:
 		Entity *logo = new Entity(basic, pong_mesh);
 		logo->position = glm::vec3(0.0, 0.0, -50.0);
 		logo->scale = glm::vec3(10.0f, 10.0f, 10.0f);
-		logo->s = basic;
+		logo->shader = basic;
 
 		player = new Player(basic, paddle);
 		player->position = glm::vec3(-60, 0.0, 0.0);
@@ -62,12 +62,12 @@ public:
 		Wall *left = new Wall(basic, cube);
 		left->position = glm::vec3(-64.0, 0.0, 0.0);
 		left->scale = glm::vec3(1.0f, 73.0f, 10.0f);
-		left->c->disable();
+		left->collider->disable();
 
 		Wall *right = new Wall(basic, cube);
 		right->position = glm::vec3(64.0, 0.0, 0.0);
 		right->scale = glm::vec3(1.0f, 73.0f, 10.0f);
-		right->c->disable();
+		right->collider->disable();
 
 		Wall *top = new Wall(basic, cube);
 		top->position = glm::vec3(0.0, 36.0, 0.0);
@@ -80,7 +80,7 @@ public:
 		Wall *center = new Wall(basic, cube);
 		center->position = glm::vec3(0.0, 0.0, -2.0);
 		center->scale = glm::vec3(1.0f, 72.0f, 1.0f);
-		center->c->disable();
+		center->collider->disable();
 
 		addEntity(left);
 		addEntity(right);

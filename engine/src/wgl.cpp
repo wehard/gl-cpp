@@ -91,7 +91,7 @@ void WEngine::run()
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		for (auto e : entities)
-			renderer->render(e);
+			renderer->drawEntity(e);
 
 		frameBuffer->Unbind();
 
