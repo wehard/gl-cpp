@@ -54,13 +54,14 @@ void WEngine::init()
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
 	// glPolygonMode(GL_FRONT_FACE, GL_LINE);
 	glEnable(GL_DEPTH_TEST);
+
 }
 
 void WEngine::run()
 {
-	// Shader *texshader = new Shader("../engine/shaders/texture.vert", "../engine/shaders/texture.frag");
-	// Framebuffer *frameBuffer = new Framebuffer();
-	// Entity *frame = new Entity(texshader, Mesh::makeQuad());
+	Shader *texshader = new Shader("../engine/shaders/texture.vert", "../engine/shaders/texture.frag");
+	TexturedQuad *quad = new TexturedQuad();
+	Framebuffer *frameBuffer = new Framebuffer();
 
 	onAttach();
 	input = new WengineInput(vector<int>({GLFW_KEY_W}));
@@ -74,18 +75,12 @@ void WEngine::run()
 		double delta_time = current_time - last_time;
 
 		onUpdate(delta_time);
-		glm::vec3 cam_target = glm::vec3(entities[1]->position.x / 4.0, -entities[0]->position.y, 95.0);
-		if (glm::length(cam_target - c->position) > 0.1)
-		{
-			float cam_speed = 100.0f;
-			glm::vec3 dir = glm::normalize(cam_target - c->position);
-			c->position = c->position + dir * (cam_speed * (float)delta_time) * glm::length(cam_target - c->position) / 10.0f;
-		}
+		
 		for (auto e : entities)
 			e->update(delta_time);
 
 		// rendering
-		// frameBuffer->Bind();
+		frameBuffer->Bind();
 
 		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -98,11 +93,13 @@ void WEngine::run()
 		for (auto e : entities)
 			r->render(e);
 
-		// frameBuffer->Unbind();
-		// glClearColor(0.2, 0.2, 0.2, 1.0);
-		// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		// glBindTexture(GL_TEXTURE_2D, frameBuffer->tex_id);
-		// frame->draw();
+		frameBuffer->Unbind();
+
+		glClearColor(0.2, 0.2, 0.2, 1.0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glBindTexture(GL_TEXTURE_2D, frameBuffer->tex_id);
+		texshader->use();
+		r->drawTexturedQuad(quad);
 
 		glfwSwapBuffers(window);
 		last_time = current_time;

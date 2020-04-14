@@ -73,6 +73,7 @@ void Entity::genBuffers()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * m->indices.size(), &m->indices[0], GL_STATIC_DRAW);
 	// should we undbind all buffers here and rebind when drawing?
+	// printf("vao: %d vbo: %d uvb: %d, ebo: %d\n", vao_id, vbo_id, uvb_id, ebo_id);
 }
 
 void Entity::update(float delta_time) { }

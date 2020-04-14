@@ -9,7 +9,8 @@ SRC = shader.cpp\
 	obj_loader.cpp\
 	mesh.cpp\
 	collider.cpp\
-	framebuffer.cpp
+	framebuffer.cpp\
+	textured_quad.cpp
 
 SRCDIR = src
 
@@ -38,7 +39,7 @@ $(NAME): $(OBJS)
 
 %.o: %.cpp
 	@printf "compiling %s\n" "$<"
-	@$(CC) -I $(INCLUDE) -c $< -o $@
+	@$(CC) -g -I $(INCLUDE) -c $< -o $@
 
 
 debug:

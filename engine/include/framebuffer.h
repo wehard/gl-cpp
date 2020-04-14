@@ -16,6 +16,7 @@ class Framebuffer
 {
 private:
 	unsigned int fbo_id;
+	unsigned int rbo_id;
 public:
 	unsigned int tex_id;
 	Framebuffer();

@@ -94,6 +94,13 @@ public:
 
 	virtual void onUpdate(float deltaTime) override
 	{
+		// glm::vec3 cam_target = glm::vec3(entities[1]->position.x / 4.0, -entities[0]->position.y, 95.0);
+		// if (glm::length(cam_target - c->position) > 0.1)
+		// {
+		// 	float cam_speed = 100.0f;
+		// 	glm::vec3 dir = glm::normalize(cam_target - c->position);
+		// 	c->position = c->position + dir * (cam_speed * (float)delta_time) * glm::length(cam_target - c->position) / 10.0f;
+		// }
 	}
 };
 

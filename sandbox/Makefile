@@ -36,9 +36,8 @@ $(NAME): $(OBJS)
 	@printf "compiling %s\n" "$<"
 	@$(CC) -I $(INCLUDE) -I $(WENGINCLUDE) -c $< -o $@
 
-
 debug:
-	$(CC) -g $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) -I $(WENGINCLUDE) $(LDFLAGS)
+	$(CC) -g $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) -I $(WENGINCLUDE) -L$(WENGINE) -lwengine $(LDFLAGS)
 
 check: fclean
 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) $(LDFLAGS) CXX=~/Dev/temp/build/bin/include-what-you-use

@@ -16,6 +16,7 @@
 #include "entity.h"
 #include "shader.h"
 #include "camera.h"
+#include "textured_quad.h"
 
 class Renderer
 {
@@ -27,6 +28,7 @@ public:
 	Renderer();
 	~Renderer();
 	void render(Entity *e);
+	void drawTexturedQuad(TexturedQuad *quad);
 };
 
 

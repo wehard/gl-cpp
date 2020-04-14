@@ -23,6 +23,7 @@ class Entity;
 class Camera;
 class Renderer;
 class WengineInput;
+class Framebuffer;
 
 class WEngine
 {
@@ -35,7 +36,7 @@ private:
 	std::vector<Entity *> entities;
 	bool wireframe_mode;
 	WengineInput *input;
-
+	Framebuffer *frameBuffer;
 public:
 	WEngine(std::string title);
 	WEngine();
