@@ -47,9 +47,9 @@ void WEngine::init()
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 		std::cout << "GLEW failed to initialize!" << std::endl;
-	c = new Camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
-	c->position = glm::vec3(0.0, -30.0, 95.0);
-	r = new Renderer(c);
+	camera = new Camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
+	
+	renderer = new Renderer(camera);
 	WengineInput::setupKeyInputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
 	// glPolygonMode(GL_FRONT_FACE, GL_LINE);
@@ -91,15 +91,16 @@ void WEngine::run()
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		for (auto e : entities)
-			r->render(e);
+			renderer->render(e);
 
 		frameBuffer->Unbind();
 
-		glClearColor(0.2, 0.2, 0.2, 1.0);
+		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindTexture(GL_TEXTURE_2D, frameBuffer->tex_id);
 		texshader->use();
-		r->drawTexturedQuad(quad);
+		texshader->setVec2("screen_size", glm::vec2((float)WIN_WIDTH, (float)WIN_HEIGHT));
+		renderer->drawTexturedQuad(quad);
 
 		glfwSwapBuffers(window);
 		last_time = current_time;

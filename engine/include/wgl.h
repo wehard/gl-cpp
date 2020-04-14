@@ -15,12 +15,13 @@
 #include <GLFW/glfw3.h>
 #include <string>
 #include <vector>
+#include "camera.h"
 
 #define WIN_WIDTH 1280
 #define WIN_HEIGHT 720
 
 class Entity;
-class Camera;
+// class Camera;
 class Renderer;
 class WengineInput;
 class Framebuffer;
@@ -30,14 +31,15 @@ class WEngine
 private:
 	GLFWwindow *window;
 	std::string title;
-	Renderer *r;
-	Camera *c;
+	Renderer *renderer;
 	double last_time;
 	std::vector<Entity *> entities;
 	bool wireframe_mode;
 	WengineInput *input;
 	Framebuffer *frameBuffer;
 public:
+	Camera *camera;
+	
 	WEngine(std::string title);
 	WEngine();
 	~WEngine();

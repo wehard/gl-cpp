@@ -31,6 +31,7 @@ public:
 
 	virtual void onAttach() override
 	{
+		camera->position = glm::vec3(0.0, -30.0, 95.0);
 		Shader *basic = new Shader("../engine/shaders/phong.vert", "../engine/shaders/phong.frag");
 		Mesh *pong_mesh = loadObj("resources/logo.obj");
 		Mesh *cube = loadObj("resources/cube.obj");
@@ -94,13 +95,13 @@ public:
 
 	virtual void onUpdate(float deltaTime) override
 	{
-		// glm::vec3 cam_target = glm::vec3(entities[1]->position.x / 4.0, -entities[0]->position.y, 95.0);
-		// if (glm::length(cam_target - c->position) > 0.1)
-		// {
-		// 	float cam_speed = 100.0f;
-		// 	glm::vec3 dir = glm::normalize(cam_target - c->position);
-		// 	c->position = c->position + dir * (cam_speed * (float)delta_time) * glm::length(cam_target - c->position) / 10.0f;
-		// }
+		glm::vec3 cam_target = glm::vec3(ball->position.x / 4.0, -player->position.y, 95.0);
+		if (glm::length(cam_target - camera->position) > 0.1)
+		{
+			float cam_speed = 100.0f;
+			glm::vec3 dir = glm::normalize(cam_target - camera->position);
+			camera->position = camera->position + dir * (cam_speed * (float)deltaTime) * glm::length(cam_target - camera->position) / 10.0f;
+		}
 	}
 };
 
