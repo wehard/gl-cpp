@@ -26,6 +26,7 @@ class Pong : public WEngine
 	Player *player;
 	Opponent *opponent;
 	Ball *ball;
+	Wall *center;
 public:
 	Pong(string title) : WEngine(title) {}
 
@@ -77,10 +78,10 @@ public:
 		bottom->position = glm::vec3(0.0, -36.0, 0.0);
 		bottom->scale = glm::vec3(128.0f, 1.0f, 10.0f);
 
-		Wall *center = new Wall(basic, cube);
-		center->position = glm::vec3(0.0, 0.0, -2.0);
-		center->scale = glm::vec3(1.0f, 72.0f, 1.0f);
-		center->collider->disable();
+		center = new Wall(basic, cube);
+		center->position = glm::vec3(0.0f, 0.0f, -10.0f);
+		center->scale = glm::vec3(1.0f, 72.0f, 10.0f);
+		// center->collider->disable();
 
 		addEntity(left);
 		addEntity(right);
@@ -102,6 +103,8 @@ public:
 			glm::vec3 dir = glm::normalize(cam_target - camera->position);
 			camera->position = camera->position + dir * (cam_speed * (float)deltaTime) * glm::length(cam_target - camera->position) / 10.0f;
 		}
+		float centerZ = glm::sin(glfwGetTime()*10.0f) * 10.0f;
+		center->position.z = centerZ;
 	}
 };
 
