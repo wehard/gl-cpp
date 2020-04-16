@@ -67,3 +67,8 @@ void BitmapFont::readFontData(char *path)
 		file.close();
 	}
 }
+
+Texture *BitmapFont::getTexture()
+{
+	return (texture);
+}

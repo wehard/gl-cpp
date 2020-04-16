@@ -31,4 +31,5 @@ public:
 	~BitmapFont();
 	CharInfo getCharInfo(char c);
 	std::vector<CharInfo> getCharInfo(std::string s);
+	Texture *getTexture();
 };
