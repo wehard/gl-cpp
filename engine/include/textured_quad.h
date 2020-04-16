@@ -2,9 +2,12 @@
 
 #include <vector>
 
+class Texture;
+
 class TexturedQuad
 {
 private:
+    Texture *texture;
     std::vector<float> vertices;
     std::vector<float> uvs;
     std::vector<unsigned int> indices;
@@ -18,6 +21,7 @@ public:
     unsigned int uvb_id;
 
 public:
-    TexturedQuad(/* args */);
+    TexturedQuad(Texture *texture);
     ~TexturedQuad();
+    void draw();
 };

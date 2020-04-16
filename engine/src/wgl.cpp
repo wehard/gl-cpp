@@ -52,20 +52,15 @@ void WEngine::init()
 	renderer = new Renderer(camera);
 	WengineInput::setupKeyInputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
-	// glPolygonMode(GL_FRONT_FACE, GL_LINE);
 	glEnable(GL_DEPTH_TEST);
-
 }
 
 void WEngine::run()
 {
-	Shader *texshader = new Shader("../engine/shaders/texture.vert", "../engine/shaders/texture.frag");
-	TexturedQuad *quad = new TexturedQuad();
-	Framebuffer *frameBuffer = new Framebuffer();
-
-	onAttach();
+	Framebuffer *frameBuffer = new Framebuffer(1280, 720);
 	input = new WengineInput(vector<int>({GLFW_KEY_W}));
 
+	onAttach();
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
@@ -79,28 +74,23 @@ void WEngine::run()
 		for (auto e : entities)
 			e->update(delta_time);
 
-		// rendering
+		// rendering into framebuffer
 		frameBuffer->Bind();
-
 		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 		if (wireframe_mode)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		else
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
 		for (auto e : entities)
 			renderer->drawEntity(e);
-
 		frameBuffer->Unbind();
+
+		// display framebuffer
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glBindTexture(GL_TEXTURE_2D, frameBuffer->tex_id);
-		texshader->use();
-		texshader->setVec2("screen_size", glm::vec2((float)WIN_WIDTH, (float)WIN_HEIGHT));
-		renderer->drawTexturedQuad(quad);
+		frameBuffer->draw();
 
 		glfwSwapBuffers(window);
 		last_time = current_time;

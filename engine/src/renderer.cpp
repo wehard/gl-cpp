@@ -41,9 +41,5 @@ void Renderer::drawTexturedQuad(TexturedQuad *quad)
 {
 	if (!quad)
 		return;
-	glBindVertexArray(quad->vao_id);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, quad->ebo_id);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	quad->draw();
 }
