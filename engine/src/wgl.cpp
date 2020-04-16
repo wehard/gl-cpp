@@ -16,7 +16,7 @@
 #include "wgl_input.h"
 #include "framebuffer.h"
 #include "mesh.h"
-
+#include "texture.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
@@ -82,8 +82,10 @@ void WEngine::run()
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		else
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
 		for (auto e : entities)
 			renderer->drawEntity(e);
+		
 		frameBuffer->Unbind();
 
 		// display framebuffer
@@ -91,7 +93,7 @@ void WEngine::run()
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		frameBuffer->draw();
-
+		
 		glfwSwapBuffers(window);
 		last_time = current_time;
 		glfwPollEvents();

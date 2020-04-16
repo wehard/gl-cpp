@@ -18,7 +18,9 @@
 #include "shader.h"
 #include "obj_loader.h"
 #include "mesh.h"
-#include "framebuffer.h"
+#include "texture.h"
+#include "textured_quad.h"
+#include "bitmap_font.h"
 
 class Pong : public WEngine
 {
@@ -27,11 +29,14 @@ class Pong : public WEngine
 	Opponent *opponent;
 	Ball *ball;
 	Wall *center;
+	TexturedQuad *q;
 public:
 	Pong(string title) : WEngine(title) {}
 
 	virtual void onAttach() override
 	{
+		BitmapFont *font = new BitmapFont("resources/classic_console.fnt");
+
 		camera->position = glm::vec3(0.0, -30.0, 95.0);
 		Shader *basic = new Shader("../engine/shaders/phong.vert", "../engine/shaders/phong.frag");
 		Mesh *pong_mesh = loadObj("resources/logo.obj");

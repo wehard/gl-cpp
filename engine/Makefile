@@ -11,7 +11,8 @@ SRC = shader.cpp\
 	collider.cpp\
 	framebuffer.cpp\
 	textured_quad.cpp\
-	texture.cpp
+	texture.cpp\
+	bitmap_font.cpp
 
 SRCDIR = src
 
