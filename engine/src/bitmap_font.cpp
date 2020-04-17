@@ -1,10 +1,12 @@
 #include "bitmap_font.h"
 #include <fstream>
+#include <sstream>
 
 BitmapFont::BitmapFont(std::string path)
 {
 	readFontData(path);
-	texture = new Texture("resources/classic_console.png");
+	path.substr(0, path.find('/'));
+	texture = new Texture(path.substr(0, path.find_last_of('/') + 1) + bitmapFilename);
 }
 
 BitmapFont::~BitmapFont()
@@ -26,9 +28,7 @@ std::vector<CharInfo> BitmapFont::getCharInfo(std::string s)
 	{
 		std::map<char, CharInfo>::iterator it = characters.find(c);
 		if (it != characters.end())
-		{
 			charInfos.push_back(characters[c]);
-		}
 	}
 	return (charInfos);
 }
@@ -48,11 +48,16 @@ void BitmapFont::readFontData(std::string path)
 			else if (line.compare(0, 6, "common") == 0)
 			{
 			}
-			else if (line.compare(0, 6, "page") == 0)
+			else if (line.compare(0, 4, "page") == 0)
 			{
+				int page = 0;
+				char bitmapFile[128];
+				sscanf(line.c_str(), "page id=%d file=\"%[^\"]", &page, &bitmapFile[0]);
+				bitmapFilename = bitmapFile;
 			}
 			else if (line.compare(0, 5, "chars") == 0)
 			{
+				sscanf(line.c_str(), "chars count=%d", &charCount);
 			}
 			else if (line.compare(0, 4, "char") == 0)
 			{
@@ -66,6 +71,7 @@ void BitmapFont::readFontData(std::string path)
 		}
 		file.close();
 	}
+	printf("read font: %s [bitmap: %s chars: %d]\n", path.c_str(), bitmapFilename.c_str(), charCount);
 }
 
 Texture *BitmapFont::getTexture()

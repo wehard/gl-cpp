@@ -21,6 +21,7 @@
 #include "texture.h"
 #include "textured_quad.h"
 #include "bitmap_font.h"
+#include "text.h"
 
 class Pong : public WEngine
 {
@@ -30,12 +31,13 @@ class Pong : public WEngine
 	Ball *ball;
 	Wall *center;
 	TexturedQuad *q;
+	Text *text;
 public:
 	Pong(string title) : WEngine(title) {}
 
 	virtual void onAttach() override
 	{
-		BitmapFont *font = new BitmapFont("resources/classic_console.fnt");
+		
 
 		camera->position = glm::vec3(0.0, -30.0, 95.0);
 		Shader *basic = new Shader("../engine/shaders/phong.vert", "../engine/shaders/phong.frag");

@@ -20,6 +20,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
+#include "bitmap_font.h"
 
 
 WEngine::WEngine(std::string title) : title(title), wireframe_mode(0)
@@ -60,6 +61,8 @@ void WEngine::run()
 	Framebuffer *frameBuffer = new Framebuffer(1280, 720);
 	input = new WengineInput(vector<int>({GLFW_KEY_W}));
 
+	
+
 	onAttach();
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
@@ -85,7 +88,7 @@ void WEngine::run()
 
 		for (auto e : entities)
 			renderer->drawEntity(e);
-		
+
 		frameBuffer->Unbind();
 
 		// display framebuffer

@@ -1,3 +1,4 @@
+#include "GL/glew.h"
 #include "text.h"
 #include "mesh.h"
 #include "bitmap_font.h"
@@ -5,7 +6,9 @@
 
 Text::Text(BitmapFont *font, std::string str) : str(str), font(font)
 {
-	generateMesh();	
+	this->mesh = new Mesh();
+	generateMesh();
+	genBuffers();
 }
 
 Text::~Text()
@@ -57,7 +60,31 @@ void Text::generateMesh()
 		};
 
 		mesh->uvs.insert(mesh->uvs.end(), uvs.begin(), uvs.end());
+
+
+		std::vector<float> colors = {
+			1.0f, 1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f, 1.0f, 1.0f,
+		};
+		mesh->colors.insert(mesh->colors.end(), colors.begin(), colors.end());
+
+		std::vector<float> normals = {
+			0.0f, 0.0f, -1.0f,
+			0.0f, 0.0f, -1.0f,
+			0.0f, 0.0f, -1.0f,
+			0.0f, 0.0f, -1.0f,
+		};
+		mesh->normals.insert(mesh->normals.end(), normals.begin(), normals.end());
+
+
 		xOffset += (xAdvance + charXOffset);
 		i++;
 	}
+}
+
+BitmapFont *Text::getFont()
+{
+	return (font);
 }

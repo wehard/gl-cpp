@@ -12,7 +12,8 @@ SRC = shader.cpp\
 	framebuffer.cpp\
 	textured_quad.cpp\
 	texture.cpp\
-	bitmap_font.cpp
+	bitmap_font.cpp\
+	text.cpp
 
 SRCDIR = src
 

@@ -23,7 +23,7 @@ Framebuffer::Framebuffer(int width, int height) : width(width), height(height)
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo_id);
 
 	// create texture to render to
-	shader = new Shader("../engine/shaders/texture.vert", "../engine/shaders/texture.frag");
+	shader = new Shader("resources/shaders/texture.vert", "resources/shaders/texture.frag");
 	texture = new Texture(width, height);
 	quad = new TexturedQuad(texture);
 

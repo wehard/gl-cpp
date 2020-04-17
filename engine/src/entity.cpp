@@ -32,10 +32,12 @@ Entity::Entity(Shader *shader, Mesh *mesh) : shader(shader), mesh(mesh), rotatio
 Entity::Entity(Mesh *mesh)
 {
 	this->mesh = mesh;
-
 }
 
-Entity::Entity() : shader(0), rotation(0.0) {}
+Entity::Entity() : shader(0), rotation(0.0)
+{
+	this->mesh = new Mesh();
+}
 
 Entity::~Entity() {}
 
@@ -72,7 +74,7 @@ void Entity::genBuffers()
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * mesh->indices.size(), &mesh->indices[0], GL_STATIC_DRAW);
-	// should we undbind all buffers here and rebind when drawing?
+
 	// printf("vao: %d vbo: %d uvb: %d, ebo: %d\n", vao_id, vbo_id, uvb_id, ebo_id);
 }
 

@@ -13,6 +13,7 @@
 #include "renderer.h"
 #include "shader.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "text.h"
 
 Renderer::Renderer(Camera *cam) : camera(cam), lightPos(glm::vec3(0.0,0.0,50.0))
 {
@@ -42,4 +43,11 @@ void Renderer::drawTexturedQuad(TexturedQuad *quad)
 	if (!quad)
 		return;
 	quad->draw();
+}
+
+void Renderer::drawText(Text *text)
+{
+	text->shader->use();
+	glBindTexture(GL_TEXTURE_2D, text->getFont()->getTexture()->getTextureID());
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

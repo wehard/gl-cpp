@@ -22,7 +22,7 @@ class Mesh;
 
 class Entity
 {
-private:
+protected:
 	uint vao_id;
 	uint vbo_id;
 	uint ebo_id;
@@ -39,9 +39,10 @@ public:
 	glm::vec3 position;
 	glm::vec3 scale;
 	float rotation;
-	Entity(Shader *shader, Mesh *mesh);
-	Entity(Mesh *mesh);
+
 	Entity();
+	Entity(Mesh *mesh);
+	Entity(Shader *shader, Mesh *mesh);
 	~Entity();
 	void draw();
 	glm::mat4 getModelMatrix();

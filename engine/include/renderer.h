@@ -17,6 +17,7 @@
 #include "shader.h"
 #include "camera.h"
 #include "textured_quad.h"
+#include "text.h"
 
 class Renderer
 {
@@ -29,6 +30,7 @@ public:
 	~Renderer();
 	void drawEntity(Entity *entity);
 	void drawTexturedQuad(TexturedQuad *quad);
+	void drawText(Text *text);
 };
 
 
