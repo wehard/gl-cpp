@@ -5,8 +5,9 @@
 BitmapFont::BitmapFont(std::string path)
 {
 	readFontData(path);
-	path.substr(0, path.find('/'));
-	texture = new Texture(path.substr(0, path.find_last_of('/') + 1) + bitmapFilename);
+	// path.substr(0, path.find('/'));
+	texture = new Texture(path.substr(0, path.find_last_of('.')) + ".jpg");
+	// texture = new Texture("resources/fonts/classic_console.jpg");
 }
 
 BitmapFont::~BitmapFont()

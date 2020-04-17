@@ -26,7 +26,7 @@ Texture::Texture(std::string path)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	int nrChannels;
-	stbi_set_flip_vertically_on_load(true);  
+	stbi_set_flip_vertically_on_load(true);
 	unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 	if (data)
 	{
@@ -37,6 +37,7 @@ Texture::Texture(std::string path)
 	{
 		printf("Failed to load texture %s!\n", path.c_str());
 	}
+	printf("texture size: %d %d\n", width, height);
 	stbi_image_free(data);
 }
 

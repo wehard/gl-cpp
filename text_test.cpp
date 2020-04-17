@@ -14,30 +14,39 @@
 #include "shader.h"
 #include "bitmap_font.h"
 #include "text.h"
+#include "wgl_input.h"
 
 class TextTest : public WEngine
 {
-	private:
-
+private:
+	WengineInput *input;		
 public:
 	TextTest(std::string title) : WEngine(title) {}
 
 	virtual void onAttach() override
 	{
-		
-		Shader *textShader = new Shader("resources/shaders/texture.vert", "resources/shaders/texture.frag");
+		input = new WengineInput({GLFW_KEY_UP, GLFW_KEY_DOWN, GLFW_KEY_LEFT, GLFW_KEY_RIGHT});
+		Shader *textShader = new Shader("resources/shaders/text.vert", "resources/shaders/text.frag");
 		BitmapFont *font = new BitmapFont("resources/fonts/classic_console.fnt");
-		Text *text = new Text(font, "hello");
+		Text *text = new Text(font, "HELLO");
 		text->shader = textShader;
-		text->position = glm::vec3(0.0f, 0.0f, -0.0f);
-		text->scale = glm::vec3(0.0f, 1.0f, 1.0f);
+		text->position = glm::vec3(-2.5f, 0.0f, 0.0f);
+		text->scale = glm::vec3(20.0f, 20.0f, 20.0f);
 		text->rotation = 0.0f;
-		addEntity(text);
+		addText(text);
+		camera->position = glm::vec3(0.0f, 0.0f, 5.0f);
 	}
 
 	virtual void onUpdate(float deltaTime) override
 	{
-		
+		if (input->isKeyDown(GLFW_KEY_UP))
+			camera->position.z -= 0.1f;
+		if (input->isKeyDown(GLFW_KEY_DOWN))
+			camera->position.z += 0.1f;
+		if (input->isKeyDown(GLFW_KEY_LEFT))
+			camera->position.x -= 0.1f;
+		if (input->isKeyDown(GLFW_KEY_RIGHT))
+			camera->position.x += 0.1f;
 	}
 };
 

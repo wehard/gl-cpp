@@ -21,6 +21,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 #include "bitmap_font.h"
+#include "text.h"
 
 
 WEngine::WEngine(std::string title) : title(title), wireframe_mode(0)
@@ -49,7 +50,6 @@ void WEngine::init()
 	if (glewInit() != GLEW_OK)
 		std::cout << "GLEW failed to initialize!" << std::endl;
 	camera = new Camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
-	
 	renderer = new Renderer(camera);
 	WengineInput::setupKeyInputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
@@ -58,7 +58,7 @@ void WEngine::init()
 
 void WEngine::run()
 {
-	Framebuffer *frameBuffer = new Framebuffer(1280, 720);
+	// Framebuffer *frameBuffer = new Framebuffer(1280, 720);
 	input = new WengineInput(vector<int>({GLFW_KEY_W}));
 
 	
@@ -78,7 +78,8 @@ void WEngine::run()
 			e->update(delta_time);
 
 		// rendering into framebuffer
-		frameBuffer->Bind();
+		// frameBuffer->Bind();
+
 		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		if (wireframe_mode)
@@ -88,14 +89,16 @@ void WEngine::run()
 
 		for (auto e : entities)
 			renderer->drawEntity(e);
+		for (auto t : texts)
+			renderer->drawText(t);
 
-		frameBuffer->Unbind();
+		// frameBuffer->Unbind();
 
 		// display framebuffer
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glClearColor(0.0, 0.0, 0.0, 1.0);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		frameBuffer->draw();
+		// glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		// glClearColor(0.0, 0.0, 0.0, 1.0);
+		// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		// frameBuffer->draw();
 		
 		glfwSwapBuffers(window);
 		last_time = current_time;
@@ -107,4 +110,9 @@ void WEngine::addEntity(Entity *e)
 {
 	entities.insert(entities.begin(), e);
 	e->id = entities.size();
+}
+
+void WEngine::addText(Text *text)
+{
+	texts.insert(texts.end(), text);
 }

@@ -3,6 +3,7 @@
 #include "mesh.h"
 #include "bitmap_font.h"
 #include "glm/vec3.hpp"
+#include "shader.h"
 
 Text::Text(BitmapFont *font, std::string str) : str(str), font(font)
 {
@@ -28,7 +29,6 @@ void Text::generateMesh()
 		float charXOffset = (float)c.xOffset / (float)texture->width;
 		float xAdvance = (float)c.xAdvance / texture->width;
 
-
 		std::vector<float> verts = {
 			xOffset, 0.0f, 0.0f,
 			xOffset, charHeight, 0.0f,
@@ -42,9 +42,9 @@ void Text::generateMesh()
 			(i * 4) + 0,
 			(i * 4) + 1,
 			(i * 4) + 2,
-			(i * 4) + 0,
 			(i * 4) + 2,
-			(i * 4) + 3	
+			(i * 4) + 3,
+			(i * 4) + 0	
 		};
 
 		mesh->indices.insert(mesh->indices.end(), indices.begin(), indices.end());
@@ -57,6 +57,10 @@ void Text::generateMesh()
 			charX, 1.0f - charY,
 			charX + charWidth, 1.0f - charY,
 			charX + charWidth, 1.0f - (charY + charHeight)
+			// charX, charY,
+			// charX, charY + charHeight,
+			// charX + charWidth, charY + charHeight,
+			// charX + charWidth, charY
 		};
 
 		mesh->uvs.insert(mesh->uvs.end(), uvs.begin(), uvs.end());
@@ -87,4 +91,15 @@ void Text::generateMesh()
 BitmapFont *Text::getFont()
 {
 	return (font);
+}
+
+void Text::draw()
+{
+	this->shader->use();
+	this->shader->setVec3("object_color", glm::vec3(1.0, 1.0, 1.0));
+	this->shader->setMat4("model_matrix", this->getModelMatrix());
+	glBindTexture(GL_TEXTURE_2D, font->getTexture()->getTextureID());
+	glBindVertexArray(vao_id);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
+	glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_INT, 0);
 }

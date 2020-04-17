@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 #include "camera.h"
+#include "text.h"
 
 #define WIN_WIDTH 1280
 #define WIN_HEIGHT 720
@@ -34,9 +35,10 @@ private:
 	Renderer *renderer;
 	double last_time;
 	std::vector<Entity *> entities;
+	std::vector<Text *> texts;
 	bool wireframe_mode;
 	WengineInput *input;
-	Framebuffer *frameBuffer;
+	// Framebuffer *frameBuffer;
 public:
 	Camera *camera;
 	
@@ -46,6 +48,7 @@ public:
 	void init();
 	void run();
 	void addEntity(Entity *e);
+	void addText(Text *text);
 	virtual void onAttach() = 0;
 	virtual void onUpdate(float deltaTime) = 0;
 };

@@ -30,17 +30,30 @@ class Pong : public WEngine
 	Opponent *opponent;
 	Ball *ball;
 	Wall *center;
-	TexturedQuad *q;
-	Text *text;
+	Text *player_score_text;
+
 public:
 	Pong(string title) : WEngine(title) {}
 
 	virtual void onAttach() override
 	{
-		
+		BitmapFont *font = new BitmapFont("../resources/fonts/classic_console.fnt");
+		Text *player_score_text = new Text(font, "000");
+		player_score_text->shader = new Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
+		player_score_text->position = glm::vec3(-62.0f, 28.0f, 5.0f);
+		player_score_text->scale = glm::vec3(50.0f, 50.0f, 1.0f);
+		player_score_text->rotation = 0.0f;
+		addText(player_score_text);
 
-		camera->position = glm::vec3(0.0, -30.0, 95.0);
-		Shader *basic = new Shader("../engine/shaders/phong.vert", "../engine/shaders/phong.frag");
+		Text *opp_score_text = new Text(font, "000");
+		opp_score_text->shader = new Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
+		opp_score_text->position = glm::vec3(50.0f, 28.0f, 5.0f);
+		opp_score_text->scale = glm::vec3(46.0f, 50.0f, 1.0f);
+		opp_score_text->rotation = 0.0f;
+		addText(opp_score_text);
+
+		camera->position = glm::vec3(0.0, 0.0, 95.0);
+		Shader *basic = new Shader("../resources/shaders/phong.vert", "../resources/shaders/phong.frag");
 		Mesh *pong_mesh = loadObj("resources/logo.obj");
 		Mesh *cube = loadObj("resources/cube.obj");
 		Mesh *icosphere = loadObj("resources/icosphere.obj");

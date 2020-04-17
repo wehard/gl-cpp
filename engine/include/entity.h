@@ -44,7 +44,7 @@ public:
 	Entity(Mesh *mesh);
 	Entity(Shader *shader, Mesh *mesh);
 	~Entity();
-	void draw();
+	virtual void draw();
 	glm::mat4 getModelMatrix();
 	virtual void update(float deltaTime);
 };

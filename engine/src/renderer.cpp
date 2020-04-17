@@ -48,6 +48,7 @@ void Renderer::drawTexturedQuad(TexturedQuad *quad)
 void Renderer::drawText(Text *text)
 {
 	text->shader->use();
-	glBindTexture(GL_TEXTURE_2D, text->getFont()->getTexture()->getTextureID());
-	glBindTexture(GL_TEXTURE_2D, 0);
+	text->shader->setMat4("view_matrix", camera->getViewMatrix());
+	text->shader->setMat4("proj_matrix", camera->getProjectionMatrix());
+	text->draw();
 }
