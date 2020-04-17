@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 18:54:02 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:32:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/17 18:55:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ public:
 	Opponent();
 	~Opponent();
 	void update(float delta_time) override;
+	static int score;
 };
 
 

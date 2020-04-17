@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:46 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:31:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/17 18:58:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ void Ball::reset_pos_and_dir()
 
 void Ball::update(float delta_time)
 {
-	if (position.x < -70 || position.x > 70)
-		reset_pos_and_dir();
+
 	for (auto &other : Entity::entities)
 	{
 		HitInfo h;

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 18:54:02 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:31:20 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/17 18:51:35 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ public:
 	Player(Shader *s, Mesh *m);
 	~Player();
 	void update(float delta_time) override;
+	static int score;
 };
 
 

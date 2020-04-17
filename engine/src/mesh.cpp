@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 11:01:04 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:19:06 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/17 18:36:26 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ Mesh::Mesh(/* args */)
 
 Mesh::~Mesh()
 {
+	printf("destroying mesh\n");
 }
 
 Mesh *Mesh::makeQuad()

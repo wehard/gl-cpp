@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 19:04:20 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/17 19:04:07 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "textured_quad.h"
 #include "bitmap_font.h"
 #include "text.h"
+#include <string>
 
 class Pong : public WEngine
 {
@@ -31,26 +32,14 @@ class Pong : public WEngine
 	Ball *ball;
 	Wall *center;
 	Text *player_score_text;
+	Text *opp_score_text;
 
 public:
 	Pong(string title) : WEngine(title) {}
 
 	virtual void onAttach() override
 	{
-		BitmapFont *font = new BitmapFont("../resources/fonts/classic_console.fnt");
-		Text *player_score_text = new Text(font, "000");
-		player_score_text->shader = new Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
-		player_score_text->position = glm::vec3(-62.0f, 28.0f, 5.0f);
-		player_score_text->scale = glm::vec3(50.0f, 50.0f, 1.0f);
-		player_score_text->rotation = 0.0f;
-		addText(player_score_text);
 
-		Text *opp_score_text = new Text(font, "000");
-		opp_score_text->shader = new Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
-		opp_score_text->position = glm::vec3(50.0f, 28.0f, 5.0f);
-		opp_score_text->scale = glm::vec3(46.0f, 50.0f, 1.0f);
-		opp_score_text->rotation = 0.0f;
-		addText(opp_score_text);
 
 		camera->position = glm::vec3(0.0, 0.0, 95.0);
 		Shader *basic = new Shader("../resources/shaders/phong.vert", "../resources/shaders/phong.frag");
@@ -101,13 +90,28 @@ public:
 		center = new Wall(basic, cube);
 		center->position = glm::vec3(0.0f, 0.0f, -10.0f);
 		center->scale = glm::vec3(1.0f, 72.0f, 10.0f);
-		// center->collider->disable();
+		center->collider->disable();
 
-		addEntity(left);
-		addEntity(right);
+		BitmapFont *font = new BitmapFont("../resources/fonts/classic_console.fnt");
+		player_score_text = new Text(font, to_string(player->score));
+		player_score_text->shader = new Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
+		player_score_text->position = glm::vec3(-62.0f, 28.0f, 5.0f);
+		player_score_text->scale = glm::vec3(50.0f, 50.0f, 1.0f);
+		player_score_text->rotation = 0.0f;
+		addText(player_score_text);
+
+		opp_score_text = new Text(font, to_string(opponent->score));
+		opp_score_text->shader = new Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
+		opp_score_text->position = glm::vec3(50.0f, 28.0f, 5.0f);
+		opp_score_text->scale = glm::vec3(46.0f, 50.0f, 1.0f);
+		opp_score_text->rotation = 0.0f;
+		addText(opp_score_text);
+
+		// addEntity(left);
+		// addEntity(right);
 		addEntity(top);
 		addEntity(bottom);
-		addEntity(center);
+		// addEntity(center);
 		addEntity(opponent);
 		addEntity(logo);
 		addEntity(ball);
@@ -123,8 +127,24 @@ public:
 			glm::vec3 dir = glm::normalize(cam_target - camera->position);
 			camera->position = camera->position + dir * (cam_speed * (float)deltaTime) * glm::length(cam_target - camera->position) / 10.0f;
 		}
-		float centerZ = glm::sin(glfwGetTime()*10.0f) * 10.0f;
-		center->position.z = centerZ;
+		// float centerZ = glm::sin(glfwGetTime()*10.0f) * 10.0f;
+		// center->position.z = centerZ;
+
+		if (ball->position.x < -70 || ball->position.x > 70)
+	{
+		if (ball->position.x < 0)
+		{
+			Opponent::score++;
+			opp_score_text->setText(to_string(Opponent::score));
+		}
+		else
+		{
+			Player::score++;
+			player_score_text->setText(to_string(Player::score));
+		}
+		printf("score: %d-%d\n", Player::score, Opponent::score);
+		ball->reset_pos_and_dir();
+	}
 	}
 };
 

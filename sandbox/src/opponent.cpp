@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 18:41:11 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:32:05 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/17 19:06:18 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 #include <math.h>
 #include "ball.h"
 
-Opponent::Opponent(Shader *s, Mesh *m, Ball *b) : Entity(s, m), b(b), speed(60.0)
+int Opponent::score = 0;
+
+Opponent::Opponent(Shader *s, Mesh *m, Ball *b) : Entity(s, m), b(b), speed(50.0)
 {
 }
 

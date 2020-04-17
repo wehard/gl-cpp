@@ -17,6 +17,7 @@ public:
 	void draw() override;
 	BitmapFont *getFont();
 	~Text();
+	void setText(std::string text);
 };
 
 

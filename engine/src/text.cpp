@@ -44,7 +44,7 @@ void Text::generateMesh()
 			(i * 4) + 2,
 			(i * 4) + 2,
 			(i * 4) + 3,
-			(i * 4) + 0	
+			(i * 4) + 0
 		};
 
 		mesh->indices.insert(mesh->indices.end(), indices.begin(), indices.end());
@@ -102,4 +102,14 @@ void Text::draw()
 	glBindVertexArray(vao_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
 	glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_INT, 0);
+}
+
+void Text::setText(std::string text)
+{
+	this->str = text;
+	printf("warning setting leak prone text!\n");
+	delete(this->mesh);
+	this->mesh = new Mesh();
+	generateMesh();
+	genBuffers();
 }
