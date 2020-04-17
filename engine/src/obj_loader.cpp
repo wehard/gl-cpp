@@ -16,7 +16,7 @@
 #include <string.h>
 #include <string>
 
-Mesh *loadObj(const char *path)
+Mesh *loadObj(std::string path)
 {
 	Mesh *m = new Mesh();
 	// std::vector<glm::vec3> out_verts;
@@ -24,10 +24,10 @@ Mesh *loadObj(const char *path)
 	std::vector<glm::vec3> temp_normals;
 	// std::vector<int> out_indices;
 
-	FILE *f = fopen(path, "r");
+	FILE *f = fopen(path.c_str(), "r");
 	if (!f)
 	{
-		printf("error opening file: %s\n", path);
+		printf("error opening file: %s\n", path.c_str());
 		return (NULL);
 	}
 	char buf[128];

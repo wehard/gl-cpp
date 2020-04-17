@@ -16,8 +16,9 @@
 #include <GL/glew.h>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
+#include <string>
 
 class Mesh;
 
-Mesh *loadObj(const char *path);
+Mesh *loadObj(std::string path);
 std::vector<float> convertVec3s(std::vector<glm::vec3> v3s);

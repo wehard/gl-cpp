@@ -25,9 +25,9 @@ private:
 	std::map<char, CharInfo> characters;
 	Texture *texture;
 	std::string bitmapFilename;
-	void readFontData(char *path);
+	void readFontData(std::string path);
 public:
-	BitmapFont(char *path);
+	BitmapFont(std::string path);
 	~BitmapFont();
 	CharInfo getCharInfo(char c);
 	std::vector<CharInfo> getCharInfo(std::string s);

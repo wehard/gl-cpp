@@ -1,7 +1,7 @@
 #include "bitmap_font.h"
 #include <fstream>
 
-BitmapFont::BitmapFont(char *path)
+BitmapFont::BitmapFont(std::string path)
 {
 	readFontData(path);
 	texture = new Texture("resources/classic_console.png");
@@ -33,7 +33,7 @@ std::vector<CharInfo> BitmapFont::getCharInfo(std::string s)
 	return (charInfos);
 }
 
-void BitmapFont::readFontData(char *path)
+void BitmapFont::readFontData(std::string path)
 {
 	std::ifstream file(path);
 	if (file.is_open())

@@ -15,7 +15,7 @@ Texture::Texture(int width, int height) : width(width), height(height)
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-Texture::Texture(char *path)
+Texture::Texture(std::string path)
 {
 	glGenTextures(1, &tex_id);
 	glBindTexture(GL_TEXTURE_2D, tex_id);
@@ -27,7 +27,7 @@ Texture::Texture(char *path)
 
 	int nrChannels;
 	stbi_set_flip_vertically_on_load(true);  
-	unsigned char *data = stbi_load(path, &width, &height, &nrChannels, 0);
+	unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -35,7 +35,7 @@ Texture::Texture(char *path)
 	}
 	else
 	{
-		printf("Failed to load texture %s!\n", path);
+		printf("Failed to load texture %s!\n", path.c_str());
 	}
 	stbi_image_free(data);
 }

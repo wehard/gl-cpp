@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 class Texture
 {
 private:
@@ -8,7 +10,7 @@ public:
 	int width;
 	int height;
 	Texture(int width, int height);
-	Texture(char *path);
+	Texture(std::string path);
 	~Texture();
 	unsigned int getTextureID();
 };
