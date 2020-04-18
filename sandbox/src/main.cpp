@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/17 19:04:07 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/18 10:55:14 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "bitmap_font.h"
 #include "text.h"
 #include <string>
+#include "wgl_input.h"
 
 class Pong : public WEngine
 {
@@ -33,14 +34,24 @@ class Pong : public WEngine
 	Wall *center;
 	Text *player_score_text;
 	Text *opp_score_text;
+	WengineInput *input;
 
 public:
 	Pong(string title) : WEngine(title) {}
 
+	void resetGame()
+	{
+		Player::score = 0;
+		Opponent::score = 0;
+		ball->release();
+		ball->reset_pos_and_dir();
+		player_score_text->setText(to_string(Player::score));
+		opp_score_text->setText(to_string(Opponent::score));
+	}
+
 	virtual void onAttach() override
 	{
-
-
+		input = new WengineInput({GLFW_KEY_R});
 		camera->position = glm::vec3(0.0, 0.0, 95.0);
 		Shader *basic = new Shader("../resources/shaders/phong.vert", "../resources/shaders/phong.frag");
 		Mesh *pong_mesh = loadObj("resources/logo.obj");
@@ -58,12 +69,12 @@ public:
 		logo->scale = glm::vec3(10.0f, 10.0f, 10.0f);
 		logo->shader = basic;
 
-		player = new Player(basic, paddle);
-		player->position = glm::vec3(-60, 0.0, 0.0);
-		player->scale = glm::vec3(1.0f, 10.0f, 1.0f);
-
 		ball = new Ball(basic, icosphere);
 		ball->scale = glm::vec3(2.0f, 2.0f, 2.0f);
+
+		player = new Player(basic, paddle, ball);
+		player->position = glm::vec3(-60, 0.0, 0.0);
+		player->scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
 		opponent = new Opponent(basic, paddle, ball);
 		opponent->position = glm::vec3(60, 0.0, 0.0);
@@ -120,6 +131,8 @@ public:
 
 	virtual void onUpdate(float deltaTime) override
 	{
+		if (input->isKeyDown(GLFW_KEY_R))
+			resetGame();
 		glm::vec3 cam_target = glm::vec3(ball->position.x / 4.0, -player->position.y, 95.0);
 		if (glm::length(cam_target - camera->position) > 0.1)
 		{
@@ -131,16 +144,18 @@ public:
 		// center->position.z = centerZ;
 
 		if (ball->position.x < -70 || ball->position.x > 70)
-	{
+		{
 		if (ball->position.x < 0)
 		{
 			Opponent::score++;
 			opp_score_text->setText(to_string(Opponent::score));
+			ball->capture(opponent);
 		}
 		else
 		{
 			Player::score++;
 			player_score_text->setText(to_string(Player::score));
+			ball->capture(player);
 		}
 		printf("score: %d-%d\n", Player::score, Opponent::score);
 		ball->reset_pos_and_dir();

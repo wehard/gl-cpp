@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:46 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/17 18:58:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/18 10:41:06 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <iostream>
 #include <math.h>
 
-Ball::Ball(Shader *s, Mesh *m) : Entity(s, m), speed(70)
+Ball::Ball(Shader *s, Mesh *m) : Entity(s, m), speed(70), isCaptured(false)
 {
 	reset_pos_and_dir();
 }
@@ -41,7 +41,11 @@ void Ball::reset_pos_and_dir()
 
 void Ball::update(float delta_time)
 {
-
+	if (isCaptured)
+	{
+		this->position = capturer->position;
+		return;
+	}
 	for (auto &other : Entity::entities)
 	{
 		HitInfo h;
@@ -84,4 +88,16 @@ void Ball::update(float delta_time)
 glm::vec3 Ball::get_direction()
 {
 	return (direction);
+}
+
+void Ball::capture(Entity *capturer)
+{
+	isCaptured = true;
+	this->capturer = capturer;
+}
+
+void Ball::release()
+{
+	isCaptured = false;
+	this->capturer = nullptr;
 }
