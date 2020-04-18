@@ -30,7 +30,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	make -C $(WENGINE)
 	@printf "compiling %s\n" "$(NAME)"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE) -I $(WENGINCLUDE) -L$(WENGINE) -lwengine $(LDFLAGS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(WENGINE)/lib/libIrrKlang.so -I $(INCLUDE) -I $(WENGINCLUDE) -I $(WENGINE)/include/ik -L$(WENGINE) -lwengine -L$(WENGINE)/lib $(LDFLAGS)
 
 %.o: %.cpp
 	@printf "compiling %s\n" "$<"

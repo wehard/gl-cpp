@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/18 10:55:14 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/18 15:04:21 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@
 #include "text.h"
 #include <string>
 #include "wgl_input.h"
+#include "ik/irrKlang.h"
+#include <functional>
+
+using namespace irrklang;
 
 class Pong : public WEngine
 {
-	private:
+private:
 	Player *player;
 	Opponent *opponent;
 	Ball *ball;
@@ -37,8 +41,8 @@ class Pong : public WEngine
 	WengineInput *input;
 
 public:
+	ISoundEngine *soundEngine;
 	Pong(string title) : WEngine(title) {}
-
 	void resetGame()
 	{
 		Player::score = 0;
@@ -51,6 +55,7 @@ public:
 
 	virtual void onAttach() override
 	{
+		soundEngine = createIrrKlangDevice();
 		input = new WengineInput({GLFW_KEY_R});
 		camera->position = glm::vec3(0.0, 0.0, 95.0);
 		Shader *basic = new Shader("../resources/shaders/phong.vert", "../resources/shaders/phong.frag");
@@ -71,6 +76,13 @@ public:
 
 		ball = new Ball(basic, icosphere);
 		ball->scale = glm::vec3(2.0f, 2.0f, 2.0f);
+
+		ball->onBallHitCb = [this](ball_hit_type ht){
+			if (ht == WALL)
+				soundEngine->play2D("sounds/ping_pong_8bit_plop.ogg");
+			else if (ht == PADDLE)
+				soundEngine->play2D("sounds/ping_pong_8bit_plop.ogg");
+		};
 
 		player = new Player(basic, paddle, ball);
 		player->position = glm::vec3(-60, 0.0, 0.0);
@@ -145,21 +157,23 @@ public:
 
 		if (ball->position.x < -70 || ball->position.x > 70)
 		{
-		if (ball->position.x < 0)
-		{
-			Opponent::score++;
-			opp_score_text->setText(to_string(Opponent::score));
-			ball->capture(opponent);
+			if (ball->position.x < 0)
+			{
+				Opponent::score++;
+				opp_score_text->setText(to_string(Opponent::score));
+				ball->capture(opponent);
+			}
+			else
+			{
+				Player::score++;
+				player_score_text->setText(to_string(Player::score));
+				ball->capture(player);
+			}
+			ball->speed += 5.0f;
+			printf("score: %d-%d\n", Player::score, Opponent::score);
+			soundEngine->play2D("sounds/ping_pong_8bit_peeeeeep.ogg");
+			// ball->reset_pos_and_dir();
 		}
-		else
-		{
-			Player::score++;
-			player_score_text->setText(to_string(Player::score));
-			ball->capture(player);
-		}
-		printf("score: %d-%d\n", Player::score, Opponent::score);
-		ball->reset_pos_and_dir();
-	}
 	}
 };
 
