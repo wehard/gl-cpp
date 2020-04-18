@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 17:58:49 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 18:25:08 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/18 13:42:33 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ protected:
 	uint nb_id;
 	uint uvb_id;
 	Mesh *mesh;
+
 	void genBuffers();
+
 public:
-	static std::vector<Entity*> entities;
+	static std::vector<Entity *> entities;
 	size_t id;
 	Collider *collider;
 	Shader *shader;
