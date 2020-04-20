@@ -14,7 +14,7 @@ class Renderer;
 class Input;
 class Framebuffer;
 
-class WEngine
+class Application
 {
 private:
 	GLFWwindow *window;
@@ -32,9 +32,9 @@ private:
 public:
 	Camera *camera;
 
-	WEngine(std::string title, int windowWidth, int windowHeight);
-	WEngine();
-	~WEngine();
+	Application(std::string title, int windowWidth, int windowHeight);
+	Application();
+	~Application();
 	void init();
 	void run();
 	void addEntity(Entity *e);

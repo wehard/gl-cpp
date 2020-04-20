@@ -11,18 +11,18 @@
 /* ************************************************************************** */
 
 #include "entity.h"
+#include "input.h"
 
-class WengineInput;
 class Ball;
 
-class Player : public Entity
+class Player : public wgl::Entity
 {
 private:
-	WengineInput *input;
+	wgl::Input *input;
 	float speed;
 	Ball *ball;
 public:
-	Player(Shader *s, Mesh *m, Ball *ball);
+	Player(wgl::Shader *s, wgl::Mesh *m, Ball *ball);
 	~Player();
 	void update(float delta_time) override;
 	static int score;

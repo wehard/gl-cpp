@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ball.h"
+#include "entity.h"
 #include "collider.h"
 #include <stdio.h>
 #include "player.h"
@@ -20,7 +21,7 @@
 #include <iostream>
 #include <math.h>
 
-Ball::Ball(Shader *s, Mesh *m) : Entity(s, m), speed(70), isCaptured(false)
+Ball::Ball(wgl::Shader *s, wgl::Mesh *m) : wgl::Entity(s, m), speed(70), isCaptured(false)
 {
 	reset_pos_and_dir();
 }
@@ -53,9 +54,9 @@ void Ball::update(float delta_time)
 	}
 	for (auto &other : Entity::entities)
 	{
-		HitInfo h;
+		wgl::HitInfo h;
 		h.normal = glm::vec3(0.0);
-		if (other->id != this->id && Collider::checkCollision(this, other, &h))
+		if (other->id != this->id && wgl::Collider::checkCollision(this, other, &h))
 		{
 
 			Player* p  = dynamic_cast<Player*>(h.e);

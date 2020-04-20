@@ -18,7 +18,7 @@
 
 int Opponent::score = 0;
 
-Opponent::Opponent(Shader *s, Mesh *m, Ball *b) : Entity(s, m), b(b), speed(50.0)
+Opponent::Opponent(wgl::Shader *s, wgl::Mesh *m, Ball *b) : wgl::Entity(s, m), b(b), speed(50.0)
 {
 }
 

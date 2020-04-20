@@ -16,12 +16,12 @@
 #include "text.h"
 #include "input.h"
 
-class TextTest : public wgl::WEngine
+class TextTest : public wgl::Application
 {
 private:
 	wgl::Input *input;		
 public:
-	TextTest(std::string title, int windowWidth, int windowHeight) : WEngine(title, windowWidth, windowHeight) {}
+	TextTest(std::string title, int windowWidth, int windowHeight) : Application(title, windowWidth, windowHeight) {}
 
 	virtual void onAttach() override
 	{

@@ -14,7 +14,7 @@
 
 class Ball;
 
-class Opponent : public Entity
+class Opponent : public wgl::Entity
 {
 private:
 	Ball *b;
@@ -23,7 +23,7 @@ private:
 	float update_interval = 0.0;
 	float delta;
 public:
-	Opponent(Shader *s, Mesh *m, Ball *b);
+	Opponent(wgl::Shader *s, wgl::Mesh *m, Ball *b);
 	Opponent();
 	~Opponent();
 	void update(float delta_time) override;

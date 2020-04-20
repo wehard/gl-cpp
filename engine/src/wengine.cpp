@@ -11,20 +11,21 @@
 #include "bitmap_font.h"
 #include "text.h"
 #include <vector>
+#include <string>
 
 namespace wgl
 {
 
-WEngine::WEngine(std::string title, int windowWidth, int windowHeight) : title(title), windowWidth(windowWidth), windowHeight(windowHeight), wireframe_mode(0)
+Application::Application(std::string title, int windowWidth, int windowHeight) : title(title), windowWidth(windowWidth), windowHeight(windowHeight), wireframe_mode(0)
 {
 	init();
 }
 
-WEngine::WEngine() {}
+Application::Application() {}
 
-WEngine::~WEngine() {}
+Application::~Application() {}
 
-void WEngine::init()
+void Application::init()
 {
 	if (!glfwInit())
 		std::cout << "GLFW failed to initialize!" << std::endl;
@@ -47,19 +48,28 @@ void WEngine::init()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void WEngine::run()
+void Application::run()
 {
 	// Framebuffer *frameBuffer = new Framebuffer(1280, 720);
 	input = new Input(std::vector<int>({GLFW_KEY_W}));
 
 	onAttach();
 	last_time = glfwGetTime();
+	double fps_time = last_time;
+	int frameCount = 0;
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		if (input->isKeyDown(GLFW_KEY_W))
 			wireframe_mode = !wireframe_mode;
 		double current_time = glfwGetTime();
 		double delta_time = current_time - last_time;
+		if (current_time - fps_time > 1.0)
+		{
+			int fps = frameCount / fps_time;
+			std::string windowTitle = title + " " + std::to_string(fps) + " fps";
+			glfwSetWindowTitle(this->window, windowTitle.c_str());
+			fps_time = current_time;
+		}
 
 		onUpdate(delta_time);
 
@@ -91,17 +101,18 @@ void WEngine::run()
 
 		glfwSwapBuffers(window);
 		last_time = current_time;
+		frameCount++;
 		glfwPollEvents();
 	}
 }
 
-void WEngine::addEntity(Entity *e)
+void Application::addEntity(Entity *e)
 {
 	entities.insert(entities.begin(), e);
 	e->id = entities.size();
 }
 
-void WEngine::addText(Text *text)
+void Application::addText(Text *text)
 {
 	texts.insert(texts.end(), text);
 }

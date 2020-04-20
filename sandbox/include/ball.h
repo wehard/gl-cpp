@@ -16,7 +16,7 @@
 
 enum ball_hit_type {WALL, PADDLE};
 
-class Ball : public Entity
+class Ball : public wgl::Entity
 {
 private:
 	glm::vec3 direction;
@@ -24,7 +24,7 @@ private:
 	Entity *capturer;
 public:
 	float speed;
-	Ball(Shader *s, Mesh *m);
+	Ball(wgl::Shader *s, wgl::Mesh *m);
 	~Ball();
 	void update(float delta_time) override;
 	glm::vec3 get_direction();

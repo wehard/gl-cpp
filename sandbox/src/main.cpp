@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wgl.h"
+#include "wengine.h"
 #include "player.h"
 #include "ball.h"
 #include "opponent.h"
@@ -23,53 +23,53 @@
 #include "bitmap_font.h"
 #include "text.h"
 #include <string>
-#include "wgl_input.h"
+#include "input.h"
 #include "ik/irrKlang.h"
 #include <functional>
 
 using namespace irrklang;
 
-class Pong : public WEngine
+class Pong : public wgl::Application
 {
 private:
 	Player *player;
 	Opponent *opponent;
 	Ball *ball;
 	Wall *center;
-	Text *player_score_text;
-	Text *opp_score_text;
-	WengineInput *input;
+	wgl::Text *player_score_text;
+	wgl::Text *opp_score_text;
+	wgl::Input *input;
 
 public:
 	ISoundEngine *soundEngine;
-	Pong(string title) : WEngine(title) {}
+	Pong(std::string title) : wgl::Application(title, 1280, 720) {}
 	void resetGame()
 	{
 		Player::score = 0;
 		Opponent::score = 0;
 		ball->release();
 		ball->reset_pos_and_dir();
-		player_score_text->setText(to_string(Player::score));
-		opp_score_text->setText(to_string(Opponent::score));
+		player_score_text->setText(std::to_string(Player::score));
+		opp_score_text->setText(std::to_string(Opponent::score));
 	}
 
 	virtual void onAttach() override
 	{
 		soundEngine = createIrrKlangDevice();
-		input = new WengineInput({GLFW_KEY_R});
+		input = new wgl::Input({GLFW_KEY_R});
 		camera->position = glm::vec3(0.0, 0.0, 95.0);
-		Shader *basic = new Shader("../resources/shaders/phong.vert", "../resources/shaders/phong.frag");
-		Mesh *pong_mesh = loadObj("resources/logo.obj");
-		Mesh *cube = loadObj("resources/cube.obj");
-		Mesh *icosphere = loadObj("resources/icosphere.obj");
-		Mesh *paddle = loadObj("resources/cube.obj");
+		wgl::Shader *basic = new wgl::Shader("../resources/shaders/phong.vert", "../resources/shaders/phong.frag");
+		wgl::Mesh *pong_mesh = wgl::loadObj("resources/logo.obj");
+		wgl::Mesh *cube = wgl::loadObj("resources/cube.obj");
+		wgl::Mesh *icosphere = wgl::loadObj("resources/icosphere.obj");
+		wgl::Mesh *paddle = wgl::loadObj("resources/cube.obj");
 
 		pong_mesh->setVertexColors(glm::vec4(0.9, 0.1, 0.2, 1.0));
 		cube->setVertexColors(glm::vec4(0.2, 0.2, 0.2, 1.0));
 		icosphere->setVertexColors(glm::vec4(0.9, 0.9, 0.9, 1.0));
 		paddle->setVertexColors(glm::vec4(1.0, 1.0, 1.0, 1.0));
 
-		Entity *logo = new Entity(basic, pong_mesh);
+		wgl::Entity *logo = new wgl::Entity(basic, pong_mesh);
 		logo->position = glm::vec3(0.0, 0.0, -50.0);
 		logo->scale = glm::vec3(10.0f, 10.0f, 10.0f);
 		logo->shader = basic;
@@ -115,16 +115,16 @@ public:
 		center->scale = glm::vec3(1.0f, 72.0f, 10.0f);
 		center->collider->disable();
 
-		BitmapFont *font = new BitmapFont("../resources/fonts/classic_console.fnt");
-		player_score_text = new Text(font, to_string(player->score));
-		player_score_text->shader = new Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
+		wgl::BitmapFont *font = new wgl::BitmapFont("../resources/fonts/classic_console.fnt");
+		player_score_text = new wgl::Text(font, std::to_string(player->score));
+		player_score_text->shader = new wgl::Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
 		player_score_text->position = glm::vec3(-62.0f, 28.0f, 5.0f);
 		player_score_text->scale = glm::vec3(50.0f, 50.0f, 1.0f);
 		player_score_text->rotation = 0.0f;
 		addText(player_score_text);
 
-		opp_score_text = new Text(font, to_string(opponent->score));
-		opp_score_text->shader = new Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
+		opp_score_text = new wgl::Text(font, std::to_string(opponent->score));
+		opp_score_text->shader = new wgl::Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
 		opp_score_text->position = glm::vec3(50.0f, 28.0f, 5.0f);
 		opp_score_text->scale = glm::vec3(46.0f, 50.0f, 1.0f);
 		opp_score_text->rotation = 0.0f;
@@ -160,13 +160,13 @@ public:
 			if (ball->position.x < 0)
 			{
 				Opponent::score++;
-				opp_score_text->setText(to_string(Opponent::score));
+				opp_score_text->setText(std::to_string(Opponent::score));
 				ball->capture(opponent);
 			}
 			else
 			{
 				Player::score++;
-				player_score_text->setText(to_string(Player::score));
+				player_score_text->setText(std::to_string(Player::score));
 				ball->capture(player);
 			}
 			ball->speed += 5.0f;

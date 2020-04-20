@@ -12,15 +12,15 @@
 
 #include "player.h"
 #include <GLFW/glfw3.h>
-#include "wgl_input.h"
+#include "input.h"
 #include "ball.h"
 
 int Player::score = 0;
 
-Player::Player(Shader *s, Mesh *m, Ball *ball) : Entity(s, m), speed(70.0), ball(ball)
+Player::Player(wgl::Shader *s, wgl::Mesh *m, Ball *ball) : wgl::Entity(s, m), speed(70.0), ball(ball)
 {
 	std::vector<int> ks = {GLFW_KEY_UP, GLFW_KEY_DOWN, GLFW_KEY_LEFT, GLFW_KEY_RIGHT, GLFW_KEY_SPACE};
-	input = new WengineInput(ks);
+	input = new wgl::Input(ks);
 	rotation = 0.0;
 	input->setIsEnabled(true);
 }
