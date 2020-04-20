@@ -5,6 +5,9 @@
 #include <vector>
 #include "texture.h"
 
+namespace wgl
+{
+
 struct CharInfo
 {
 	char c;
@@ -27,6 +30,7 @@ private:
 	std::string bitmapFilename;
 	int charCount;
 	void readFontData(std::string path);
+
 public:
 	BitmapFont(std::string path);
 	~BitmapFont();
@@ -34,3 +38,5 @@ public:
 	std::vector<CharInfo> getCharInfo(std::string s);
 	Texture *getTexture();
 };
+
+} // namespace wgl

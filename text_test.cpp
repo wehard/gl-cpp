@@ -10,25 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wgl.h"
+#include "wengine.h"
 #include "shader.h"
 #include "bitmap_font.h"
 #include "text.h"
-#include "wgl_input.h"
+#include "input.h"
 
-class TextTest : public WEngine
+class TextTest : public wgl::WEngine
 {
 private:
-	WengineInput *input;		
+	wgl::Input *input;		
 public:
-	TextTest(std::string title) : WEngine(title) {}
+	TextTest(std::string title, int windowWidth, int windowHeight) : WEngine(title, windowWidth, windowHeight) {}
 
 	virtual void onAttach() override
 	{
-		input = new WengineInput({GLFW_KEY_UP, GLFW_KEY_DOWN, GLFW_KEY_LEFT, GLFW_KEY_RIGHT});
-		Shader *textShader = new Shader("resources/shaders/text.vert", "resources/shaders/text.frag");
-		BitmapFont *font = new BitmapFont("resources/fonts/classic_console.fnt");
-		Text *text = new Text(font, "HELLO");
+		input = new wgl::Input({GLFW_KEY_UP, GLFW_KEY_DOWN, GLFW_KEY_LEFT, GLFW_KEY_RIGHT});
+		wgl::Shader *textShader = new wgl::Shader("resources/shaders/text.vert", "resources/shaders/text.frag");
+		wgl::BitmapFont *font = new wgl::BitmapFont("resources/fonts/classic_console.fnt");
+		wgl::Text *text = new wgl::Text(font, "HELLO");
 		text->shader = textShader;
 		text->position = glm::vec3(-2.5f, 0.0f, 0.0f);
 		text->scale = glm::vec3(20.0f, 20.0f, 20.0f);
@@ -52,7 +52,7 @@ public:
 
 int main(void)
 {
-	TextTest test = TextTest("text test");
+	TextTest test = TextTest("text test", 640, 400);
 	test.run();
 	return (0);
 }

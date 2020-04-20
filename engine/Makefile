@@ -4,8 +4,8 @@ SRC = shader.cpp\
 	entity.cpp\
 	camera.cpp\
 	renderer.cpp\
-	wgl.cpp\
-	wgl_input.cpp\
+	wengine.cpp\
+	input.cpp\
 	obj_loader.cpp\
 	mesh.cpp\
 	collider.cpp\

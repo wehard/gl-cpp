@@ -15,19 +15,23 @@
 #include <map>
 #include <vector>
 
-class WengineInput
+namespace wgl
+{
+
+class Input
 {
 private:
 	std::map<int, bool> keys;
 	bool is_enabled;
-public:
-	static std::vector<WengineInput*> input_instances;
 
-	WengineInput(std::vector<int> keys);
-	WengineInput();
-	~WengineInput();
+public:
+	static std::vector<Input *> input_instances;
+
+	Input(std::vector<int> keys);
+	Input();
+	~Input();
 	bool getIsEnabled() { return is_enabled; }
-    void setIsEnabled(bool value) { is_enabled = value; }
+	void setIsEnabled(bool value) { is_enabled = value; }
 
 	static void setupKeyInputs(GLFWwindow *window);
 	static void glfwKeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
@@ -35,3 +39,4 @@ public:
 	bool isKeyDown(int key);
 };
 
+} // namespace wgl

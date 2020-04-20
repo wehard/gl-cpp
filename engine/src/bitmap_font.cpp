@@ -2,6 +2,9 @@
 #include <fstream>
 #include <sstream>
 
+namespace wgl
+{
+
 BitmapFont::BitmapFont(std::string path)
 {
 	readFontData(path);
@@ -79,3 +82,5 @@ Texture *BitmapFont::getTexture()
 {
 	return (texture);
 }
+
+} // namespace wgl

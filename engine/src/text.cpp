@@ -5,6 +5,9 @@
 #include "glm/vec3.hpp"
 #include "shader.h"
 
+namespace wgl
+{
+
 Text::Text(BitmapFont *font, std::string str) : str(str), font(font)
 {
 	this->mesh = new Mesh();
@@ -33,8 +36,7 @@ void Text::generateMesh()
 			xOffset, 0.0f, 0.0f,
 			xOffset, charHeight, 0.0f,
 			xOffset + charWidth, charHeight, 0.0f,
-			xOffset + charWidth, 0.0f, 0.0f
-		};
+			xOffset + charWidth, 0.0f, 0.0f};
 
 		mesh->vertices.insert(mesh->vertices.end(), verts.begin(), verts.end());
 
@@ -44,8 +46,7 @@ void Text::generateMesh()
 			(i * 4) + 2,
 			(i * 4) + 2,
 			(i * 4) + 3,
-			(i * 4) + 0
-		};
+			(i * 4) + 0};
 
 		mesh->indices.insert(mesh->indices.end(), indices.begin(), indices.end());
 
@@ -65,23 +66,41 @@ void Text::generateMesh()
 
 		mesh->uvs.insert(mesh->uvs.end(), uvs.begin(), uvs.end());
 
-
 		std::vector<float> colors = {
-			1.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 1.0f, 1.0f, 1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
+			1.0f,
 		};
 		mesh->colors.insert(mesh->colors.end(), colors.begin(), colors.end());
 
 		std::vector<float> normals = {
-			0.0f, 0.0f, -1.0f,
-			0.0f, 0.0f, -1.0f,
-			0.0f, 0.0f, -1.0f,
-			0.0f, 0.0f, -1.0f,
+			0.0f,
+			0.0f,
+			-1.0f,
+			0.0f,
+			0.0f,
+			-1.0f,
+			0.0f,
+			0.0f,
+			-1.0f,
+			0.0f,
+			0.0f,
+			-1.0f,
 		};
 		mesh->normals.insert(mesh->normals.end(), normals.begin(), normals.end());
-
 
 		xOffset += (xAdvance + charXOffset);
 		i++;
@@ -108,8 +127,10 @@ void Text::setText(std::string text)
 {
 	this->str = text;
 	printf("warning setting leak prone text!\n");
-	delete(this->mesh);
+	delete (this->mesh);
 	this->mesh = new Mesh();
 	generateMesh();
 	genBuffers();
 }
+
+} // namespace wgl

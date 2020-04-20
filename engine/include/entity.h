@@ -17,6 +17,9 @@
 #include <vector>
 #include "collider.h"
 
+namespace wgl
+{
+
 class Shader;
 class Mesh;
 
@@ -50,3 +53,5 @@ public:
 	glm::mat4 getModelMatrix();
 	virtual void update(float deltaTime);
 };
+
+} // namespace wgl

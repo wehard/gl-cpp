@@ -17,6 +17,9 @@
 #include "textured_quad.h"
 #include "shader.h"
 
+namespace wgl
+{
+
 Framebuffer::Framebuffer(int width, int height) : width(width), height(height)
 {
 	glGenFramebuffers(1, &fbo_id);
@@ -69,4 +72,6 @@ void Framebuffer::draw()
 	shader->use();
 	shader->setVec2("screen_size", glm::vec2((float)width, (float)height));
 	quad->draw();
+}
+
 }

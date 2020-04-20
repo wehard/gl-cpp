@@ -5,6 +5,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
 
+namespace wgl
+{
+
 Texture::Texture(int width, int height) : width(width), height(height)
 {
 	glGenTextures(1, &tex_id);
@@ -49,4 +52,6 @@ Texture::~Texture()
 unsigned int Texture::getTextureID()
 {
 	return (tex_id);
+}
+
 }

@@ -15,6 +15,9 @@
 #include "entity.h"
 #include <stdio.h>
 
+namespace wgl
+{
+
 Collider::Collider(Mesh *m) : m_is_enabled(true)
 {
 	this->b = Mesh::calculateBounds(m);
@@ -80,7 +83,7 @@ bool Collider::checkCollision(Entity *e1, Entity *e2, HitInfo *h, int ignore_mas
 		if (ignore_mask & (1 << i))
 		{
 			printf("ignoring face %d\n", i);
-			continue ;
+			continue;
 		}
 		if (i == 0 || distance[i] < min_dist)
 		{
@@ -92,3 +95,5 @@ bool Collider::checkCollision(Entity *e1, Entity *e2, HitInfo *h, int ignore_mas
 	h->e = e2;
 	return (true);
 }
+
+} // namespace wgl

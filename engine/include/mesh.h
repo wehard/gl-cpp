@@ -14,6 +14,9 @@
 #include <vector>
 #include <glm/vec4.hpp>
 
+namespace wgl
+{
+
 struct Bounds;
 
 class Mesh
@@ -25,7 +28,7 @@ public:
 	std::vector<GLfloat> colors;
 	std::vector<GLfloat> uvs;
 	std::vector<GLfloat> normals;
-	size_t	getNumVertices();
+	size_t getNumVertices();
 	Mesh();
 	~Mesh();
 	void setVertexColors(glm::vec4 c);
@@ -34,3 +37,4 @@ public:
 	static void print(Mesh *m);
 };
 
+} // namespace wgl

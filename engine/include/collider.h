@@ -14,6 +14,9 @@
 #include "bounds.h"
 #include <glm/vec3.hpp>
 
+namespace wgl
+{
+
 class Mesh;
 class Entity;
 
@@ -36,6 +39,7 @@ class Collider
 private:
 	Bounds b;
 	bool m_is_enabled;
+
 public:
 	Collider(Mesh *m);
 	~Collider();
@@ -45,3 +49,4 @@ public:
 	static bool checkCollision(Entity *e1, Entity *e2, HitInfo *h, int ignore_mask = 0);
 };
 
+} // namespace wgl

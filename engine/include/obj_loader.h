@@ -18,7 +18,12 @@
 #include <glm/vec3.hpp>
 #include <string>
 
+namespace wgl
+{
+
 class Mesh;
 
 Mesh *loadObj(std::string path);
 std::vector<float> convertVec3s(std::vector<glm::vec3> v3s);
+
+}

@@ -16,6 +16,9 @@
 #include <string.h>
 #include <string>
 
+namespace wgl
+{
+
 Mesh *loadObj(std::string path)
 {
 	Mesh *m = new Mesh();
@@ -35,7 +38,7 @@ Mesh *loadObj(std::string path)
 	{
 		int res = fscanf(f, "%s", buf);
 		if (res == EOF)
-			break ;
+			break;
 
 		if (strcmp(buf, "v") == 0)
 		{
@@ -86,18 +89,17 @@ Mesh *loadObj(std::string path)
 			m->indices.push_back(v_i[1]);
 			m->indices.push_back(v_i[2]);
 
-			m->normals[(v_i[0] * 3)] = 		temp_normals[n_i[0]].x;
-			m->normals[(v_i[0] * 3) + 1] =	temp_normals[n_i[0]].y;
-			m->normals[(v_i[0] * 3) + 2] =	temp_normals[n_i[0]].z;
+			m->normals[(v_i[0] * 3)] = temp_normals[n_i[0]].x;
+			m->normals[(v_i[0] * 3) + 1] = temp_normals[n_i[0]].y;
+			m->normals[(v_i[0] * 3) + 2] = temp_normals[n_i[0]].z;
 
-			m->normals[(v_i[1] * 3)] = 		temp_normals[n_i[1]].x;
-			m->normals[(v_i[1] * 3) + 1] =	temp_normals[n_i[1]].y;
-			m->normals[(v_i[1] * 3) + 2] =	temp_normals[n_i[1]].z;
+			m->normals[(v_i[1] * 3)] = temp_normals[n_i[1]].x;
+			m->normals[(v_i[1] * 3) + 1] = temp_normals[n_i[1]].y;
+			m->normals[(v_i[1] * 3) + 2] = temp_normals[n_i[1]].z;
 
-			m->normals[(v_i[2] * 3)] = 		temp_normals[n_i[2]].x;
-			m->normals[(v_i[2] * 3) + 1] =	temp_normals[n_i[2]].y;
-			m->normals[(v_i[2] * 3) + 2] =	temp_normals[n_i[2]].z;
-
+			m->normals[(v_i[2] * 3)] = temp_normals[n_i[2]].x;
+			m->normals[(v_i[2] * 3) + 1] = temp_normals[n_i[2]].y;
+			m->normals[(v_i[2] * 3) + 2] = temp_normals[n_i[2]].z;
 		}
 	}
 	return (m);
@@ -114,3 +116,5 @@ std::vector<float> convertVec3s(std::vector<glm::vec3> v3s)
 	}
 	return (fs);
 }
+
+} // namespace wgl

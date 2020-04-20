@@ -16,6 +16,9 @@
 #include <math.h>
 #include <glm/vec3.hpp>
 
+namespace wgl
+{
+
 Mesh::Mesh(/* args */)
 {
 }
@@ -29,27 +32,58 @@ Mesh *Mesh::makeQuad()
 {
 	Mesh *m = new Mesh();
 	m->vertices = {
-		-0.5f,	-0.5f,	0.0f,
-		-0.5f,	0.5f,	0.0f,
-		0.5f,	0.5f,	0.0f,
-		0.5f,	-0.5f,	0.0f,
-		};
+		-0.5f,
+		-0.5f,
+		0.0f,
+		-0.5f,
+		0.5f,
+		0.0f,
+		0.5f,
+		0.5f,
+		0.0f,
+		0.5f,
+		-0.5f,
+		0.0f,
+	};
 
 	m->colors = {
-		1.0f, 1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f, 1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
 	};
 
 	m->uvs = {
-		0.0f, 0.0f,
-		0.0f, 1.0f,
-		1.0f, 1.0f,
-		1.0f, 0.0f,
+		0.0f,
+		0.0f,
+		0.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		1.0f,
+		0.0f,
 	};
 
-	m->indices = {0, 1, 2, 2, 3, 0,};
+	m->indices = {
+		0,
+		1,
+		2,
+		2,
+		3,
+		0,
+	};
 	return (m);
 }
 
@@ -58,11 +92,10 @@ void Mesh::setVertexColors(glm::vec4 c)
 	for (size_t i = 0; i < colors.size(); i += 4)
 	{
 		colors[i] = c.r;
-		colors[i+1] = c.g;
-		colors[i+2] = c.b;
-		colors[i+3] = c.a;
+		colors[i + 1] = c.g;
+		colors[i + 2] = c.b;
+		colors[i + 3] = c.a;
 	}
-
 }
 
 size_t Mesh::getNumVertices()
@@ -76,11 +109,9 @@ void Mesh::print(Mesh *m)
 	for (size_t i = 0; i < m->vertices.size(); i += 3)
 	{
 		printf("v %.2f, %.2f, %.2f\tn %.2f, %.2f, %.2f\n",
-			m->vertices[i], m->vertices[i+1], m->vertices[i+2],
-			m->normals[i], m->normals[i+1], m->normals[i+2]
-			);
+			   m->vertices[i], m->vertices[i + 1], m->vertices[i + 2],
+			   m->normals[i], m->normals[i + 1], m->normals[i + 2]);
 	}
-
 }
 
 Bounds Mesh::calculateBounds(Mesh *m)
@@ -88,8 +119,7 @@ Bounds Mesh::calculateBounds(Mesh *m)
 	Bounds b = {
 		b.x_min = INFINITY, b.x_max = -INFINITY,
 		b.y_min = INFINITY, b.y_max = -INFINITY,
-		b.z_min = INFINITY, b.z_max = -INFINITY
-		};
+		b.z_min = INFINITY, b.z_max = -INFINITY};
 	if (!m)
 		return (b);
 	for (size_t i = 0; i < m->vertices.size(); i += 3)
@@ -110,3 +140,5 @@ Bounds Mesh::calculateBounds(Mesh *m)
 	}
 	return (b);
 }
+
+} // namespace wgl

@@ -1,19 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   wgl.cpp                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/29 16:56:38 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 19:08:56 by wkorande         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "wgl.h"
+#include "wengine.h"
 #include "camera.h"
 #include "renderer.h"
-#include "wgl_input.h"
+#include "input.h"
 #include "framebuffer.h"
 #include "mesh.h"
 #include "texture.h"
@@ -22,16 +10,19 @@
 #include <iostream>
 #include "bitmap_font.h"
 #include "text.h"
+#include <vector>
 
+namespace wgl
+{
 
-WEngine::WEngine(std::string title) : title(title), wireframe_mode(0)
+WEngine::WEngine(std::string title, int windowWidth, int windowHeight) : title(title), windowWidth(windowWidth), windowHeight(windowHeight), wireframe_mode(0)
 {
 	init();
 }
 
-WEngine::WEngine() { }
+WEngine::WEngine() {}
 
-WEngine::~WEngine() { }
+WEngine::~WEngine() {}
 
 void WEngine::init()
 {
@@ -44,14 +35,14 @@ void WEngine::init()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
-	window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, title.c_str(), nullptr, nullptr);
+	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 		std::cout << "GLEW failed to initialize!" << std::endl;
-	camera = new Camera(45.0f, (float)WIN_WIDTH / (float)WIN_HEIGHT);
+	camera = new Camera(45.0f, (float)windowWidth / (float)windowHeight);
 	renderer = new Renderer(camera);
-	WengineInput::setupKeyInputs(window);
+	Input::setupKeyInputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
 	glEnable(GL_DEPTH_TEST);
 }
@@ -59,9 +50,7 @@ void WEngine::init()
 void WEngine::run()
 {
 	// Framebuffer *frameBuffer = new Framebuffer(1280, 720);
-	input = new WengineInput(vector<int>({GLFW_KEY_W}));
-
-	
+	input = new Input(std::vector<int>({GLFW_KEY_W}));
 
 	onAttach();
 	last_time = glfwGetTime();
@@ -73,7 +62,7 @@ void WEngine::run()
 		double delta_time = current_time - last_time;
 
 		onUpdate(delta_time);
-		
+
 		for (auto e : entities)
 			e->update(delta_time);
 
@@ -99,7 +88,7 @@ void WEngine::run()
 		// glClearColor(0.0, 0.0, 0.0, 1.0);
 		// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// frameBuffer->draw();
-		
+
 		glfwSwapBuffers(window);
 		last_time = current_time;
 		glfwPollEvents();
@@ -116,3 +105,5 @@ void WEngine::addText(Text *text)
 {
 	texts.insert(texts.end(), text);
 }
+
+} // namespace wgl

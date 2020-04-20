@@ -14,12 +14,16 @@
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
 
+namespace wgl
+{
+
 class Camera
 {
 private:
 	glm::vec3 rotation;
-	float	fov;
+	float fov;
 	glm::mat4x4 projection_matrix;
+
 public:
 	glm::vec3 position;
 	Camera(float fovy, float aspect);
@@ -29,3 +33,4 @@ public:
 	glm::mat4x4 getProjectionMatrix();
 };
 
+} // namespace wgl

@@ -19,11 +19,15 @@
 #include "textured_quad.h"
 #include "text.h"
 
+namespace wgl
+{
+
 class Renderer
 {
 private:
 	Camera *camera;
 	glm::vec3 lightPos;
+
 public:
 	Renderer(Camera *camera);
 	Renderer();
@@ -33,4 +37,4 @@ public:
 	void drawText(Text *text);
 };
 
-
+} // namespace wgl

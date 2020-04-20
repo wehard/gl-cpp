@@ -2,6 +2,9 @@
 
 #include <string>
 
+namespace wgl
+{
+
 class Texture
 {
 private:
@@ -15,3 +18,4 @@ public:
 	unsigned int getTextureID();
 };
 
+}

@@ -17,7 +17,10 @@
 #include <map>
 #include "shader.h"
 
-Shader::Shader(string vert_path, string frag_path)
+namespace wgl
+{
+
+Shader::Shader(std::string vert_path, std::string frag_path)
 {
 	this->vert_path = vert_path;
 	this->frag_path = frag_path;
@@ -38,25 +41,25 @@ void Shader::use()
 	glUseProgram(p_id);
 }
 
-void Shader::setFloat(string name, float f)
+void Shader::setFloat(std::string name, float f)
 {
 	glUniform1f(uniforms[name], f);
 }
-void Shader::setVec2(string name, glm::vec2 v)
+void Shader::setVec2(std::string name, glm::vec2 v)
 {
 	glUniform2f(uniforms[name], v[0], v[1]);
 }
 
-void Shader::setVec3(string name, glm::vec3 v)
+void Shader::setVec3(std::string name, glm::vec3 v)
 {
 	glUniform3f(uniforms[name], v[0], v[1], v[2]);
 }
 
-void Shader::setMat4(string name, glm::mat4x4 m)
+void Shader::setMat4(std::string name, glm::mat4x4 m)
 {
 	GLuint location = glGetUniformLocation(p_id, name.c_str());
 	// std::cout << name << " loc: " << location << std::endl;
-	glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat*)&m[0]);
+	glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat *)&m[0]);
 }
 
 void Shader::loadUniforms()
@@ -71,10 +74,9 @@ void Shader::loadUniforms()
 		GLenum type;
 		GLchar name[30];
 		glGetActiveUniform(p_id, i, 30, &len, &size, &type, &name[0]);
-		uniforms.insert(std::pair<string, GLuint>(name, (GLuint)i));
+		uniforms.insert(std::pair<std::string, GLuint>(name, (GLuint)i));
 	}
 	printf("Active uniforms: %d\n", count);
-
 
 	std::map<std::string, GLuint>::iterator it = uniforms.begin();
 	while (it != uniforms.end())
@@ -96,10 +98,9 @@ void Shader::loadAttributes()
 		GLenum type;
 		GLchar name[30];
 		glGetActiveAttrib(p_id, i, 30, &len, &size, &type, &name[0]);
-		attributes.insert(std::pair<string, GLuint>(name, (GLuint)glGetAttribLocation(p_id, name)));
+		attributes.insert(std::pair<std::string, GLuint>(name, (GLuint)glGetAttribLocation(p_id, name)));
 	}
 	printf("Active attributes: %d\n", count);
-
 
 	std::map<std::string, GLuint>::iterator it = attributes.begin();
 	while (it != attributes.end())
@@ -109,7 +110,7 @@ void Shader::loadAttributes()
 	}
 }
 
-string Shader::loadShader(string path)
+std::string Shader::loadShader(std::string path)
 {
 	std::string source;
 
@@ -126,7 +127,7 @@ string Shader::loadShader(string path)
 	return (source);
 }
 
-GLuint Shader::compileShader(string src, GLenum shader_type)
+GLuint Shader::compileShader(std::string src, GLenum shader_type)
 {
 	GLuint shader_id;
 
@@ -157,3 +158,5 @@ GLuint Shader::createProgram(GLuint vert_id, GLuint frag_id)
 	glDeleteShader(frag_id);
 	return (program_id);
 }
+
+} // namespace wgl

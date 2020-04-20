@@ -12,6 +12,9 @@
 
 #pragma once
 
+namespace wgl
+{
+
 class Texture;
 class TexturedQuad;
 class Shader;
@@ -26,6 +29,7 @@ private:
 	Texture *texture;
 	TexturedQuad *quad;
 	Shader *shader;
+
 public:
 	// unsigned int tex_id;
 	Framebuffer(int width, int height);
@@ -35,3 +39,5 @@ public:
 	Texture *getTexture();
 	void draw();
 };
+
+} // namespace wgl

@@ -15,7 +15,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "text.h"
 
-Renderer::Renderer(Camera *cam) : camera(cam), lightPos(glm::vec3(0.0,0.0,50.0))
+namespace wgl
+{
+
+Renderer::Renderer(Camera *cam) : camera(cam), lightPos(glm::vec3(0.0, 0.0, 50.0))
 {
 }
 
@@ -52,3 +55,5 @@ void Renderer::drawText(Text *text)
 	text->shader->setMat4("proj_matrix", camera->getProjectionMatrix());
 	text->draw();
 }
+
+} // namespace wgl

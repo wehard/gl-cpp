@@ -12,6 +12,9 @@
 
 #pragma once
 
+namespace wgl
+{
+
 struct Bounds
 {
 	float x_min;
@@ -21,3 +24,5 @@ struct Bounds
 	float z_min;
 	float z_max;
 };
+
+}

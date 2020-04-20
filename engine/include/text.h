@@ -4,6 +4,9 @@
 #include "entity.h"
 #include "bitmap_font.h"
 
+namespace wgl
+{
+
 class Mesh;
 
 class Text : public Entity
@@ -12,6 +15,7 @@ private:
 	std::string str;
 	BitmapFont *font;
 	void generateMesh();
+
 public:
 	Text(BitmapFont *font, std::string str);
 	void draw() override;
@@ -20,4 +24,4 @@ public:
 	void setText(std::string text);
 };
 
-
+} // namespace wgl
