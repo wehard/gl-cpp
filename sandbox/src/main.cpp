@@ -10,21 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wengine.h"
+#include "wgl.h"
+
 #include "player.h"
 #include "ball.h"
 #include "opponent.h"
 #include "wall.h"
-#include "shader.h"
-#include "obj_loader.h"
-#include "mesh.h"
-#include "texture.h"
-#include "textured_quad.h"
-#include "bitmap_font.h"
-#include "text.h"
-#include <string>
-#include "input.h"
+
 #include "ik/irrKlang.h"
+#include <string>
 #include <functional>
 
 using namespace irrklang;

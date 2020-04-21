@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wengine.h"
-#include "shader.h"
-#include "bitmap_font.h"
-#include "text.h"
-#include "input.h"
+#include "wgl.h"
 
 class TextTest : public wgl::Application
 {

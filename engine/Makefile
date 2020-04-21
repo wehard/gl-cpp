@@ -4,7 +4,7 @@ SRC = shader.cpp\
 	entity.cpp\
 	camera.cpp\
 	renderer.cpp\
-	wengine.cpp\
+	application.cpp\
 	input.cpp\
 	obj_loader.cpp\
 	mesh.cpp\
