@@ -1,4 +1,4 @@
-NAME = libwengine.a
+NAME = libwgl.a
 
 SRC = shader.cpp\
 	entity.cpp\

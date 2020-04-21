@@ -1,6 +1,6 @@
 NAME = pong
 
-WENGINE = ../engine
+WENGINE = ../wgl
 
 SRC = main.cpp\
 	player.cpp\
@@ -30,14 +30,14 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	make -C $(WENGINE)
 	@printf "compiling %s\n" "$(NAME)"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(WENGINE)/lib/libIrrKlang.so -I $(INCLUDE) -I $(WENGINCLUDE) -I $(WENGINE)/include/ik -L$(WENGINE) -lwengine -L$(WENGINE)/lib $(LDFLAGS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(WENGINE)/lib/libIrrKlang.so -I $(INCLUDE) -I $(WENGINCLUDE) -I $(WENGINE)/include/ik -L$(WENGINE) -lwgl -L$(WENGINE)/lib $(LDFLAGS)
 
 %.o: %.cpp
 	@printf "compiling %s\n" "$<"
 	@$(CC) -I $(INCLUDE) -I $(WENGINCLUDE) -c $< -o $@
 
 debug:
-	$(CC) -g $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) -I $(WENGINCLUDE) -L$(WENGINE) -lwengine $(LDFLAGS)
+	$(CC) -g $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) -I $(WENGINCLUDE) -L$(WENGINE) -lwgl$(LDFLAGS)
 
 check: fclean
 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) -I $(INCLUDE) $(LDFLAGS) CXX=~/Dev/temp/build/bin/include-what-you-use
