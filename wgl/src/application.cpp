@@ -16,7 +16,7 @@
 namespace wgl
 {
 
-	Application* Application::instance = nullptr;
+Application *Application::instance = nullptr;
 
 Application::Application(std::string title, int windowWidth, int windowHeight) : title(title), windowWidth(windowWidth), windowHeight(windowHeight), wireframe_mode(0)
 {
