@@ -18,6 +18,7 @@ namespace wgl
 
 Application::Application(std::string title, int windowWidth, int windowHeight) : title(title), windowWidth(windowWidth), windowHeight(windowHeight), wireframe_mode(0)
 {
+	instance = this;
 	init();
 }
 

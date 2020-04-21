@@ -28,8 +28,11 @@ private:
 	// Framebuffer *frameBuffer;
 	int windowWidth;
 	int windowHeight;
+	static Application *instance;
 
 public:
+
+	static Application& Get() { return *instance; }
 	Camera *camera;
 
 	Application(std::string title, int windowWidth, int windowHeight);
