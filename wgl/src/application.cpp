@@ -24,7 +24,7 @@ Application::Application(std::string title, int windowWidth, int windowHeight) :
 	init();
 }
 
-Application::Application() {}
+// Application::Application() {}
 
 Application::~Application() {}
 
@@ -44,8 +44,8 @@ void Application::init()
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 		std::cout << "GLEW failed to initialize!" << std::endl;
-	camera = new Camera(45.0f, (float)windowWidth / (float)windowHeight);
-	renderer = new Renderer(camera);
+	camera = std::unique_ptr<Camera>(new Camera(45.0f, (float)windowWidth / (float)windowHeight));
+	renderer = std::unique_ptr<Renderer>(new Renderer(*camera));
 	Input::setupKeyInputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
 	glEnable(GL_DEPTH_TEST);
@@ -54,7 +54,7 @@ void Application::init()
 void Application::run()
 {
 	// Framebuffer *frameBuffer = new Framebuffer(1280, 720);
-	input = new Input(std::vector<int>({GLFW_KEY_W}));
+	// input = std::unique_ptr<Input>(new Input(std::vector<int>({GLFW_KEY_W})));
 
 	onAttach();
 	last_time = glfwGetTime();
@@ -62,8 +62,8 @@ void Application::run()
 	int frameCount = 0;
 	while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
-		if (input->isKeyDown(GLFW_KEY_W))
-			wireframe_mode = !wireframe_mode;
+		// if (input->isKeyDown(GLFW_KEY_W))
+		// 	wireframe_mode = !wireframe_mode;
 		double current_time = glfwGetTime();
 		double delta_time = current_time - last_time;
 		if (current_time - fps_time > 1.0)

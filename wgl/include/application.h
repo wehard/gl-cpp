@@ -5,7 +5,7 @@
 #include <vector>
 #include "camera.h"
 #include "text.h"
-
+#include <memory>
 namespace wgl
 {
 
@@ -19,12 +19,12 @@ class Application
 private:
 	GLFWwindow *window;
 	std::string title;
-	Renderer *renderer;
 	double last_time;
 	std::vector<Entity *> entities;
 	std::vector<Text *> texts;
 	bool wireframe_mode;
-	Input *input;
+	// std::unique_ptr<Input> input;
+	std::unique_ptr<Renderer> renderer;
 	// Framebuffer *frameBuffer;
 	int windowWidth;
 	int windowHeight;
@@ -33,10 +33,10 @@ private:
 public:
 
 	static Application& Get() { return *instance; }
-	Camera *camera;
+	std::unique_ptr<Camera> camera;
 
 	Application(std::string title, int windowWidth, int windowHeight);
-	Application();
+	// Application();
 	~Application();
 	void init();
 	void run();

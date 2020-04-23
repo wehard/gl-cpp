@@ -32,7 +32,8 @@ private:
 	Wall *center;
 	wgl::Text *player_score_text;
 	wgl::Text *opp_score_text;
-	wgl::Input *input;
+	// std::unique_ptr<wgl::Input> input;
+	wgl::Input input;
 
 public:
 	ISoundEngine *soundEngine;
@@ -50,7 +51,8 @@ public:
 	virtual void onAttach() override
 	{
 		soundEngine = createIrrKlangDevice();
-		input = new wgl::Input({GLFW_KEY_R});
+		// input = std::unique_ptr<wgl::Input>(new wgl::Input({GLFW_KEY_R}));
+		input = wgl::Input({GLFW_KEY_R});
 		camera->position = glm::vec3(0.0, 0.0, 95.0);
 		wgl::Shader *basic = new wgl::Shader("../resources/shaders/phong.vert", "../resources/shaders/phong.frag");
 		wgl::Mesh *pong_mesh = wgl::loadObj("resources/logo.obj");
@@ -137,7 +139,7 @@ public:
 
 	virtual void onUpdate(float deltaTime) override
 	{
-		if (input->isKeyDown(GLFW_KEY_R))
+		if (input.isKeyDown(GLFW_KEY_R))
 			resetGame();
 		glm::vec3 cam_target = glm::vec3(ball->position.x / 4.0, -player->position.y, 95.0);
 		if (glm::length(cam_target - camera->position) > 0.1)
@@ -173,7 +175,7 @@ public:
 
 int main(void)
 {
-	Pong pong = Pong("pong");
-	pong.run();
+	Pong *pong = new Pong("pong");
+	pong->run();
 	return (0);
 }
