@@ -12,7 +12,9 @@
 
 #include "wall.h"
 
-Wall::Wall(wgl::Shader *s, wgl::Mesh *m) : wgl::Entity(s, m)
+Wall::Wall() {}
+
+Wall::Wall(wgl::Shader &s, wgl::Mesh &m) : wgl::Entity(s, m)
 {
 }
 

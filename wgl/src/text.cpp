@@ -8,9 +8,11 @@
 namespace wgl
 {
 
+Text::Text() {}
+
 Text::Text(BitmapFont *font, std::string str) : str(str), font(font)
 {
-	this->mesh = new Mesh();
+	// this->mesh = new Mesh();
 	generateMesh();
 	genBuffers();
 }
@@ -26,7 +28,7 @@ void Text::generateMesh()
 	int i = 0;
 	for (CharInfo &c : charInfos)
 	{
-		Texture *texture = font->getTexture();
+		Texture *texture = &font->getTexture();
 		float charWidth = (float)c.width / (float)texture->width;
 		float charHeight = (float)c.height / (float)texture->height;
 		float charXOffset = (float)c.xOffset / (float)texture->width;
@@ -38,7 +40,7 @@ void Text::generateMesh()
 			xOffset + charWidth, charHeight, 0.0f,
 			xOffset + charWidth, 0.0f, 0.0f};
 
-		mesh->vertices.insert(mesh->vertices.end(), verts.begin(), verts.end());
+		mesh.vertices.insert(mesh.vertices.end(), verts.begin(), verts.end());
 
 		std::vector<int> indices = {
 			(i * 4) + 0,
@@ -48,7 +50,7 @@ void Text::generateMesh()
 			(i * 4) + 3,
 			(i * 4) + 0};
 
-		mesh->indices.insert(mesh->indices.end(), indices.begin(), indices.end());
+		mesh.indices.insert(mesh.indices.end(), indices.begin(), indices.end());
 
 		float charX = (float)c.x / texture->width;
 		float charY = (float)c.y / texture->height;
@@ -64,7 +66,7 @@ void Text::generateMesh()
 			// charX + charWidth, charY
 		};
 
-		mesh->uvs.insert(mesh->uvs.end(), uvs.begin(), uvs.end());
+		mesh.uvs.insert(mesh.uvs.end(), uvs.begin(), uvs.end());
 
 		std::vector<float> colors = {
 			1.0f,
@@ -84,7 +86,7 @@ void Text::generateMesh()
 			1.0f,
 			1.0f,
 		};
-		mesh->colors.insert(mesh->colors.end(), colors.begin(), colors.end());
+		mesh.colors.insert(mesh.colors.end(), colors.begin(), colors.end());
 
 		std::vector<float> normals = {
 			0.0f,
@@ -100,7 +102,7 @@ void Text::generateMesh()
 			0.0f,
 			-1.0f,
 		};
-		mesh->normals.insert(mesh->normals.end(), normals.begin(), normals.end());
+		mesh.normals.insert(mesh.normals.end(), normals.begin(), normals.end());
 
 		xOffset += (xAdvance + charXOffset);
 		i++;
@@ -114,21 +116,21 @@ BitmapFont *Text::getFont()
 
 void Text::draw()
 {
-	this->shader->use();
-	this->shader->setVec3("object_color", glm::vec3(1.0, 1.0, 1.0));
-	this->shader->setMat4("model_matrix", this->getModelMatrix());
-	glBindTexture(GL_TEXTURE_2D, font->getTexture()->getTextureID());
+	this->shader.use();
+	this->shader.setVec3("object_color", glm::vec3(1.0, 1.0, 1.0));
+	this->shader.setMat4("model_matrix", this->getModelMatrix());
+	glBindTexture(GL_TEXTURE_2D, font->getTexture().getTextureID());
 	glBindVertexArray(vao_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
-	glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 }
 
 void Text::setText(std::string text)
 {
 	this->str = text;
 	printf("warning setting leak prone text!\n");
-	delete (this->mesh);
-	this->mesh = new Mesh();
+	// delete (this->mesh);
+	this->mesh = Mesh();
 	generateMesh();
 	genBuffers();
 }

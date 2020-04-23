@@ -17,6 +17,7 @@ class Wall : public wgl::Entity
 private:
 	/* data */
 public:
-	Wall(wgl::Shader *s, wgl::Mesh *m);
+	Wall();
+	Wall(wgl::Shader &s, wgl::Mesh &m);
 	~Wall();
 };

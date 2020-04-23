@@ -9,8 +9,9 @@
 /*   Updated: 2020/04/13 17:19:00 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#pragma once
 
-#include <GL/gl.h>
+// #include <GL/gl.h>
 #include <vector>
 #include <glm/vec4.hpp>
 
@@ -23,17 +24,17 @@ class Mesh
 {
 private:
 public:
-	std::vector<GLuint> indices;
-	std::vector<GLfloat> vertices;
-	std::vector<GLfloat> colors;
-	std::vector<GLfloat> uvs;
-	std::vector<GLfloat> normals;
+	std::vector<unsigned int> indices;
+	std::vector<float> vertices;
+	std::vector<float> colors;
+	std::vector<float> uvs;
+	std::vector<float> normals;
 	size_t getNumVertices();
 	Mesh();
 	~Mesh();
 	void setVertexColors(glm::vec4 c);
 	static Mesh *makeQuad();
-	static Bounds calculateBounds(Mesh *m);
+	static Bounds calculateBounds(Mesh &m);
 	static void print(Mesh *m);
 };
 

@@ -44,8 +44,7 @@ void Application::init()
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 		std::cout << "GLEW failed to initialize!" << std::endl;
-	camera = std::unique_ptr<Camera>(new Camera(45.0f, (float)windowWidth / (float)windowHeight));
-	renderer = std::unique_ptr<Renderer>(new Renderer(*camera));
+	camera = Camera(45.0f, (float)windowWidth / (float)windowHeight);
 	Input::setupKeyInputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
 	glEnable(GL_DEPTH_TEST);
@@ -90,9 +89,9 @@ void Application::run()
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		for (auto e : entities)
-			renderer->drawEntity(e);
+			renderer.drawEntity(e, camera);
 		for (auto t : texts)
-			renderer->drawText(t);
+			renderer.drawText(t, camera);
 
 		// frameBuffer->Unbind();
 

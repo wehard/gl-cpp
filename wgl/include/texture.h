@@ -12,6 +12,7 @@ private:
 public:
 	int width;
 	int height;
+	Texture();
 	Texture(int width, int height);
 	Texture(std::string path);
 	~Texture();

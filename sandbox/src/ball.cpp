@@ -21,7 +21,9 @@
 #include <iostream>
 #include <math.h>
 
-Ball::Ball(wgl::Shader *s, wgl::Mesh *m) : wgl::Entity(s, m), speed(70), isCaptured(false)
+Ball::Ball() {}
+
+Ball::Ball(wgl::Shader &s, wgl::Mesh &m) : wgl::Entity(s, m), speed(70), isCaptured(false)
 {
 	reset_pos_and_dir();
 }

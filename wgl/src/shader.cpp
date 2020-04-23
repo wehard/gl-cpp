@@ -10,15 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shader.h"
 #include <fstream>
 #include <sstream>
 #include <stdio.h>
 #include <vector>
 #include <map>
-#include "shader.h"
 
 namespace wgl
 {
+
+Shader::Shader() {}
 
 Shader::Shader(std::string vert_path, std::string frag_path)
 {

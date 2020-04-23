@@ -25,10 +25,9 @@ private:
 	glm::mat4x4 projection_matrix;
 
 public:
-	glm::vec3 position;
 	Camera(float fovy, float aspect);
 	Camera();
-	~Camera();
+	glm::vec3 position = glm::vec3(0.0, 0.0, 0.0);
 	glm::mat4x4 getViewMatrix();
 	glm::mat4x4 getProjectionMatrix();
 };

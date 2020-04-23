@@ -41,7 +41,8 @@ private:
 	bool m_is_enabled;
 
 public:
-	Collider(Mesh *m);
+	Collider();
+	Collider(Mesh &m);
 	~Collider();
 	void enable();
 	void disable();
