@@ -28,11 +28,11 @@ public:
 		textShader = wgl::createRef<wgl::Shader>("resources/shaders/text.vert", "resources/shaders/text.frag");
 		font = wgl::createRef<wgl::BitmapFont>("resources/fonts/classic_console.fnt");
 		text = wgl::createRef<wgl::Text>("HELLO", font, textShader);
-		text->position = glm::vec3(-2.5f, 0.0f, 0.0f);
+		text->position = glm::vec3(-5.0f, 0.0f, 0.0f);
 		text->scale = glm::vec3(20.0f, 20.0f, 20.0f);
 		text->rotation = 0.0f;
 		addText(text);
-		camera->position = glm::vec3(0.0f, 0.0f, 5.0f);
+		camera->position = glm::vec3(0.0f, 0.0f, 10.0f);
 	}
 
 	virtual void onUpdate(float deltaTime) override

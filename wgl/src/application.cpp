@@ -16,6 +16,11 @@
 namespace wgl
 {
 
+static void GLFWErrorCallback(int error, const char* description)
+{
+	printf("GLFW Error %d: %s\n", error, description);
+}
+
 Application *Application::instance = nullptr;
 
 Application::Application(std::string title, int windowWidth, int windowHeight) : title(title), windowWidth(windowWidth), windowHeight(windowHeight), wireframe_mode(0)
@@ -35,6 +40,7 @@ Application::~Application()
 
 void Application::init()
 {
+	glfwSetErrorCallback(GLFWErrorCallback);
 	if (!glfwInit())
 		std::cout << "GLFW failed to initialize!" << std::endl;
 
@@ -106,7 +112,6 @@ void Application::run()
 		// glClearColor(0.0, 0.0, 0.0, 1.0);
 		// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// frameBuffer->draw();
-
 		glfwSwapBuffers(window);
 		last_time = current_time;
 		frameCount++;
