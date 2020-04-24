@@ -12,17 +12,17 @@
 
 #include "entity.h"
 #include "input.h"
-#include "ball.h"
+
+class Ball;
 
 class Player : public wgl::Entity
 {
 private:
 	wgl::Input *input;
 	float speed;
-	Ball ball;
+	Ball *ball;
 public:
-	Player();
-	Player(wgl::Shader &s, wgl::Mesh &m, Ball &ball);
+	Player(wgl::Shader *s, wgl::Mesh *m, Ball *ball);
 	~Player();
 	void update(float delta_time) override;
 	static int score;

@@ -11,18 +11,19 @@
 /* ************************************************************************** */
 
 #include "entity.h"
-#include "ball.h"
+
+class Ball;
 
 class Opponent : public wgl::Entity
 {
 private:
-	Ball b;
+	Ball *b;
 	float speed;
 	float target_y;
 	float update_interval = 0.0;
 	float delta;
 public:
-	Opponent(wgl::Shader &s, wgl::Mesh &m, Ball &b);
+	Opponent(wgl::Shader *s, wgl::Mesh *m, Ball *b);
 	Opponent();
 	~Opponent();
 	void update(float delta_time) override;

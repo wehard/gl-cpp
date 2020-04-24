@@ -18,10 +18,11 @@
 
 int Opponent::score = 0;
 
+Opponent::Opponent(wgl::Shader *s, wgl::Mesh *m, Ball *b) : wgl::Entity(s, m), b(b), speed(50.0)
+{
+}
+
 Opponent::Opponent() {}
-
-Opponent::Opponent(wgl::Shader &s, wgl::Mesh &m, Ball &b) : wgl::Entity(s, m), b(b), speed(50.0) {}
-
 
 Opponent::~Opponent()
 {
@@ -30,19 +31,19 @@ Opponent::~Opponent()
 void Opponent::update(float delta_time)
 {
 
-	glm::vec3 p = glm::vec3(position.x, b.position.y, position.z);
-	glm::vec3 bp = p - b.position;
+	glm::vec3 p = glm::vec3(position.x, b->position.y, position.z);
+	glm::vec3 bp = p - b->position;
 	float adjacent = glm::length(bp);
-	float angle = glm::dot(b.get_direction(), glm::normalize(bp));
+	float angle = glm::dot(b->get_direction(), glm::normalize(bp));
 	float opposite = adjacent * tanf(angle);
 
 	// printf("adjacent: %.2f opposite: %.2f angle: %.2f\n", adjacent, opposite, glm::degrees(angle));
-	// printf("ball y: %.2f\n", b.get_direction().y);
+	// printf("ball y: %.2f\n", b->get_direction().y);
 
 
 	glm::vec3 target = p; // glm::vec3(position.x, target_y, position.z);
-	if (b.get_direction().x < 0)
-		target.y = -b.position.y/3;
+	if (b->get_direction().x < 0)
+		target.y = -b->position.y/3;
 
 	if (glm::length(target - position) > 1)
 	{

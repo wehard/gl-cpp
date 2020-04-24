@@ -9,7 +9,6 @@
 /*   Updated: 2020/04/18 14:55:15 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#pragma once
 
 #include "entity.h"
 #include <glm/vec3.hpp>
@@ -25,8 +24,7 @@ private:
 	Entity *capturer;
 public:
 	float speed;
-	Ball();
-	Ball(wgl::Shader &s, wgl::Mesh &m);
+	Ball(wgl::Shader *s, wgl::Mesh *m);
 	~Ball();
 	void update(float delta_time) override;
 	glm::vec3 get_direction();

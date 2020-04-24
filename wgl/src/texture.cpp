@@ -8,8 +8,6 @@
 namespace wgl
 {
 
-Texture::Texture() {}
-
 Texture::Texture(int width, int height) : width(width), height(height)
 {
 	glGenTextures(1, &tex_id);

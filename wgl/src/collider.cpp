@@ -18,9 +18,7 @@
 namespace wgl
 {
 
-Collider::Collider() {}
-
-Collider::Collider(Mesh &m) : m_is_enabled(true)
+Collider::Collider(Mesh *m) : m_is_enabled(true)
 {
 	this->b = Mesh::calculateBounds(m);
 }
@@ -57,10 +55,10 @@ Bounds transform_bounds(Bounds b, glm::vec3 p, glm::vec3 s)
 
 bool Collider::checkCollision(Entity *e1, Entity *e2, HitInfo *h, int ignore_mask)
 {
-	if (!e1 || !e2 /*|| !e1->collider || !e2->collider*/ || !e1->collider.isEnabled() || !e2->collider.isEnabled())
+	if (!e1 || !e2 || !e1->collider || !e2->collider || !e1->collider->isEnabled() || !e2->collider->isEnabled())
 		return (false);
-	Bounds b1 = transform_bounds(e1->collider.b, e1->position, e1->scale);
-	Bounds b2 = transform_bounds(e2->collider.b, e2->position, e2->scale);
+	Bounds b1 = transform_bounds(e1->collider->b, e1->position, e1->scale);
+	Bounds b2 = transform_bounds(e2->collider->b, e2->position, e2->scale);
 
 	const glm::vec3 face_normals[6] = {
 		glm::vec3(1.0, 0.0, 0.0),

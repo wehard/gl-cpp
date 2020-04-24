@@ -17,7 +17,6 @@ private:
 	void generateMesh();
 
 public:
-	Text();
 	Text(BitmapFont *font, std::string str);
 	void draw() override;
 	BitmapFont *getFont();

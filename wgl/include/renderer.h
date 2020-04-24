@@ -26,14 +26,16 @@ namespace wgl
 class Renderer
 {
 private:
-	// Camera &camera;
+	Camera &camera;
 	glm::vec3 lightPos;
 
 public:
-	void Init();
-	void drawEntity(Entity *entity, Camera &camera);
+	Renderer(Camera &camera);
+	// Renderer();
+	~Renderer();
+	void drawEntity(Entity *entity);
 	void drawTexturedQuad(TexturedQuad *quad);
-	void drawText(Text *text, Camera &camera);
+	void drawText(Text *text);
 };
 
 } // namespace wgl

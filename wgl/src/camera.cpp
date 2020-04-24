@@ -17,12 +17,13 @@
 namespace wgl
 {
 
-Camera::Camera() {}
-
 Camera::Camera(float fovy, float aspect)
 {
+	this->position = glm::vec3(0.0, 0.0, 0.0);
 	this->projection_matrix = glm::perspective(fovy, aspect, 0.1f, 1000.0f);
 }
+Camera::Camera() {}
+Camera::~Camera() {}
 
 glm::mat4x4 Camera::getViewMatrix()
 {

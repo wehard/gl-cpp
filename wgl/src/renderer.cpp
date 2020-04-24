@@ -18,19 +18,26 @@
 namespace wgl
 {
 
-void Renderer::Init()
+Renderer::Renderer(Camera &camera) : camera(camera), lightPos(glm::vec3(0.0, 0.0, 50.0))
 {
-
 }
 
-void Renderer::drawEntity(Entity *entity, Camera &camera)
+// Renderer::Renderer() : camera(nullptr)
+// {
+// }
+
+Renderer::~Renderer()
 {
-	entity->shader.use();
-	entity->shader.setVec3("light_pos", camera.position);
-	entity->shader.setVec3("light_color", glm::vec3(1.0, 1.0, 1.0));
-	entity->shader.setMat4("view_matrix", camera.getViewMatrix());
-	entity->shader.setMat4("proj_matrix", camera.getProjectionMatrix());
-	entity->shader.setMat4("model_matrix", entity->getModelMatrix());
+}
+
+void Renderer::drawEntity(Entity *entity)
+{
+	entity->shader->use();
+	entity->shader->setVec3("light_pos", camera.position);
+	entity->shader->setVec3("light_color", glm::vec3(1.0, 1.0, 1.0));
+	entity->shader->setMat4("view_matrix", camera.getViewMatrix());
+	entity->shader->setMat4("proj_matrix", camera.getProjectionMatrix());
+	entity->shader->setMat4("model_matrix", entity->getModelMatrix());
 	entity->draw();
 }
 
@@ -41,11 +48,11 @@ void Renderer::drawTexturedQuad(TexturedQuad *quad)
 	quad->draw();
 }
 
-void Renderer::drawText(Text *text, Camera &camera)
+void Renderer::drawText(Text *text)
 {
-	text->shader.use();
-	text->shader.setMat4("view_matrix", camera.getViewMatrix());
-	text->shader.setMat4("proj_matrix", camera.getProjectionMatrix());
+	text->shader->use();
+	text->shader->setMat4("view_matrix", camera.getViewMatrix());
+	text->shader->setMat4("proj_matrix", camera.getProjectionMatrix());
 	text->draw();
 }
 

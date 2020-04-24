@@ -24,20 +24,23 @@ namespace wgl
 
 std::vector<Entity *> Entity::entities;
 
-Entity::Entity(Shader &shader, Mesh &mesh) : shader(shader), mesh(mesh), rotation(0.0)
+Entity::Entity(Shader *shader, Mesh *mesh) : shader(shader), mesh(mesh), rotation(0.0)
 {
 	this->scale = glm::vec3(1.0, 1.0, 1.0);
-	this->collider = Collider(mesh);
+	this->collider = new Collider(mesh);
 	genBuffers();
 	Entity::entities.push_back(this);
 }
 
-Entity::Entity(Mesh &mesh)
+Entity::Entity(Mesh *mesh)
 {
 	this->mesh = mesh;
 }
 
-Entity::Entity() {}
+Entity::Entity() : shader(0), rotation(0.0)
+{
+	this->mesh = new Mesh();
+}
 
 Entity::~Entity() {}
 
@@ -53,27 +56,27 @@ void Entity::genBuffers()
 	glGenBuffers(1, &ebo_id);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_id);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh.vertices.size(), &mesh.vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh->vertices.size(), &mesh->vertices[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, cb_id);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh.colors.size(), &mesh.colors[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh->colors.size(), &mesh->colors[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, uvb_id);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh.uvs.size(), &mesh.uvs[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh->uvs.size(), &mesh->uvs[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(2);
 
 	glBindBuffer(GL_ARRAY_BUFFER, nb_id);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh.normals.size(), &mesh.normals[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh->normals.size(), &mesh->normals[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(3);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * mesh.indices.size(), &mesh.indices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * mesh->indices.size(), &mesh->indices[0], GL_STATIC_DRAW);
 
 	// printf("vao: %d vbo: %d uvb: %d, ebo: %d\n", vao_id, vbo_id, uvb_id, ebo_id);
 }
@@ -84,7 +87,7 @@ void Entity::draw()
 {
 	glBindVertexArray(vao_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
-	glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_INT, 0);
 }
 
 glm::mat4 Entity::getModelMatrix()

@@ -22,7 +22,7 @@ public:
 	virtual void onAttach() override
 	{
 		input = new wgl::Input({GLFW_KEY_UP, GLFW_KEY_DOWN, GLFW_KEY_LEFT, GLFW_KEY_RIGHT});
-		wgl::Shader textShader = wgl::Shader("resources/shaders/text.vert", "resources/shaders/text.frag");
+		wgl::Shader *textShader = new wgl::Shader("resources/shaders/text.vert", "resources/shaders/text.frag");
 		wgl::BitmapFont *font = new wgl::BitmapFont("resources/fonts/classic_console.fnt");
 		wgl::Text *text = new wgl::Text(font, "HELLO");
 		text->shader = textShader;
@@ -30,19 +30,19 @@ public:
 		text->scale = glm::vec3(20.0f, 20.0f, 20.0f);
 		text->rotation = 0.0f;
 		addText(text);
-		camera.position = glm::vec3(0.0f, 0.0f, 5.0f);
+		camera->position = glm::vec3(0.0f, 0.0f, 5.0f);
 	}
 
 	virtual void onUpdate(float deltaTime) override
 	{
 		if (input->isKeyDown(GLFW_KEY_UP))
-			camera.position.z -= 0.1f;
+			camera->position.z -= 0.1f;
 		if (input->isKeyDown(GLFW_KEY_DOWN))
-			camera.position.z += 0.1f;
+			camera->position.z += 0.1f;
 		if (input->isKeyDown(GLFW_KEY_LEFT))
-			camera.position.x -= 0.1f;
+			camera->position.x -= 0.1f;
 		if (input->isKeyDown(GLFW_KEY_RIGHT))
-			camera.position.x += 0.1f;
+			camera->position.x += 0.1f;
 	}
 };
 
