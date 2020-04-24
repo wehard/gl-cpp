@@ -22,27 +22,26 @@
 namespace wgl
 {
 
-std::vector<Entity *> Entity::entities;
+Entity::Entity() : shader(0), mesh(0), rotation(0.0) {}
 
-Entity::Entity(Shader *shader, Mesh *mesh) : shader(shader), mesh(mesh), rotation(0.0)
+Entity::Entity(ref<Shader> shader, ref<Mesh> mesh) : shader(shader), mesh(mesh), rotation(0.0), scale({0.0,0.0,0.0})
 {
-	this->scale = glm::vec3(1.0, 1.0, 1.0);
-	this->collider = new Collider(mesh);
+	this->collider = createRef<Collider>(mesh);
 	genBuffers();
-	Entity::entities.push_back(this);
 }
 
-Entity::Entity(Mesh *mesh)
+Entity::Entity(ref<Mesh> mesh) : mesh(mesh) {}
+
+Entity::~Entity()
 {
-	this->mesh = mesh;
-}
+	glDeleteBuffers(1, &vbo_id);
+	glDeleteBuffers(1, &cb_id);
+	glDeleteBuffers(1, &uvb_id);
+	glDeleteBuffers(1, &nb_id);
+	glDeleteBuffers(1, &ebo_id);
 
-Entity::Entity() : shader(0), rotation(0.0)
-{
-	this->mesh = new Mesh();
+	glDeleteVertexArrays(1, &vao_id);
 }
-
-Entity::~Entity() {}
 
 void Entity::genBuffers()
 {

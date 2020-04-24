@@ -1,5 +1,7 @@
 #pragma once
 
+#include "core.h"
+
 #include "application.h"
 #include "input.h"
 #include "obj_loader.h"

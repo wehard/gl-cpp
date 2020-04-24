@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <GL/glew.h>
 #include <fstream>
 #include <sstream>
 #include <stdio.h>
@@ -34,6 +35,8 @@ Shader::Shader(std::string vert_path, std::string frag_path)
 
 Shader::~Shader()
 {
+	printf("destroyed shader: %d\n", this->p_id);
+	glDeleteProgram(p_id);
 }
 
 void Shader::use()
@@ -127,9 +130,9 @@ std::string Shader::loadShader(std::string path)
 	return (source);
 }
 
-GLuint Shader::compileShader(std::string src, GLenum shader_type)
+uint32_t Shader::compileShader(std::string src, uint32_t shader_type)
 {
-	GLuint shader_id;
+	uint32_t shader_id;
 
 	shader_id = glCreateShader(shader_type);
 	const char *source_ptr = src.c_str();
@@ -148,9 +151,9 @@ GLuint Shader::compileShader(std::string src, GLenum shader_type)
 	return (shader_id);
 }
 
-GLuint Shader::createProgram(GLuint vert_id, GLuint frag_id)
+uint32_t Shader::createProgram(uint32_t vert_id, uint32_t frag_id)
 {
-	GLuint program_id = glCreateProgram();
+	uint32_t program_id = glCreateProgram();
 	glAttachShader(program_id, vert_id);
 	glAttachShader(program_id, frag_id);
 	glLinkProgram(program_id);

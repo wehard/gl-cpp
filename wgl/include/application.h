@@ -1,4 +1,5 @@
 #pragma once
+#include "core.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <string>
@@ -20,11 +21,11 @@ private:
 	GLFWwindow *window;
 	std::string title;
 	double last_time;
-	std::vector<Entity *> entities;
-	std::vector<Text *> texts;
+	std::vector<ref<Entity>> entities;
+	std::vector<ref<Text>> texts;
 	bool wireframe_mode;
 	// std::unique_ptr<Input> input;
-	std::unique_ptr<Renderer> renderer;
+	scope<Renderer> renderer;
 	// Framebuffer *frameBuffer;
 	int windowWidth;
 	int windowHeight;
@@ -33,17 +34,18 @@ private:
 public:
 
 	static Application& Get() { return *instance; }
-	std::unique_ptr<Camera> camera;
+	ref<Camera> camera;
 
 	Application(std::string title, int windowWidth, int windowHeight);
 	// Application();
 	~Application();
 	void init();
 	void run();
-	void addEntity(Entity *e);
-	void addText(Text *text);
+	void addEntity(ref<Entity> entity);
+	void addText(ref<Text> text);
 	virtual void onAttach() = 0;
 	virtual void onUpdate(float deltaTime) = 0;
+	virtual void onDetach() = 0;
 };
 
 } // namespace wgl

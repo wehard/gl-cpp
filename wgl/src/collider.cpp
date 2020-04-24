@@ -18,9 +18,9 @@
 namespace wgl
 {
 
-Collider::Collider(Mesh *m) : m_is_enabled(true)
+Collider::Collider(ref<Mesh> mesh) : m_is_enabled(true)
 {
-	this->b = Mesh::calculateBounds(m);
+	this->b = Mesh::calculateBounds(mesh);
 }
 
 Collider::~Collider()

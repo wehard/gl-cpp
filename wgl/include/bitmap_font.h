@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core.h"
 #include <string>
 #include <map>
 #include <vector>
@@ -26,7 +27,7 @@ class BitmapFont
 private:
 	std::string fontName;
 	std::map<char, CharInfo> characters;
-	Texture *texture;
+	ref<Texture> texture;
 	std::string bitmapFilename;
 	int charCount;
 	void readFontData(std::string path);
@@ -36,7 +37,7 @@ public:
 	~BitmapFont();
 	CharInfo getCharInfo(char c);
 	std::vector<CharInfo> getCharInfo(std::string s);
-	Texture *getTexture();
+	ref<Texture> getTexture();
 };
 
 } // namespace wgl

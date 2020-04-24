@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core.h"
 #include <string>
 #include "entity.h"
 #include "bitmap_font.h"
@@ -13,13 +14,13 @@ class Text : public Entity
 {
 private:
 	std::string str;
-	BitmapFont *font;
+	ref<BitmapFont> font;
 	void generateMesh();
 
 public:
-	Text(BitmapFont *font, std::string str);
+	Text(std::string str, ref<BitmapFont> font, ref<Shader> shader);
 	void draw() override;
-	BitmapFont *getFont();
+	ref<BitmapFont> getFont();
 	~Text();
 	void setText(std::string text);
 };

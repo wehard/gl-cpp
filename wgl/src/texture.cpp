@@ -46,6 +46,7 @@ Texture::Texture(std::string path)
 
 Texture::~Texture()
 {
+	printf("destroyed texture: %d\n", tex_id);
 	glDeleteTextures(1, &tex_id);
 }
 

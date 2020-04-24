@@ -12,6 +12,7 @@
 
 #pragma once
 
+#include "core.h"
 #include <vector>
 #include <glm/glm.hpp>
 #include <vector>
@@ -32,22 +33,21 @@ protected:
 	uint cb_id;
 	uint nb_id;
 	uint uvb_id;
-	Mesh *mesh;
+	ref<Mesh> mesh;
 
 	void genBuffers();
 
 public:
-	static std::vector<Entity *> entities;
 	size_t id;
-	Collider *collider;
-	Shader *shader;
+	ref<Collider> collider;
+	ref<Shader> shader;
 	glm::vec3 position;
 	glm::vec3 scale;
 	float rotation;
 
 	Entity();
-	Entity(Mesh *mesh);
-	Entity(Shader *shader, Mesh *mesh);
+	Entity(ref<Mesh> mesh);
+	Entity(ref<Shader> shader, ref<Mesh> mesh);
 	~Entity();
 	virtual void draw();
 	glm::mat4 getModelMatrix();

@@ -25,7 +25,8 @@ Mesh::Mesh(/* args */)
 
 Mesh::~Mesh()
 {
-	printf("destroying mesh\n");
+	// clear();
+	printf("destroyed mesh: %s\n", name.c_str());
 }
 
 Mesh *Mesh::makeQuad()
@@ -114,17 +115,27 @@ void Mesh::print(Mesh *m)
 	}
 }
 
-Bounds Mesh::calculateBounds(Mesh *m)
+void Mesh::clear()
+{
+	vertices.clear();
+	normals.clear();
+	colors.clear();
+	uvs.clear();
+	indices.clear();
+	printf("cleared mesh: %s\n", name.c_str());
+}
+
+Bounds Mesh::calculateBounds(ref<Mesh> mesh)
 {
 	Bounds b = {
 		b.x_min = INFINITY, b.x_max = -INFINITY,
 		b.y_min = INFINITY, b.y_max = -INFINITY,
 		b.z_min = INFINITY, b.z_max = -INFINITY};
-	if (!m)
+	if (!mesh)
 		return (b);
-	for (size_t i = 0; i < m->vertices.size(); i += 3)
+	for (size_t i = 0; i < mesh->vertices.size(); i += 3)
 	{
-		glm::vec3 cur = glm::vec3(m->vertices[i], m->vertices[i + 1], m->vertices[i + 2]);
+		glm::vec3 cur = glm::vec3(mesh->vertices[i], mesh->vertices[i + 1], mesh->vertices[i + 2]);
 		if (cur.x < b.x_min)
 			b.x_min = cur.x;
 		if (cur.y < b.y_min)

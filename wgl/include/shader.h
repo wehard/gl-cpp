@@ -1,5 +1,5 @@
 #pragma once
-#include <GL/glew.h>
+
 #include <iostream>
 #include <map>
 #include <glm/glm.hpp>
@@ -10,17 +10,17 @@ namespace wgl
 class Shader
 {
 private:
-	GLuint p_id;
-	GLuint v_id;
-	GLuint f_id;
+	uint32_t p_id;
+	uint32_t v_id;
+	uint32_t f_id;
 	std::string vert_path;
 	std::string frag_path;
-	std::map<std::string, GLuint> uniforms;
-	std::map<std::string, GLuint> attributes;
+	std::map<std::string, uint32_t> uniforms;
+	std::map<std::string, uint32_t> attributes;
 
 	std::string loadShader(std::string path);
-	GLuint compileShader(std::string src, GLenum shader_type);
-	GLuint createProgram(GLuint vert_id, GLuint frag_id);
+	uint32_t compileShader(std::string src, uint32_t shader_type);
+	uint32_t createProgram(uint32_t vert_id, uint32_t frag_id);
 	void loadUniforms();
 	void loadAttributes();
 

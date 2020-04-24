@@ -9,7 +9,7 @@ BitmapFont::BitmapFont(std::string path)
 {
 	readFontData(path);
 	// path.substr(0, path.find('/'));
-	texture = new Texture(path.substr(0, path.find_last_of('.')) + ".jpg");
+	texture = createScope<Texture>(path.substr(0, path.find_last_of('.')) + ".jpg");
 	// texture = new Texture("resources/fonts/classic_console.jpg");
 }
 
@@ -78,7 +78,7 @@ void BitmapFont::readFontData(std::string path)
 	printf("read font: %s [bitmap: %s chars: %d]\n", path.c_str(), bitmapFilename.c_str(), charCount);
 }
 
-Texture *BitmapFont::getTexture()
+ref<Texture> BitmapFont::getTexture()
 {
 	return (texture);
 }

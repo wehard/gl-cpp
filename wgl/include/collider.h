@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #pragma once
+#include "core.h"
 #include "bounds.h"
 #include <glm/vec3.hpp>
 
@@ -41,7 +42,7 @@ private:
 	bool m_is_enabled;
 
 public:
-	Collider(Mesh *m);
+	Collider(ref<Mesh> mesh);
 	~Collider();
 	void enable();
 	void disable();

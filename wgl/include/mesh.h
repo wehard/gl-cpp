@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "core.h"
 #include <GL/gl.h>
 #include <vector>
 #include <glm/vec4.hpp>
+#include <string>
 
 namespace wgl
 {
@@ -23,6 +25,7 @@ class Mesh
 {
 private:
 public:
+	std::string name;
 	std::vector<GLuint> indices;
 	std::vector<GLfloat> vertices;
 	std::vector<GLfloat> colors;
@@ -33,8 +36,9 @@ public:
 	~Mesh();
 	void setVertexColors(glm::vec4 c);
 	static Mesh *makeQuad();
-	static Bounds calculateBounds(Mesh *m);
+	static Bounds calculateBounds(ref<Mesh> mesh);
 	static void print(Mesh *m);
+	void clear();
 };
 
 } // namespace wgl

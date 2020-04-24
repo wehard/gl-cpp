@@ -12,6 +12,7 @@
 
 #pragma once
 
+#include "core.h"
 #include <vector>
 #include "entity.h"
 #include "shader.h"
@@ -26,16 +27,16 @@ namespace wgl
 class Renderer
 {
 private:
-	Camera &camera;
+	ref<Camera> camera;
 	glm::vec3 lightPos;
 
 public:
-	Renderer(Camera &camera);
 	// Renderer();
+	Renderer(ref<Camera> camera);
 	~Renderer();
-	void drawEntity(Entity *entity);
+	void drawEntity(ref<Entity> entity);
 	void drawTexturedQuad(TexturedQuad *quad);
-	void drawText(Text *text);
+	void drawText(ref<Text> text);
 };
 
 } // namespace wgl

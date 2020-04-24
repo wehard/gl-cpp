@@ -8,15 +8,16 @@
 namespace wgl
 {
 
-Text::Text(BitmapFont *font, std::string str) : str(str), font(font)
+Text::~Text() {}
+
+Text::Text(std::string str, ref<BitmapFont> font, ref<Shader> shader) : str(str),
+																		font(font)
 {
-	this->mesh = new Mesh();
+	this->shader = shader;
+	this->mesh = createRef<Mesh>();
+	this->mesh->name = "Text Mesh";
 	generateMesh();
 	genBuffers();
-}
-
-Text::~Text()
-{
 }
 
 void Text::generateMesh()
@@ -26,7 +27,7 @@ void Text::generateMesh()
 	int i = 0;
 	for (CharInfo &c : charInfos)
 	{
-		Texture *texture = font->getTexture();
+		ref<Texture> texture = font->getTexture();
 		float charWidth = (float)c.width / (float)texture->width;
 		float charHeight = (float)c.height / (float)texture->height;
 		float charXOffset = (float)c.xOffset / (float)texture->width;
@@ -107,7 +108,7 @@ void Text::generateMesh()
 	}
 }
 
-BitmapFont *Text::getFont()
+ref<BitmapFont> Text::getFont()
 {
 	return (font);
 }
@@ -117,7 +118,8 @@ void Text::draw()
 	this->shader->use();
 	this->shader->setVec3("object_color", glm::vec3(1.0, 1.0, 1.0));
 	this->shader->setMat4("model_matrix", this->getModelMatrix());
-	glBindTexture(GL_TEXTURE_2D, font->getTexture()->getTextureID());
+	uint32_t tex = font->getTexture()->getTextureID();
+	glBindTexture(GL_TEXTURE_2D, tex);
 	glBindVertexArray(vao_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_id);
 	glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_INT, 0);
@@ -127,8 +129,8 @@ void Text::setText(std::string text)
 {
 	this->str = text;
 	printf("warning setting leak prone text!\n");
-	delete (this->mesh);
-	this->mesh = new Mesh();
+	// delete (this->mesh);
+	this->mesh = createRef<Mesh>();
 	generateMesh();
 	genBuffers();
 }

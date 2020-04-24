@@ -26,7 +26,12 @@ Application::Application(std::string title, int windowWidth, int windowHeight) :
 
 // Application::Application() {}
 
-Application::~Application() {}
+Application::~Application()
+{
+	glfwDestroyWindow(window);
+	glfwTerminate();
+	printf("destroyed application\n");
+}
 
 void Application::init()
 {
@@ -44,8 +49,8 @@ void Application::init()
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 		std::cout << "GLEW failed to initialize!" << std::endl;
-	camera = std::unique_ptr<Camera>(new Camera(45.0f, (float)windowWidth / (float)windowHeight));
-	renderer = std::unique_ptr<Renderer>(new Renderer(*camera));
+	camera = createRef<Camera>(45.0f, (float)windowWidth / (float)windowHeight);
+	renderer = createScope<Renderer>(camera);
 	Input::setupKeyInputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
 	glEnable(GL_DEPTH_TEST);
@@ -107,15 +112,16 @@ void Application::run()
 		frameCount++;
 		glfwPollEvents();
 	}
+	onDetach();
 }
 
-void Application::addEntity(Entity *e)
+void Application::addEntity(ref<Entity> entity)
 {
-	entities.insert(entities.begin(), e);
-	e->id = entities.size();
+	entities.insert(entities.begin(), entity);
+	entity->id = entities.size();
 }
 
-void Application::addText(Text *text)
+void Application::addText(ref<Text> text)
 {
 	texts.insert(texts.end(), text);
 }
