@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 18:54:02 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/17 18:55:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/25 16:24:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ class Ball;
 class Opponent : public wgl::Entity
 {
 private:
-	Ball *b;
+	wgl::ref<Ball> b;
 	float speed;
 	float target_y;
 	float update_interval = 0.0;
 	float delta;
 public:
-	Opponent(wgl::Shader *s, wgl::Mesh *m, Ball *b);
+	Opponent(wgl::ref<wgl::Shader> s, wgl::ref<wgl::Mesh> m, wgl::ref<Ball> b);
 	Opponent();
 	~Opponent();
 	void update(float delta_time) override;

@@ -6,13 +6,13 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 13:11:09 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:31:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/25 16:22:57 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wall.h"
 
-Wall::Wall(wgl::Shader *s, wgl::Mesh *m) : wgl::Entity(s, m)
+Wall::Wall(wgl::ref<wgl::Shader> s, wgl::ref<wgl::Mesh> m) : wgl::Entity(s, m)
 {
 }
 

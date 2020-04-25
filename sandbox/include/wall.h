@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 13:10:30 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:31:51 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/25 16:22:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ class Wall : public wgl::Entity
 private:
 	/* data */
 public:
-	Wall(wgl::Shader *s, wgl::Mesh *m);
+	Wall(wgl::ref<wgl::Shader> s, wgl::ref<wgl::Mesh> m);
 	~Wall();
 };

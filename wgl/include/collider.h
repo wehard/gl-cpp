@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:45:13 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 17:26:09 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/25 16:20:35 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class Entity;
 
 struct HitInfo
 {
-	Entity *e;
+	wgl::ref<Entity> e;
 	glm::vec3 normal;
 	int faces = 0;
 };
@@ -47,7 +47,7 @@ public:
 	void enable();
 	void disable();
 	bool isEnabled();
-	static bool checkCollision(Entity *e1, Entity *e2, HitInfo *h, int ignore_mask = 0);
+	static bool checkCollision(wgl::ref<Entity> e1, wgl::ref<Entity> e2, HitInfo *h, int ignore_mask = 0);
 };
 
 } // namespace wgl

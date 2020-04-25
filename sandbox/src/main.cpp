@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/18 15:04:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/25 16:31:48 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ using namespace irrklang;
 class Pong : public wgl::Application
 {
 private:
-	Player *player;
-	Opponent *opponent;
-	Ball *ball;
-	Wall *center;
-	wgl::Text *player_score_text;
-	wgl::Text *opp_score_text;
+	std::vector<wgl::ref<wgl::Entity>> entities;
+	wgl::ref<Player> player;
+	wgl::ref<Opponent> opponent;
+	wgl::ref<Ball> ball;
+	wgl::ref<Wall> center;
+	wgl::ref<wgl::Text> player_score_text;
+	wgl::ref<wgl::Text> opp_score_text;
 	// std::unique_ptr<wgl::Input> input;
 	wgl::Input input;
 
@@ -54,23 +55,23 @@ public:
 		// input = std::unique_ptr<wgl::Input>(new wgl::Input({GLFW_KEY_R}));
 		input = wgl::Input({GLFW_KEY_R});
 		camera->position = glm::vec3(0.0, 0.0, 95.0);
-		wgl::Shader *basic = new wgl::Shader("../resources/shaders/phong.vert", "../resources/shaders/phong.frag");
-		wgl::Mesh *pong_mesh = wgl::loadObj("resources/logo.obj");
-		wgl::Mesh *cube = wgl::loadObj("resources/cube.obj");
-		wgl::Mesh *icosphere = wgl::loadObj("resources/icosphere.obj");
-		wgl::Mesh *paddle = wgl::loadObj("resources/cube.obj");
+		wgl::ref<wgl::Shader> basic = wgl::createRef<wgl::Shader>("../resources/shaders/phong.vert", "../resources/shaders/phong.frag");
+		wgl::ref<wgl::Mesh> pong_mesh = std::shared_ptr<wgl::Mesh>(wgl::loadObj("resources/logo.obj"));
+		wgl::ref<wgl::Mesh> cube = std::shared_ptr<wgl::Mesh>(wgl::loadObj("resources/cube.obj"));
+		wgl::ref<wgl::Mesh> icosphere = std::shared_ptr<wgl::Mesh>(wgl::loadObj("resources/icosphere.obj"));
+		wgl::ref<wgl::Mesh> paddle = std::shared_ptr<wgl::Mesh>(wgl::loadObj("resources/cube.obj"));
 
 		pong_mesh->setVertexColors(glm::vec4(0.9, 0.1, 0.2, 1.0));
 		cube->setVertexColors(glm::vec4(0.2, 0.2, 0.2, 1.0));
 		icosphere->setVertexColors(glm::vec4(0.9, 0.9, 0.9, 1.0));
 		paddle->setVertexColors(glm::vec4(1.0, 1.0, 1.0, 1.0));
 
-		wgl::Entity *logo = new wgl::Entity(basic, pong_mesh);
+		wgl::ref<wgl::Entity> logo = wgl::createRef<wgl::Entity>(basic, pong_mesh);
 		logo->position = glm::vec3(0.0, 0.0, -50.0);
 		logo->scale = glm::vec3(10.0f, 10.0f, 10.0f);
-		logo->shader = basic;
+		// logo->shader = basic;
 
-		ball = new Ball(basic, icosphere);
+		ball = wgl::createRef<Ball>(basic, icosphere);
 		ball->scale = glm::vec3(2.0f, 2.0f, 2.0f);
 
 		ball->onBallHitCb = [this](ball_hit_type ht){
@@ -80,47 +81,46 @@ public:
 				soundEngine->play2D("sounds/ping_pong_8bit_plop.ogg");
 		};
 
-		player = new Player(basic, paddle, ball);
+		player = wgl::createRef<Player>(basic, paddle, ball);
 		player->position = glm::vec3(-60, 0.0, 0.0);
 		player->scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
-		opponent = new Opponent(basic, paddle, ball);
+		opponent = wgl::createRef<Opponent>(basic, paddle, ball);
 		opponent->position = glm::vec3(60, 0.0, 0.0);
 		opponent->scale = glm::vec3(1.0f, 10.0f, 1.0f);
 
-		Wall *left = new Wall(basic, cube);
+		wgl::ref<Wall> left = wgl::createRef<Wall>(basic, cube);
 		left->position = glm::vec3(-64.0, 0.0, 0.0);
 		left->scale = glm::vec3(1.0f, 73.0f, 10.0f);
 		left->collider->disable();
 
-		Wall *right = new Wall(basic, cube);
+		wgl::ref<Wall> right = wgl::createRef<Wall>(basic, cube);
 		right->position = glm::vec3(64.0, 0.0, 0.0);
 		right->scale = glm::vec3(1.0f, 73.0f, 10.0f);
 		right->collider->disable();
 
-		Wall *top = new Wall(basic, cube);
+		wgl::ref<Wall> top = wgl::createRef<Wall>(basic, cube);
 		top->position = glm::vec3(0.0, 36.0, 0.0);
 		top->scale = glm::vec3(128.0f, 1.0f, 10.0f);
 
-		Wall *bottom = new Wall(basic, cube);
+		wgl::ref<Wall> bottom = wgl::createRef<Wall>(basic, cube);
 		bottom->position = glm::vec3(0.0, -36.0, 0.0);
 		bottom->scale = glm::vec3(128.0f, 1.0f, 10.0f);
 
-		center = new Wall(basic, cube);
+		center = wgl::createRef<Wall>(basic, cube);
 		center->position = glm::vec3(0.0f, 0.0f, -10.0f);
 		center->scale = glm::vec3(1.0f, 72.0f, 10.0f);
 		center->collider->disable();
 
-		wgl::BitmapFont *font = new wgl::BitmapFont("../resources/fonts/classic_console.fnt");
-		player_score_text = new wgl::Text(font, std::to_string(player->score));
-		player_score_text->shader = new wgl::Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
+		wgl::ref<wgl::BitmapFont> font = wgl::createRef<wgl::BitmapFont>("../resources/fonts/classic_console.fnt");
+		wgl::ref<wgl::Shader> textShader = wgl::createRef<wgl::Shader>(wgl::Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag"));
+		player_score_text = wgl::createRef<wgl::Text>(std::to_string(player->score), font, textShader);
 		player_score_text->position = glm::vec3(-62.0f, 28.0f, 5.0f);
 		player_score_text->scale = glm::vec3(50.0f, 50.0f, 1.0f);
 		player_score_text->rotation = 0.0f;
 		addText(player_score_text);
 
-		opp_score_text = new wgl::Text(font, std::to_string(opponent->score));
-		opp_score_text->shader = new wgl::Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag");
+		opp_score_text = wgl::createRef<wgl::Text>(std::to_string(opponent->score),font, textShader);
 		opp_score_text->position = glm::vec3(50.0f, 28.0f, 5.0f);
 		opp_score_text->scale = glm::vec3(46.0f, 50.0f, 1.0f);
 		opp_score_text->rotation = 0.0f;
@@ -170,6 +170,10 @@ public:
 			soundEngine->play2D("sounds/ping_pong_8bit_peeeeeep.ogg");
 			// ball->reset_pos_and_dir();
 		}
+	}
+	virtual void onDetach() override
+	{
+
 	}
 };
 

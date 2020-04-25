@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 18:41:11 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/17 19:06:18 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/25 16:24:25 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int Opponent::score = 0;
 
-Opponent::Opponent(wgl::Shader *s, wgl::Mesh *m, Ball *b) : wgl::Entity(s, m), b(b), speed(50.0)
+Opponent::Opponent(wgl::ref<wgl::Shader> s, wgl::ref<wgl::Mesh> m, wgl::ref<Ball> b) : wgl::Entity(s, m), b(b), speed(50.0)
 {
 }
 

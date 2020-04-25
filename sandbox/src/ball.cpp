@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:46 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/18 15:16:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/25 16:21:19 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <iostream>
 #include <math.h>
 
-Ball::Ball(wgl::Shader *s, wgl::Mesh *m) : wgl::Entity(s, m), speed(70), isCaptured(false)
+Ball::Ball(wgl::ref<wgl::Shader> shader, wgl::ref<wgl::Mesh> mesh) : wgl::Entity(shader, mesh), speed(70), isCaptured(false)
 {
 	reset_pos_and_dir();
 }
@@ -52,11 +52,11 @@ void Ball::update(float delta_time)
 			position.x -= offset;
 		return;
 	}
-	for (auto &other : Entity::entities)
+	/* for (auto other : this->entities)
 	{
 		wgl::HitInfo h;
 		h.normal = glm::vec3(0.0);
-		if (other->id != this->id && wgl::Collider::checkCollision(this, other, &h))
+		if (other->id != this->id && wgl::Collider::checkCollision(wgl::createScope<Ball>(this), other, &h))
 		{
 
 			Player* p  = dynamic_cast<Player*>(h.e);
@@ -94,7 +94,7 @@ void Ball::update(float delta_time)
 			// std::cout << std::bitset<8>(h.faces) << " other: " << other->id << std::endl;
 			return ;
 		}
-	}
+	} */
 	position = position + direction * speed * delta_time;
 }
 
@@ -103,7 +103,7 @@ glm::vec3 Ball::get_direction()
 	return (direction);
 }
 
-void Ball::capture(Entity *capturer)
+void Ball::capture(wgl::ref<Entity> capturer)
 {
 	this->position = capturer->position;
 	isCaptured = true;

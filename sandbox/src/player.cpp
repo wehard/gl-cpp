@@ -6,18 +6,18 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 18:57:26 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/18 10:54:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/25 16:30:32 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
-#include <GLFW/glfw3.h>
+// #include <GLFW/glfw3.h>
 #include "input.h"
 #include "ball.h"
 
 int Player::score = 0;
 
-Player::Player(wgl::Shader *s, wgl::Mesh *m, Ball *ball) : wgl::Entity(s, m), speed(70.0), ball(ball)
+Player::Player(wgl::ref<wgl::Shader> s, wgl::ref<wgl::Mesh> m, wgl::ref<Ball> ball) : wgl::Entity(s, m), speed(70.0), ball(ball)
 {
 	std::vector<int> ks = {GLFW_KEY_UP, GLFW_KEY_DOWN, GLFW_KEY_LEFT, GLFW_KEY_RIGHT, GLFW_KEY_SPACE};
 	input = new wgl::Input(ks);
