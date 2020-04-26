@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   text_test.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/13 19:04:20 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/26 15:33:12 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,18 @@ public:
 		// input = wgl::createRef<wgl::Input>(std::vector<{GLFW_KEY_UP, GLFW_KEY_DOWN, GLFW_KEY_LEFT, GLFW_KEY_RIGHT});
 		textShader = wgl::createRef<wgl::Shader>("resources/shaders/text.vert", "resources/shaders/text.frag");
 		font = wgl::createRef<wgl::BitmapFont>("resources/fonts/classic_console.fnt");
-		text = wgl::createRef<wgl::Text>("HELLO", font, textShader);
-		text->position = glm::vec3(-5.0f, 0.0f, 0.0f);
-		text->scale = glm::vec3(20.0f, 20.0f, 20.0f);
-		text->rotation = 0.0f;
-		addText(text);
+
+		for (size_t i = 0; i < 10000; i++)
+		{
+			wgl::ref<wgl::Text> text = wgl::createRef<wgl::Text>("HELLO", font, textShader);
+			text->position = glm::vec3(-5.0f+(sin(i)*10.0f), (cos(i)*10.0f), -(float)i);
+			text->scale = glm::vec3(20.0f, 20.0f, 20.0f);
+			text->rotation = 0.0f;
+			addText(text);
+		}
+
+
+
 		camera->position = glm::vec3(0.0f, 0.0f, 10.0f);
 	}
 
