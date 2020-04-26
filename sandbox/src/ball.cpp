@@ -6,10 +6,11 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:12:46 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/25 16:21:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/26 14:26:07 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "wgl.h"
 #include "ball.h"
 #include "entity.h"
 #include "collider.h"
@@ -20,6 +21,7 @@
 #include <bitset> //
 #include <iostream>
 #include <math.h>
+#include <memory>
 
 Ball::Ball(wgl::ref<wgl::Shader> shader, wgl::ref<wgl::Mesh> mesh) : wgl::Entity(shader, mesh), speed(70), isCaptured(false)
 {
@@ -52,15 +54,14 @@ void Ball::update(float delta_time)
 			position.x -= offset;
 		return;
 	}
-	/* for (auto other : this->entities)
+	for (auto other : this->entities)
 	{
 		wgl::HitInfo h;
 		h.normal = glm::vec3(0.0);
-		if (other->id != this->id && wgl::Collider::checkCollision(wgl::createScope<Ball>(this), other, &h))
+		if (other->id != this->id && wgl::Collider::checkCollision(this, other.get(), &h))
 		{
-
-			Player* p  = dynamic_cast<Player*>(h.e);
-			Opponent *o  = dynamic_cast<Opponent*>(h.e);
+			Player *p = dynamic_cast<Player*>(h.e);
+			Opponent *o = dynamic_cast<Opponent*>(h.e);
 			if (p || o)
 			{
 				if (onBallHitCb)
@@ -94,7 +95,7 @@ void Ball::update(float delta_time)
 			// std::cout << std::bitset<8>(h.faces) << " other: " << other->id << std::endl;
 			return ;
 		}
-	} */
+	}
 	position = position + direction * speed * delta_time;
 }
 

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/25 16:31:48 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/26 14:28:27 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,13 @@ public:
 		opp_score_text->scale = glm::vec3(46.0f, 50.0f, 1.0f);
 		opp_score_text->rotation = 0.0f;
 		addText(opp_score_text);
+
+		this->entities.push_back(top);
+		this->entities.push_back(bottom);
+		this->entities.push_back(player);
+		this->entities.push_back(opponent);
+
+		ball->entities = this->entities;
 
 		// addEntity(left);
 		// addEntity(right);

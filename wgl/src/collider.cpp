@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:45:34 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/25 16:20:25 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/26 14:24:15 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ Bounds transform_bounds(Bounds b, glm::vec3 p, glm::vec3 s)
 	return (b);
 }
 
-bool Collider::checkCollision(wgl::ref<Entity> e1, wgl::ref<Entity> e2, HitInfo *h, int ignore_mask)
+bool Collider::checkCollision(Entity *e1, Entity *e2, HitInfo *h, int ignore_mask)
 {
 	if (!e1 || !e2 || !e1->collider || !e2->collider || !e1->collider->isEnabled() || !e2->collider->isEnabled())
 		return (false);
