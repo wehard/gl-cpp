@@ -52,6 +52,7 @@ void Application::init()
 
 	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	glfwMakeContextCurrent(window);
+	glfwSwapInterval(0);
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 		std::cout << "GLEW failed to initialize!" << std::endl;
@@ -60,6 +61,7 @@ void Application::init()
 	Input::setupKeyInputs(window);
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_FALSE);
 	glEnable(GL_DEPTH_TEST);
+
 }
 
 void Application::run()
