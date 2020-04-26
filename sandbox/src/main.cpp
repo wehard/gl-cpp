@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 16:35:01 by wkorande          #+#    #+#             */
-/*   Updated: 2020/04/26 14:28:27 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/04/26 14:47:11 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ private:
 	wgl::ref<Wall> center;
 	wgl::ref<wgl::Text> player_score_text;
 	wgl::ref<wgl::Text> opp_score_text;
+	wgl::ref<wgl::BitmapFont> font;
+	wgl::ref<wgl::Shader> textShader;
 	// std::unique_ptr<wgl::Input> input;
 	wgl::Input input;
 
@@ -74,7 +76,7 @@ public:
 		ball = wgl::createRef<Ball>(basic, icosphere);
 		ball->scale = glm::vec3(2.0f, 2.0f, 2.0f);
 
-		ball->onBallHitCb = [this](ball_hit_type ht){
+		ball->onBallHitCb = [this](ball_hit_type ht) {
 			if (ht == WALL)
 				soundEngine->play2D("sounds/ping_pong_8bit_plop.ogg");
 			else if (ht == PADDLE)
@@ -112,15 +114,15 @@ public:
 		center->scale = glm::vec3(1.0f, 72.0f, 10.0f);
 		center->collider->disable();
 
-		wgl::ref<wgl::BitmapFont> font = wgl::createRef<wgl::BitmapFont>("../resources/fonts/classic_console.fnt");
-		wgl::ref<wgl::Shader> textShader = wgl::createRef<wgl::Shader>(wgl::Shader("../resources/shaders/text.vert", "../resources/shaders/text.frag"));
+		textShader = wgl::createRef<wgl::Shader>("../resources/shaders/text.vert", "../resources/shaders/text.frag");
+		font = wgl::createRef<wgl::BitmapFont>("../resources/fonts/classic_console.fnt");
 		player_score_text = wgl::createRef<wgl::Text>(std::to_string(player->score), font, textShader);
 		player_score_text->position = glm::vec3(-62.0f, 28.0f, 5.0f);
 		player_score_text->scale = glm::vec3(50.0f, 50.0f, 1.0f);
 		player_score_text->rotation = 0.0f;
 		addText(player_score_text);
 
-		opp_score_text = wgl::createRef<wgl::Text>(std::to_string(opponent->score),font, textShader);
+		opp_score_text = wgl::createRef<wgl::Text>(std::to_string(opponent->score), font, textShader);
 		opp_score_text->position = glm::vec3(50.0f, 28.0f, 5.0f);
 		opp_score_text->scale = glm::vec3(46.0f, 50.0f, 1.0f);
 		opp_score_text->rotation = 0.0f;
@@ -133,11 +135,8 @@ public:
 
 		ball->entities = this->entities;
 
-		// addEntity(left);
-		// addEntity(right);
 		addEntity(top);
 		addEntity(bottom);
-		// addEntity(center);
 		addEntity(opponent);
 		addEntity(logo);
 		addEntity(ball);
@@ -180,7 +179,6 @@ public:
 	}
 	virtual void onDetach() override
 	{
-
 	}
 };
 
